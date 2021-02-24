@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cidades",
+  "info": {
+    "name": "cidade"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "city": {
+      "type": "uid",
+      "required": true
+    },
+    "centros": {
+      "via": "cidade",
+      "collection": "centro-hospitalar"
+    }
+  }
+}

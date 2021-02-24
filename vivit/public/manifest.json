@@ -1,0 +1,21 @@
+{
+  "name": "Name - Boilerplate",
+  "short_name": "Name",
+  "icons": [
+    {
+      "src": "/img/icon-192.png",
+      "type": "image/png",
+      "size": "192x192"
+    },
+    {
+      "src": "/img/icon-512.png",
+      "type": "image/png",
+      "size": "512x512"
+    }
+  ],
+  "background_color": "#06092B",
+  "description": "Descrição",
+  "display": "fullscreen",
+  "start_url": "/",
+  "theme_color": "#06092B"
+}

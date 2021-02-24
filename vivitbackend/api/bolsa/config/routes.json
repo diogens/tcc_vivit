@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/bolsas",
+      "handler": "bolsa.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/bolsas/count",
+      "handler": "bolsa.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/bolsas/:id",
+      "handler": "bolsa.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/bolsas",
+      "handler": "bolsa.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/bolsas/:id",
+      "handler": "bolsa.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/bolsas/:id",
+      "handler": "bolsa.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

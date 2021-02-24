@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/centro-hospitalars",
+      "handler": "centro-hospitalar.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/centro-hospitalars/count",
+      "handler": "centro-hospitalar.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/centro-hospitalars/:id",
+      "handler": "centro-hospitalar.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/centro-hospitalars",
+      "handler": "centro-hospitalar.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/centro-hospitalars/:id",
+      "handler": "centro-hospitalar.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/centro-hospitalars/:id",
+      "handler": "centro-hospitalar.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

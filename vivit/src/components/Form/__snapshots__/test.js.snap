@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form/> should render the text 1`] = `
+<main
+  class="styles__Wrapper-qg3dkt-0"
+>
+  <h1>
+    Form
+  </h1>
+</main>
+`;

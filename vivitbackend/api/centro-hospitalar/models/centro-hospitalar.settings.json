@@ -1,0 +1,82 @@
+{
+  "kind": "collectionType",
+  "collectionName": "centro_hospitalars",
+  "info": {
+    "name": "Centro",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "avatar": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "galery": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "street": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string"
+    },
+    "telphone1": {
+      "type": "string"
+    },
+    "telphone2": {
+      "type": "string"
+    },
+    "location": {
+      "type": "float"
+    },
+    "bolsas": {
+      "collection": "bolsa",
+      "via": "centro"
+    },
+    "eventos": {
+      "collection": "evento",
+      "via": "centro"
+    },
+    "state": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "cidade": {
+      "model": "cidade",
+      "via": "centros"
+    },
+    "postagems": {
+      "collection": "postagem"
+    }
+  }
+}
