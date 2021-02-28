@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "postagems",
+  "collectionName": "posts",
   "info": {
-    "name": "Postagem"
+    "name": "Posts"
   },
   "options": {
     "increments": true,
@@ -14,25 +14,24 @@
       "type": "string",
       "required": true
     },
-    "publish": {
-      "type": "datetime"
+    "subtitle": {
+      "type": "text"
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
     },
     "gallery": {
       "collection": "file",
       "via": "related",
       "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "images"
       ],
       "plugin": "upload",
       "required": false
     },
-    "post": {
-      "type": "richtext"
-    },
-    "subtitle": {
-      "type": "string",
+    "description": {
+      "type": "richtext",
       "required": true
     }
   }

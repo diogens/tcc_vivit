@@ -833,45 +833,6 @@
               }
             }
           },
-          "postagems": {
-            "required": [
-              "id",
-              "title",
-              "subtitle"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "title": {
-                "type": "string"
-              },
-              "publish": {
-                "type": "string"
-              },
-              "gallery": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "post": {
-                "type": "string"
-              },
-              "subtitle": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -925,9 +886,6 @@
             "type": "string"
           },
           "cidade": {
-            "type": "string"
-          },
-          "postagems": {
             "type": "string"
           },
           "published_at": {

@@ -671,9 +671,6 @@
               "cidade": {
                 "type": "string"
               },
-              "postagems": {
-                "type": "string"
-              },
               "published_at": {
                 "type": "string"
               },

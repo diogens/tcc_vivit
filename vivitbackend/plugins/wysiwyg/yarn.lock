@@ -251,10 +251,10 @@
     "@ckeditor/ckeditor5-core" "^25.0.0"
     "@ckeditor/ckeditor5-engine" "^25.0.0"
 
-"@ckeditor/ckeditor5-react@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-react/-/ckeditor5-react-3.0.0.tgz#05a1bdd7b26a8c1df6fd734376ea84e394d6ab47"
-  integrity sha512-kqoD0rbGeUp7CjYBtKcwXVVSWO/VL1QsoTyeGbFyoMHmkM96fBj0TI0Xs2kFqKkeiICtAnwvul3GVNWbIlK/Tw==
+"@ckeditor/ckeditor5-react@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-react/-/ckeditor5-react-3.0.1.tgz#50e3544abdc74c7f2e33873ba10e5f14a5933c8c"
+  integrity sha512-Lqh/rmXNJup/2xbIjOBIthV0hE3sQ4TUsAHpS8UKlfMH7yNyV4XaNhbGAHo4A5egmrGShRBxLZw/DYXjOHbyWg==
   dependencies:
     prop-types "^15.7.2"
 
