@@ -28,13 +28,13 @@ const colors = {
   mediumBlue: "#007eff",
   darkBlue: "#AED4FB",
   content: {
-    background: "#fafafb",
+    background: "#457b9d",
     "background-alpha": "rgba(14, 22, 34, 0.02)",
   },
   leftMenu: {
     "link-hover": "#1c2431",
-    "link-color": "#919bae",
-    "title-color": "#5b626f",
+    "link-color": "#E9C46A",
+    "title-color": "#E76F51",
   },
   strapi: {
     "gray-light": "#eff3f6",
@@ -49,6 +49,42 @@ const colors = {
     orangeDark: "#06081b",
     pink: "#f231a5",
     orange: "#f56161",
+  },
+  vivit: {
+    blueLight: "#10132d",
+    blue: "#0a0d27",
+    orangeDark: "#06081b",
+    pink: "#f231a5",
+    orange: "#f56161",
+    imperialRed: "#e63946",
+    honeydew: "#f1faee",
+    powderBlue: "#a8dadc",
+    caladonBlue: "#457b9d",
+    prussianBlue: "#1d3557"
+  },
+  vivitD: {
+    blueLight: "#10132d",
+    blue: "#0a0d27",
+    orangeDark: "#06081b",
+    pink: "#f231a5",
+    orange: "#f56161",
+    charcoal: "#264653",
+    PersioanGreen: "#2A9D8F",
+    orangeYellowCrayola: "#E9C46A",
+    sandyBrown: "#F4A261",
+    BurntSienna: "#E76F51"
+  },
+  vivitC: {
+    blueLight: "#10132d",
+    blue: "#0a0d27",
+    orangeDark: "#06081b",
+    pink: "#f231a5",
+    orange: "#f56161",
+    deepSpaceSparkle: "#335c67",
+    mediumChampagne: "#FFF3B0",
+    indianYellow: "#E09F3E",
+    auburn: "#9E2A2B",
+    rasewood: "#540b0e"
   },
 };
 

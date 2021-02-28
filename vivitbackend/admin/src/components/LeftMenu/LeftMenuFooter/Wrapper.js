@@ -4,7 +4,7 @@ const Wrapper = styled.div`
   ${({ theme }) => css`
     position: absolute;
     width: 100%;
-    background: ${theme.main.colors.won.blue};
+    background: ${theme.main.colors.vivitD.charcoal};
     bottom: 0;
     .poweredBy {
       display: flex;
@@ -25,7 +25,7 @@ const Wrapper = styled.div`
       color: ${theme.main.colors.strapi["gray-light"]};
       a {
         margin-left: 5px;
-        color: ${theme.main.colors.won.orange};
+        color: ${theme.main.colors.vivitD.BurntSienna};
       }
     }
   `}

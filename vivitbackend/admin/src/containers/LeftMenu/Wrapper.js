@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     left: 0;
     height: 100vh;
     width: ${theme.main.sizes.leftMenu.width};
-    background: ${theme.main.colors.won.blueLight};
+    background: ${theme.main.colors.vivitD.charcoal};
 
     /* scrollbar overrides */
     * {

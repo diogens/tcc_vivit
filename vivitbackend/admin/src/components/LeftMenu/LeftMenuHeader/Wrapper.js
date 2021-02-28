@@ -5,7 +5,7 @@ import Logo from "../../../assets/images/logo05.png";
 
 const Wrapper = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.main.colors.won.blue};
+    background-color: ${theme.main.colors.vivitD.sandyBrown};
     height: ${theme.main.sizes.leftMenu.height};
 
     .projectName {
