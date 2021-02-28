@@ -66,6 +66,7 @@ const colors = {
     blueLight: "#10132d",
     blue: "#0a0d27",
     orangeDark: "#06081b",
+    mediumChampagne: "#FFF3B0",
     pink: "#f231a5",
     orange: "#f56161",
     charcoal: "#264653",
