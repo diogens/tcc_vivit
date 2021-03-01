@@ -608,6 +608,153 @@
           "description": {
             "type": "string"
           },
+          "cover": {
+            "required": [
+              "id",
+              "name",
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {
+                "type": "object"
+              },
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {
+                "type": "object"
+              },
+              "related": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "centro": {
+            "required": [
+              "id",
+              "name",
+              "avatar",
+              "state",
+              "city"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "galery": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "telphone1": {
+                "type": "string"
+              },
+              "telphone2": {
+                "type": "string"
+              },
+              "location": {
+                "type": "number"
+              },
+              "bolsas": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "eventos": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "state": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "cidade": {
+                "type": "string"
+              },
+              "posts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -632,6 +779,9 @@
             "format": "date-time"
           },
           "description": {
+            "type": "string"
+          },
+          "centro": {
             "type": "string"
           },
           "published_at": {

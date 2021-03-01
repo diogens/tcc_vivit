@@ -833,6 +833,55 @@
               }
             }
           },
+          "posts": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "title",
+                "date",
+                "description"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "subtitle": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "gallery": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "description": {
+                  "type": "string"
+                },
+                "cover": {
+                  "type": "string"
+                },
+                "centro": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -887,6 +936,12 @@
           },
           "cidade": {
             "type": "string"
+          },
+          "posts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",

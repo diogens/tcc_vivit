@@ -74,6 +74,10 @@
     "cidade": {
       "model": "cidade",
       "via": "centros"
+    },
+    "posts": {
+      "via": "centro",
+      "collection": "posts"
     }
   }
 }
