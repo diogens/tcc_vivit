@@ -3,7 +3,6 @@ version: '3'
 services:
   api:
     environment:
-      NODE_OPTIONS: --max-old-space-size=500
       DATABASE_CLIENT: postgres
       DATABASE_NAME: vivit
       DATABASE_HOST: db
