@@ -5,7 +5,7 @@
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
-    "start": "strapi start --max-old-space-size=(1024)",
+    "start": "strapi start --max-old-space-size=510",
     "build": "strapi build",
     "strapi": "strapi"
   },
