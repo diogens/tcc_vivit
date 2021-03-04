@@ -4,10 +4,10 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
-    "develop": "strapi develop --max-old-space-size=510",
-    "start": "strapi start --max-old-space-size=510",
-    "build": "strapi build --max-old-space-size=510",
-    "strapi": "strapi --max-old-space-size=510"
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi --max-old-space-size=4096"
   },
   "devDependencies": {},
   "dependencies": {
