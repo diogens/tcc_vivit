@@ -1,10 +1,13 @@
-version: '3'
-
+version: "3"
 services:
-  api:
-    container_name: boilerplate_api
-    build: .
+  cavo:
+    image: index.docker.io/diogenss9999/vivit_adm:latest
     ports:
-      - "1337:1337"
-    restart: on-failure
-
+      - "443:3443"
+      - "80:3080"
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 2000
