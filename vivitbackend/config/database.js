@@ -2,17 +2,13 @@ module.exports = ({ env }) => ({
   defaultConnection: 'default',
   connections: {
     default: {
-      connector: 'bookshelf',
+      connector: 'mongoose',
       settings: {
-        client: 'postgres',
-        host: env('DATABASE_HOST', '127.0.0.1'),
-        port: env.int('DATABASE_PORT', 5432),
-        database: env('DATABASE_NAME', 'vivit'),
-        username: env('DATABASE_USERNAME', 'postgres'),
-        password: env('DATABASE_PASSWORD', 'docker'),
-        ssl: env.bool('DATABASE_SSL', false),
+        uri: "mongodb+srv://admin:vivit@cluster0.awox0.mongodb.net/vivit?retryWrites=true&w=majority"
       },
-      options: {}
+      options: {
+        "ssl": true
+      }
     },
   },
 });
