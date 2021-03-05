@@ -38,7 +38,11 @@ const SOCIAL_LINKS = [
   },
   {
     name: "Twitter",
-    link: "https://twitter.com/diogensss",
+    link: "https://twitter.com/Hemoba",
+  },
+  {
+    name: "Test",
+    link: "https://google.com",
   },
 ];
 
@@ -63,7 +67,7 @@ const HomePage = () => {
         <div className="row">
           <div className="col-lg-8 col-md-12">
             <Block>
-              <h2 id="mainHeader">Bem vindo a Won Games</h2>
+              <h2 id="mainHeader">Bem vindo a <b>VIVIT</b></h2>
               <P>
                 Ao lado você pode inserir diferentes jogos, categorias e
                 publishers para a nossa maravilhoa loja de jogos 🎃{" "}
