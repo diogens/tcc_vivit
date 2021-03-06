@@ -1,0 +1,14 @@
+{
+  "terminal.integrated.fontSize": 13,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    //For Eslint
+    "source.fixAll.eslint": true
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    /* "editor.defaultFormatter": "esbenp.prettier-vscode" */
+  },
+}
