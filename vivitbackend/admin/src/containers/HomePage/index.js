@@ -69,8 +69,7 @@ const HomePage = () => {
             <Block>
               <h2 id="mainHeader">Bem vindo a <b>VIVIT</b></h2>
               <P>
-                Ao lado você pode inserir diferentes jogos, categorias e
-                publishers para a nossa maravilhoa loja de jogos 🎃{" "}
+               ...... descrição para o projeto....
               </P>
 
               <Separator style={{ marginTop: 37, marginBottom: 36 }} />
