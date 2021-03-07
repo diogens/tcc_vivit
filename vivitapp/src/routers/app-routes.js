@@ -1,10 +1,10 @@
 /* eslint-disable react/display-name */
 import React from 'react'
 import {
-  createDrawerNavigator,
-  DrawerItemList,
+  createDrawerNavigator
+  /* DrawerItemList,
   DrawerItem,
-  DrawerContentScrollView
+  DrawerContentScrollView */
 } from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -12,13 +12,12 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 // components
 
 // screens
-import { Home } from '../screens'
+import { Home, Map } from '../screens'
 
 import theme from '../styles/theme'
 import { User } from '../context/UserContext'
 
-function MainProfileDrawerContent({ navigation, ...props }) {
-  /* const navigation = useNavigation() */
+/* function MainProfileDrawerContent({ navigation, ...props }) {
   const { userLogOut } = React.useContext(User)
 
   return (
@@ -35,7 +34,7 @@ function MainProfileDrawerContent({ navigation, ...props }) {
             return <Icon name="email" size={size} color="#F6C117" />
           }
         }}
-        label="Meu Perfil"
+        label="Meu Perfil2"
         onPress={() => {
           console.log('Props =>')
           navigation.navigate('Perfil')
@@ -56,7 +55,7 @@ function MainProfileDrawerContent({ navigation, ...props }) {
       />
     </DrawerContentScrollView>
   )
-}
+} */
 
 const Drawer = createDrawerNavigator()
 export default function Routes() {
@@ -76,9 +75,9 @@ export default function Routes() {
           itemStyle: { width: '100%', height: 70, justifyContent: 'center' },
           activeTintColor: '#F6C117',
           inactiveTintColor: '#F6C117'
-          /* contentContainerStyle: { backgroundColor: 'green'} */
+          /* contentContainerStyle: { backgroundColor: 'green' } */
         }}
-        drawerContent={(props) => <MainProfileDrawerContent {...props} />}
+        /* drawerContent={(props) => <MainProfileDrawerContent {...props} />} */
       >
         <Drawer.Screen
           options={{
@@ -88,6 +87,15 @@ export default function Routes() {
           }}
           name="Home"
           component={Home}
+        />
+        <Drawer.Screen
+          options={{
+            drawerIcon: ({ color, focused, size }) => (
+              <Icon name="email" color={color} size={size} />
+            )
+          }}
+          name="Map"
+          component={Map}
         />
       </Drawer.Navigator>
     </NavigationContainer>
