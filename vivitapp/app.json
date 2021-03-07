@@ -1,12 +1,29 @@
 {
-  "name": "vivitapp",
-  "displayName": "vivitapp",
+  "name": "Vivit",
+  "displayName": "Vivit",
   "expo": {
-    "name": "vivitapp",
-    "slug": "vivitapp",
+    "name": "Vivit",
+    "slug": "vivit",
+    "icon": "./assets/icon/ic_launcher.png",
     "version": "1.0.0",
+    "orientation": "portrait",
+    "platforms":[
+      "ios",
+      "android"
+    ],
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.vivit.cofferislland",
+      "config": {},
+      "versionCode": 1
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vivit.cofferislland",
+      "buildNumber": "1.0.0"
+    },
+    "description": "Projeto de TCC"
   }
 }

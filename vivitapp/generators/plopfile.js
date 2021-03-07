@@ -18,12 +18,6 @@ module.exports = function (plop) {
         path: '../src/components/{{pascalCase name}}/index.js',
         templateFile: 'templates/index.js.hbs'
       },
-
-      {
-        type: 'add',
-        path: '../src/components/{{pascalCase name}}/stories.js',
-        templateFile: 'templates/stories.js.hbs'
-      },
       {
         type: 'add',
         path: '../src/components/{{pascalCase name}}/styles.js',

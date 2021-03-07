@@ -23,6 +23,7 @@ export default function App() {
         const update = await Updates.checkForUpdateAsync()
 
         if (update.isAvailable) {
+          alert('Existe uma atualização :)')
           await Updates.fetchUpdateAsync()
           await Updates.reloadAsync
         }
