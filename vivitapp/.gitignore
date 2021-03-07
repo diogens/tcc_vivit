@@ -65,3 +65,5 @@ web-build/
 
 #lock
 yarn.lock
+
+coverage

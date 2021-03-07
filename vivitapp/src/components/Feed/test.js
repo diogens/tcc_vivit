@@ -1,11 +1,10 @@
 import React from 'react'
 import { fireEvent, render, waitFor } from '@testing-library/react-native'
+import { Feed } from '.'
 
-import { {{pascalCase name}} }from '.'
-
-describe('<{{pascalCase name}}/>', () => {
-  test('Deve fazer algo...', async () => {
-    const { getByTestId, getByText, queryByTestId, toJSON } = render(<{{pascalCase name}} />)
+describe('examples of some things', () => {
+  test('Teste 2', async () => {
+    const { getByTestId, getByText, queryByTestId, toJSON } = render(<Feed />)
     const famousProgrammerInHistory = 'Ada Lovelace'
 
     const input = getByTestId('input')
@@ -21,12 +20,4 @@ describe('<{{pascalCase name}}/>', () => {
     )
     expect(toJSON()).toMatchSnapshot()
   })
-
-  test('Deve fazer isso...', async () => {
-    const { getByText } = render(<{{pascalCase name}} />)
-    expect(getByText('{{pascalCase name}}')).toBeTruthy()
-  })
 })
-
-
-
