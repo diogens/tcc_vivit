@@ -16,7 +16,11 @@
     ],
     "android": {
       "package": "com.vivit.cofferislland",
-      "config": {},
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDqJkFt7c-qGsB5hy4WGwA3ZxQQ9_PpxyM"
+        }
+      },
       "versionCode": 1
     },
     "ios": {
