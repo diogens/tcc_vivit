@@ -1,13 +1,14 @@
 /* eslint-disable react/display-name */
 import React from 'react'
 import {
-  createDrawerNavigator
-  /* DrawerItemList,
+  createDrawerNavigator,
+  DrawerItemList,
   DrawerItem,
-  DrawerContentScrollView */
+  DrawerContentScrollView
 } from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+
+import { SimpleLineIcons } from '@expo/vector-icons'
 // Icons
 // components
 
@@ -17,7 +18,7 @@ import { Home, Map } from '../screens'
 import theme from '../styles/theme'
 import { User } from '../context/UserContext'
 
-/* function MainProfileDrawerContent({ navigation, ...props }) {
+function MainProfileDrawerContent({ navigation, ...props }) {
   const { userLogOut } = React.useContext(User)
 
   return (
@@ -26,36 +27,35 @@ import { User } from '../context/UserContext'
       <DrawerItem
         activeTintColor="#F6C117"
         icon={({ size, focused, color }) => (
-          <Icon name="email" size={size} color="#F6C117" />
+          <SimpleLineIcons name="event" size={size} color="#F6C117" />
         )}
         labelStyle={{ color: '#fff' }}
         options={{
           drawerIcon: ({ color, focused, size }) => {
-            return <Icon name="email" size={size} color="#F6C117" />
+            return <SimpleLineIcons name="event" size={size} color="#F6C117" />
           }
         }}
-        label="Meu Perfil2"
+        label="Eventos"
         onPress={() => {
-          console.log('Props =>')
-          navigation.navigate('Perfil')
+          console.log('Evento... =>')
         }}
       />
 
       <DrawerItem
         activeTintColor="#F6C117"
         icon={({ size, focused, color }) => (
-          <Icon name="email" size={size} color="#F6C117" />
+          <SimpleLineIcons name="login" size={size} color="#F6C117" />
         )}
-        label="Sair"
+        label="Entrar"
         labelStyle={{ color: '#fff' }}
         onPress={() => {
           userLogOut()
-          alert('Saindo')
+          alert('Entrando')
         }}
       />
     </DrawerContentScrollView>
   )
-} */
+}
 
 const Drawer = createDrawerNavigator()
 export default function Routes() {
@@ -63,26 +63,29 @@ export default function Routes() {
     <NavigationContainer>
       <Drawer.Navigator
         drawerStyle={{
-          width: '90%',
-          borderTopRightRadius: 40,
-          borderBottomRightRadius: 40,
-          backgroundColor: theme.colors.primary
+          width: '80%',
+          borderTopRightRadius: 20,
+          borderBottomRightRadius: 20,
+          backgroundColor: theme.colors.charcoal
         }}
         drawerContentOptions={{
           margin: -0,
-          activeBackgroundColor: theme.colors.lightBlue,
+          activeBackgroundColor: theme.colors.BurntSienna,
           labelStyle: { color: '#fff' },
-          itemStyle: { width: '100%', height: 70, justifyContent: 'center' },
-          activeTintColor: '#F6C117',
-          inactiveTintColor: '#F6C117'
-          /* contentContainerStyle: { backgroundColor: 'green' } */
+          itemStyle: {
+            height: 70,
+            justifyContent: 'center',
+            borderRadius: 17
+          },
+          activeTintColor: theme.colors.charcoal,
+          inactiveTintColor: theme.colors.BurntSienna
         }}
-        /* drawerContent={(props) => <MainProfileDrawerContent {...props} />} */
+        /*  drawerContent={(props) => <MainProfileDrawerContent {...props} />} */
       >
         <Drawer.Screen
           options={{
             drawerIcon: ({ color, focused, size }) => (
-              <Icon name="email" color={color} size={size} />
+              <SimpleLineIcons name="home" size={size} color={color} />
             )
           }}
           name="Home"
@@ -91,7 +94,7 @@ export default function Routes() {
         <Drawer.Screen
           options={{
             drawerIcon: ({ color, focused, size }) => (
-              <Icon name="email" color={color} size={size} />
+              <SimpleLineIcons name="location-pin" size={size} color={color} />
             )
           }}
           name="Map"

@@ -1,10 +1,7 @@
 import React from 'react'
 import { Avatar, Card, Button, Title, Paragraph } from 'react-native-paper'
 import { AntDesign, Entypo, MaterialCommunityIcons } from '@expo/vector-icons'
-
-const LeftContent = (props) => (
-  <Avatar.Image {...props} source={{ uri: 'https://picsum.photos/700' }} />
-)
+import { View } from 'react-native'
 
 export const Feed = ({
   nameUser,
@@ -12,16 +9,37 @@ export const Feed = ({
   titleNews,
   content,
   source,
-  onPress
+  onPress,
+  avatar,
+  centro
 }) => {
   return (
     <Card style={{ borderRadius: 15 }} onPress={onPress}>
-      {/* <Card.Title title={nameUser} subtitle={nameSetor} left={LeftContent} /> */}
+      <Card.Title
+        title={nameUser}
+        subtitle={nameSetor}
+        left={() => (
+          <View
+            style={{
+              width: 350,
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}
+          >
+            <Avatar.Image
+              source={{
+                uri: avatar ? avatar : 'https://picsum.photos/700'
+              }}
+            />
+            <Title style={{ marginLeft: 20 }}>{centro}</Title>
+          </View>
+        )}
+      />
+      <Card.Cover style={{ height: 400 }} source={{ uri: source }} />
       <Card.Content>
-        <Title>{titleNews}</Title>
+        <Title>{titleNews} </Title>
         <Paragraph>{content}</Paragraph>
       </Card.Content>
-      <Card.Cover source={{ uri: source }} />
       <Card.Actions>
         <Button>
           <AntDesign name="hearto" size={24} color="black" />

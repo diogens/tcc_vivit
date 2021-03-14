@@ -46,10 +46,11 @@ export const TimeLine = () => {
   }
 
   return (
-    <View style={{ flex: 1, paddingHorizontal: 20 }}>
+    <View style={{ flex: 1, paddingHorizontal: 10 }}>
       <FlatList
         key="list"
         data={news}
+        showsVerticalScrollIndicator
         onRefresh={refreshList}
         refreshing={refreshing}
         keyExtractor={(item) => item.id}
@@ -64,9 +65,11 @@ export const TimeLine = () => {
               console.log(item?._id)
               setNewsId(item?._id)
             }}
-            /* nameUser="Diogenes" */
-            titleNews={item?.titulo}
-            source={`http://5.183.8.1:1337${item.cover.formats.medium.url}`}
+            centro={item?.centro?.name}
+            titleNews={item?.title}
+            avatar={`http://5.183.8.1:1337${item?.centro?.avatar?.url}`}
+            content={item?.subtitle}
+            source={`http://5.183.8.1:1337${item?.cover?.url}`}
           />
         )}
       />
