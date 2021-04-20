@@ -1,0 +1,1005 @@
+"""Direct the client to resolve this field locally, either from the cache or local resolvers."""
+directive @client(
+  """
+  When true, the client will never use the cache for this value. See
+  https://www.apollographql.com/docs/react/essentials/local-state/#forcing-resolvers-with-clientalways-true
+  """
+  always: Boolean
+) on FIELD | FRAGMENT_DEFINITION | INLINE_FRAGMENT
+
+"""
+Export this locally resolved field as a variable to be used in the remainder of this query. See
+https://www.apollographql.com/docs/react/essentials/local-state/#using-client-fields-as-variables
+"""
+directive @export(
+  """The variable name to export this field as."""
+  as: String!
+) on FIELD
+
+"""
+Specify a custom store key for this result. See
+https://www.apollographql.com/docs/react/advanced/caching/#the-connection-directive
+"""
+directive @connection(
+  """Specify the store key."""
+  key: String!
+  """An array of query argument names to include in the generated custom store key."""
+  filter: [String!]
+) on FIELD
+
+input FileInfoInput {
+  name: String
+  alternativeText: String
+  caption: String
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+input UsersPermissionsRegisterInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String
+  user: UsersPermissionsMe!
+}
+
+type UserPermissionsPasswordPayload {
+  ok: Boolean!
+}
+
+type CentroHospitalar {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  avatar: UploadFile
+  description: String
+  street: String
+  number: String
+  telephone1: String
+  telephone2: String
+  state: String!
+  latitude: Float!
+  longitude: Float
+  user: UsersPermissionsUser
+  published_at: DateTime
+  gallery(sort: String, limit: Int, start: Int, where: JSON): [UploadFile!]!
+  posts(sort: String, limit: Int, start: Int, where: JSON): [Posts!]!
+}
+
+type CentroHospitalarConnection {
+  values: [CentroHospitalar]
+  groupBy: CentroHospitalarGroupBy
+  aggregate: CentroHospitalarAggregator
+}
+
+type CentroHospitalarAggregator {
+  count: Int
+  totalCount: Int
+  sum: CentroHospitalarAggregatorSum
+  avg: CentroHospitalarAggregatorAvg
+  min: CentroHospitalarAggregatorMin
+  max: CentroHospitalarAggregatorMax
+}
+
+type CentroHospitalarAggregatorSum {
+  latitude: Float
+  longitude: Float
+}
+
+type CentroHospitalarAggregatorAvg {
+  latitude: Float
+  longitude: Float
+}
+
+type CentroHospitalarAggregatorMin {
+  latitude: Float
+  longitude: Float
+}
+
+type CentroHospitalarAggregatorMax {
+  latitude: Float
+  longitude: Float
+}
+
+type CentroHospitalarGroupBy {
+  id: [CentroHospitalarConnectionId]
+  _id: [CentroHospitalarConnection_id]
+  createdAt: [CentroHospitalarConnectionCreatedAt]
+  updatedAt: [CentroHospitalarConnectionUpdatedAt]
+  name: [CentroHospitalarConnectionName]
+  avatar: [CentroHospitalarConnectionAvatar]
+  description: [CentroHospitalarConnectionDescription]
+  street: [CentroHospitalarConnectionStreet]
+  number: [CentroHospitalarConnectionNumber]
+  telephone1: [CentroHospitalarConnectionTelephone1]
+  telephone2: [CentroHospitalarConnectionTelephone2]
+  state: [CentroHospitalarConnectionState]
+  latitude: [CentroHospitalarConnectionLatitude]
+  longitude: [CentroHospitalarConnectionLongitude]
+  user: [CentroHospitalarConnectionUser]
+  published_at: [CentroHospitalarConnectionPublished_at]
+}
+
+type CentroHospitalarConnectionId {
+  key: ID
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnection_id {
+  key: ID
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionCreatedAt {
+  key: DateTime
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionUpdatedAt {
+  key: DateTime
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionName {
+  key: String
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionAvatar {
+  key: ID
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionDescription {
+  key: String
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionStreet {
+  key: String
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionNumber {
+  key: String
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionTelephone1 {
+  key: String
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionTelephone2 {
+  key: String
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionState {
+  key: String
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionLatitude {
+  key: Float
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionLongitude {
+  key: Float
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionUser {
+  key: ID
+  connection: CentroHospitalarConnection
+}
+
+type CentroHospitalarConnectionPublished_at {
+  key: DateTime
+  connection: CentroHospitalarConnection
+}
+
+input CentroHospitalarInput {
+  name: String!
+  avatar: ID
+  gallery: [ID]
+  description: String
+  street: String
+  number: String
+  telephone1: String
+  telephone2: String
+  state: String!
+  posts: [ID]
+  latitude: Float!
+  longitude: Float
+  user: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editCentroHospitalarInput {
+  name: String
+  avatar: ID
+  gallery: [ID]
+  description: String
+  street: String
+  number: String
+  telephone1: String
+  telephone2: String
+  state: String
+  posts: [ID]
+  latitude: Float
+  longitude: Float
+  user: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createCentroHospitalarInput {
+  data: CentroHospitalarInput
+}
+
+type createCentroHospitalarPayload {
+  centroHospitalar: CentroHospitalar
+}
+
+input updateCentroHospitalarInput {
+  where: InputID
+  data: editCentroHospitalarInput
+}
+
+type updateCentroHospitalarPayload {
+  centroHospitalar: CentroHospitalar
+}
+
+input deleteCentroHospitalarInput {
+  where: InputID
+}
+
+type deleteCentroHospitalarPayload {
+  centroHospitalar: CentroHospitalar
+}
+
+type Posts {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  subtitle: String
+  date: DateTime!
+  description: String!
+  cover: UploadFile
+  centro: CentroHospitalar
+  published_at: DateTime
+  gallery(sort: String, limit: Int, start: Int, where: JSON): [UploadFile!]!
+}
+
+type PostsConnection {
+  values: [Posts]
+  groupBy: PostsGroupBy
+  aggregate: PostsAggregator
+}
+
+type PostsAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type PostsGroupBy {
+  id: [PostsConnectionId]
+  _id: [PostsConnection_id]
+  createdAt: [PostsConnectionCreatedAt]
+  updatedAt: [PostsConnectionUpdatedAt]
+  title: [PostsConnectionTitle]
+  subtitle: [PostsConnectionSubtitle]
+  date: [PostsConnectionDate]
+  description: [PostsConnectionDescription]
+  cover: [PostsConnectionCover]
+  centro: [PostsConnectionCentro]
+  published_at: [PostsConnectionPublished_at]
+}
+
+type PostsConnectionId {
+  key: ID
+  connection: PostsConnection
+}
+
+type PostsConnection_id {
+  key: ID
+  connection: PostsConnection
+}
+
+type PostsConnectionCreatedAt {
+  key: DateTime
+  connection: PostsConnection
+}
+
+type PostsConnectionUpdatedAt {
+  key: DateTime
+  connection: PostsConnection
+}
+
+type PostsConnectionTitle {
+  key: String
+  connection: PostsConnection
+}
+
+type PostsConnectionSubtitle {
+  key: String
+  connection: PostsConnection
+}
+
+type PostsConnectionDate {
+  key: DateTime
+  connection: PostsConnection
+}
+
+type PostsConnectionDescription {
+  key: String
+  connection: PostsConnection
+}
+
+type PostsConnectionCover {
+  key: ID
+  connection: PostsConnection
+}
+
+type PostsConnectionCentro {
+  key: ID
+  connection: PostsConnection
+}
+
+type PostsConnectionPublished_at {
+  key: DateTime
+  connection: PostsConnection
+}
+
+input PostInput {
+  title: String!
+  subtitle: String
+  date: DateTime!
+  gallery: [ID]
+  description: String!
+  cover: ID
+  centro: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editPostInput {
+  title: String
+  subtitle: String
+  date: DateTime
+  gallery: [ID]
+  description: String
+  cover: ID
+  centro: ID
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createPostInput {
+  data: PostInput
+}
+
+type createPostPayload {
+  post: Posts
+}
+
+input updatePostInput {
+  where: InputID
+  data: editPostInput
+}
+
+type updatePostPayload {
+  post: Posts
+}
+
+input deletePostInput {
+  where: InputID
+}
+
+type deletePostPayload {
+  post: Posts
+}
+
+type UploadFile {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph!]!
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileAggregator {
+  count: Int
+  totalCount: Int
+  sum: UploadFileAggregatorSum
+  avg: UploadFileAggregatorAvg
+  min: UploadFileAggregatorMin
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+  _id: [UploadFileConnection_id]
+  createdAt: [UploadFileConnectionCreatedAt]
+  updatedAt: [UploadFileConnectionUpdatedAt]
+  name: [UploadFileConnectionName]
+  alternativeText: [UploadFileConnectionAlternativeText]
+  caption: [UploadFileConnectionCaption]
+  width: [UploadFileConnectionWidth]
+  height: [UploadFileConnectionHeight]
+  formats: [UploadFileConnectionFormats]
+  hash: [UploadFileConnectionHash]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  previewUrl: [UploadFileConnectionPreviewUrl]
+  provider: [UploadFileConnectionProvider]
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+type UploadFileConnectionId {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnection_id {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreatedAt {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdatedAt {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+input FileInput {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  related: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input deleteFileInput {
+  where: InputID
+}
+
+type deleteFilePayload {
+  file: UploadFile
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  _id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  _id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission!]!
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser!]!
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+  _id: [UsersPermissionsRoleConnection_id]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnection_id {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+  created_by: ID
+  updated_by: ID
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+  centro: CentroHospitalar
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+  _id: [UsersPermissionsUserConnection_id]
+  createdAt: [UsersPermissionsUserConnectionCreatedAt]
+  updatedAt: [UsersPermissionsUserConnectionUpdatedAt]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+  centro: [UsersPermissionsUserConnectionCentro]
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnection_id {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreatedAt {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdatedAt {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCentro {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  centro: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmationToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  centro: ID
+  created_by: ID
+  updated_by: ID
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | CentroHospitalar | CentroHospitalarConnection | CentroHospitalarAggregator | CentroHospitalarAggregatorSum | CentroHospitalarAggregatorAvg | CentroHospitalarAggregatorMin | CentroHospitalarAggregatorMax | CentroHospitalarGroupBy | CentroHospitalarConnectionId | CentroHospitalarConnection_id | CentroHospitalarConnectionCreatedAt | CentroHospitalarConnectionUpdatedAt | CentroHospitalarConnectionName | CentroHospitalarConnectionAvatar | CentroHospitalarConnectionDescription | CentroHospitalarConnectionStreet | CentroHospitalarConnectionNumber | CentroHospitalarConnectionTelephone1 | CentroHospitalarConnectionTelephone2 | CentroHospitalarConnectionState | CentroHospitalarConnectionLatitude | CentroHospitalarConnectionLongitude | CentroHospitalarConnectionUser | CentroHospitalarConnectionPublished_at | createCentroHospitalarPayload | updateCentroHospitalarPayload | deleteCentroHospitalarPayload | Posts | PostsConnection | PostsAggregator | PostsGroupBy | PostsConnectionId | PostsConnection_id | PostsConnectionCreatedAt | PostsConnectionUpdatedAt | PostsConnectionTitle | PostsConnectionSubtitle | PostsConnectionDate | PostsConnectionDescription | PostsConnectionCover | PostsConnectionCentro | PostsConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCentro | createUserPayload | updateUserPayload | deleteUserPayload
+
+input InputID {
+  id: ID!
+}
+
+enum PublicationState {
+  LIVE
+  PREVIEW
+}
+
+type AdminUser {
+  id: ID!
+  username: String
+  firstname: String!
+  lastname: String!
+}
+
+type Query {
+  centroHospitalar(id: ID!, publicationState: PublicationState): CentroHospitalar
+  centroHospitalars(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [CentroHospitalar!]!
+  centroHospitalarsConnection(sort: String, limit: Int, start: Int, where: JSON): CentroHospitalarConnection
+  post(id: ID!, publicationState: PublicationState): Posts
+  posts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Posts!]!
+  postsConnection(sort: String, limit: Int, start: Int, where: JSON): PostsConnection
+  files(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UploadFile!]!
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!, publicationState: PublicationState): UsersPermissionsRole
+  """Retrieve all the existing roles. You can't apply filters on this query."""
+  roles(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsRole!]!
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!, publicationState: PublicationState): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [UsersPermissionsUser!]!
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  me: UsersPermissionsMe
+}
+
+type Mutation {
+  createCentroHospitalar(input: createCentroHospitalarInput): createCentroHospitalarPayload
+  updateCentroHospitalar(input: updateCentroHospitalarInput): updateCentroHospitalarPayload
+  deleteCentroHospitalar(input: deleteCentroHospitalarInput): deleteCentroHospitalarPayload
+  createPost(input: createPostInput): createPostPayload
+  updatePost(input: updatePostInput): updatePostPayload
+  deletePost(input: deletePostInput): deletePostPayload
+  """Delete one file"""
+  deleteFile(input: deleteFileInput): deleteFilePayload
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, field: String, source: String, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+  updateFileInfo(id: ID!, info: FileInfoInput!): UploadFile!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+  register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+  forgotPassword(email: String!): UserPermissionsPasswordPayload
+  resetPassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+"""The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."""
+scalar JSON
+
+"""A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."""
+scalar DateTime
+
+"""A time string with format: HH:mm:ss.SSS"""
+scalar Time
+
+"""A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."""
+scalar Date
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
