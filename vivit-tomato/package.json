@@ -49,7 +49,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "codegen": "apollo codegen:generate --target typescript  --outputFlat src/graphql/generated",
+    "codegen": "apollo codegen:generate --target typescript --excludes=node_modules/ --includes=src/graphql/**/*.ts --localSchemaFile schema.gql --tagName=gql --outputFlat src/graphql/generated",
     "schema:convert": "node ./convertToNonNull.js",
     "schema:download": "apollo client:download-schema --endpoint=http://5.183.8.1:1337/graphql schema-temp.gql",
     "types:generate": "yarn schema:download && yarn schema:convert && yarn codegen",
