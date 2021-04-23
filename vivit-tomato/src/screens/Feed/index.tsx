@@ -1,48 +1,39 @@
 import React from 'react'
-import { Button, View, Text, ActivityIndicator } from 'react-native'
-import { ApolloProvider, useQuery, gql } from '@apollo/client'
-import * as S from './styles'
-import { FlatList } from 'react-native-gesture-handler'
-
+import { View, Text, ActivityIndicator, FlatList } from 'react-native'
 import Post from '../../components/Post'
-import { apolloClient } from '../../../apollo'
+import { useQuery, gql } from '@apollo/client'
+import * as S from './styles'
 
-const GET_STARSHIP = gql`
-  query listPosts {
-    posts {
-      id
-      title
-      subtitle
-      date
-      description
-      cover {
-        name
-        url
-      }
-    }
-  }
-`
+import { QueryPosts } from 'graphql/generated/QueryPosts'
+import { QUERY_POSTS } from '../../graphql/queries/posts'
 
 const Feed = ({ navigation }) => {
   /* const {} = apolloClient.query */
-  const { data, error, loading } = useQuery(GET_STARSHIP)
+  const { data, error, loading } = useQuery<QueryPosts>(QUERY_POSTS)
   if (error) {
-    console.log('Error fetching starship', error)
+    console.log('Error fetching starship', error, data.posts)
   }
 
   return (
     <S.Wrapper>
-      <Text style={{ fontFamily: 'Ubuntu-Light' }}>Aqui</Text>
-
       {loading ? (
         <ActivityIndicator color="#333" />
       ) : (
         <View>
-          <Text style={{ fontFamily: 'Ubuntu-Bold' }}>Agora</Text>
           <FlatList
             data={data.posts}
             renderItem={({ item, separators, index }) => {
-              return <Post title={item.title} />
+              return (
+                <Post
+                  key={index}
+                  user={item?.centro?.name}
+                  avatar={`http://5.183.8.1:1337${item?.centro?.avatar?.url}`}
+                  subtitle={item.subtitle}
+                  img={`http://5.183.8.1:1337${item?.cover?.url}`}
+                  title={item.title}
+                  date={item.date}
+                />
+              )
             }}
           />
         </View>

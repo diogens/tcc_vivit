@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
-import { ApolloProvider, useQuery, gql } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from 'styled-components/native'
 
 import Routers from './src/router'

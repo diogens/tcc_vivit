@@ -3,6 +3,7 @@
     "@apollo/client": "^3.3.7",
     "@react-native-picker/picker": "^1.9.2",
     "@react-navigation/bottom-tabs": "^5.11.10",
+    "apollo": "^2.32.1",
     "expo": "~40.0.0",
     "expo-app-loading": "^1.0.1",
     "expo-asset": "~8.2.1",
@@ -26,13 +27,13 @@
     "@react-navigation/drawer": "^5.12.5",
     "@react-navigation/native": "^5.9.4",
     "@testing-library/react": "^11.2.6",
+    "@types/graphql": "^14.5.0",
     "@types/node": "^14.14.1",
     "@types/react": "~16.9.35",
     "@types/react-native": "~0.63.2",
     "@types/styled-components": "^5.1.4",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
-    "apollo": "^2.32.5",
     "eslint": "^7.24.0",
     "eslint-config-prettier": "^6.14.0",
     "eslint-plugin-prettier": "^3.1.4",
@@ -49,11 +50,17 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "codegen": "apollo codegen:generate --target typescript --excludes=node_modules/ --includes=src/graphql/**/*.ts --localSchemaFile schema.gql --tagName=gql --outputFlat src/graphql/generated",
-    "schema:convert": "node ./convertToNonNull.js",
+    "code": "npx apollo service:download --endpoint=http://5.183.8.1:1337/graphql graphql-schema.js",
+
     "schema:download": "apollo client:download-schema --endpoint=http://5.183.8.1:1337/graphql schema-temp.gql",
+    "schema:convert": "node convertToNonNull.js",
+    "codegen": "apollo codegen:generate --target typescript --excludes=node_modules/ --includes=src/graphql/**/*.ts --localSchemaFile schema.gql --tagName=gql --outputFlat src/graphql/generated",
     "types:generate": "yarn schema:download && yarn schema:convert && yarn codegen",
-    "generate": "yarn plop --plopfile generators/plopfile.js"
+
+    "generate": "yarn plop --plopfile generators/plopfile.js",
+
+    "deploy:prod": "expo build:android --release-channel production",
+    "deploy:dev": "expo build:android --release-channel development"
   },
   "private": true
 }

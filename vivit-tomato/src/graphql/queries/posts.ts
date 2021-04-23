@@ -8,6 +8,12 @@ export const QUERY_POSTS = gql`
       subtitle
       date
       description
+      centro {
+        name
+        avatar {
+          url
+        }
+      }
       cover {
         name
         url

@@ -1,4 +1,5 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
+import { NormalizedCacheObject } from '@apollo/client/cache/inmemory/types'
 // import { setContext } from '@apollo/link-context';
 
 /*
@@ -15,7 +16,7 @@ const asyncAuthLink = setContext(async () => {
 });
 */
 
-export const apolloClient = new ApolloClient({
+export const apolloClient = new ApolloClient<NormalizedCacheObject>({
   link: new HttpLink({ uri: 'http://5.183.8.1:1337/graphql' }),
   cache: new InMemoryCache()
   // link: asyncAuthLink.concat(httpLink),

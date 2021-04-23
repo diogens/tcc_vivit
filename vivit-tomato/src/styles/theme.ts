@@ -16,11 +16,20 @@ export default {
       xsmall: 10,
       small: 12,
       medium: 14,
-      large: 16,
-      xlarge: 19,
-      xxlarge: 24,
+      large: 19,
+      xlarge: 22,
+      xxlarge: 25,
       xxxlarge: 36
     }
+  },
+  theme_colors: {
+    primary: '#f56161',
+    secondary: '#2A9D8F',
+    yellow1: '#FFF3B0',
+    yellow2: '#E9C46A',
+    orange: '#F4A261',
+    tomato: '#E76F51',
+    white: '#FAFAFA'
   },
   colors: {
     mediumChampagne: '#FFF3B0',
