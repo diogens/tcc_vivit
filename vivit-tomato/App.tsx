@@ -3,6 +3,7 @@ import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
 import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from 'styled-components/native'
+import * as Updates from 'expo-updates'
 
 import Routers from './src/router'
 
@@ -19,6 +20,24 @@ export default function App() {
     'Inter-SemiBoldItalic':
       'https://rsms.me/inter/font-files/Inter-SemiBoldItalic.otf?v=3.12'
   })
+
+  React.useEffect(() => {
+    async function updateApp() {
+      try {
+        const update = await Updates.checkForUpdateAsync()
+
+        if (update.isAvailable) {
+          alert('Existe uma atualização :) hehehe')
+          await Updates.fetchUpdateAsync()
+          await Updates.reloadAsync
+        }
+      } catch (error) {
+        return false
+      }
+    }
+
+    updateApp()
+  }, [])
 
   if (!fontsLoaded) {
     return <AppLoading />
