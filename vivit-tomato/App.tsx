@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
+import { StatusBar } from 'react-native'
 import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from 'styled-components/native'
 import * as Updates from 'expo-updates'
@@ -44,6 +45,11 @@ export default function App() {
   }
   return (
     <ApolloProvider client={apolloClient}>
+      <StatusBar
+        backgroundColor="#000"
+        showHideTransition="slide"
+        barStyle="light-content"
+      />
       <ThemeProvider theme={theme}>
         <Routers />
       </ThemeProvider>
