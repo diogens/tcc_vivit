@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, View } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 
 import ButtomHemocentros from '../components/ButtomHemocentros'
@@ -11,7 +12,6 @@ import Mapa from '../screens/Map'
 
 import { AntDesign } from '@expo/vector-icons'
 
-const Drawer = createDrawerNavigator()
 const TabNavigator = createBottomTabNavigator()
 
 /* const DrawerNavigator = () => {
@@ -41,7 +41,8 @@ export default function App() {
           component={Feed}
           options={{
             title: 'Noticias',
-            tabBarIcon: ({ color, focused }) => (
+            // eslint-disable-next-line react/display-name
+            tabBarIcon: ({ color }) => (
               <AntDesign name="notification" color={color} size={30} />
             )
           }}
@@ -51,7 +52,8 @@ export default function App() {
           component={Feed}
           options={{
             title: '',
-            tabBarIcon: ({ color, focused }) => (
+            // eslint-disable-next-line react/display-name
+            tabBarIcon: ({ color }) => (
               <ButtomHemocentros color={color} size={50} />
             )
           }}
@@ -61,7 +63,8 @@ export default function App() {
           component={Mapa}
           options={{
             title: 'Hemocentros',
-            tabBarIcon: ({ color, focused }) => (
+            // eslint-disable-next-line react/display-name
+            tabBarIcon: ({ color }) => (
               <AntDesign name="info" color={color} size={30} />
             )
           }}
