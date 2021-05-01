@@ -48,7 +48,7 @@ const wrapperModifiers = {
 export const Wrapper = styled.Text<WrapperProps>`
   ${({ size, color, theme }) => css`
     font-family: ${theme.font.family.ubuntu_light};
-    color: ${theme.colors.white};
+    color: ${theme.colors.black};
 
     padding-top: 5px;
     padding-bottom: 5px;

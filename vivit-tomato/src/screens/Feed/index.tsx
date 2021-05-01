@@ -1,29 +1,60 @@
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
 
 import Details from './details'
 import Feeds from './feed'
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 
-const Stack = createStackNavigator()
+type SharedStackParams = {
+  List: undefined
+  Details: {
+    id: number
+    src: string
+  }
+}
+
+const {
+  Navigator,
+  Screen
+} = createSharedElementStackNavigator<SharedStackParams>()
 
 function Feed() {
   return (
-    <Stack.Navigator initialRouteName="Feeds" headerMode="none">
-      <Stack.Screen
+    <Navigator initialRouteName="Feeds" headerMode="none">
+      <Screen
         name="Details"
         component={Details}
-        options={{
-          title: 'Awesome app'
+        initialParams={{ id: 0, src: 'unknow' }}
+        sharedElements={(route, otherRoute, showing) => {
+          const { item } = route.params
+          return [
+            {
+              id: `item.${item.id}.photo`,
+              animation: 'fade'
+              // resize: 'clip'
+              // align: ''left-top'
+            }
+          ]
         }}
       />
-      <Stack.Screen
+      <Screen
         name="Feeds"
+        sharedElements={(route, otherRoute, showing) => {
+          const { item } = route.params
+          return [
+            {
+              id: `item.${item.id}.photo`,
+              animation: 'fade'
+              // resize: 'clip'
+              // align: ''left-top'
+            }
+          ]
+        }}
         component={Feeds}
         options={{
           title: 'Awesome app'
         }}
       />
-    </Stack.Navigator>
+    </Navigator>
   )
 }
 
