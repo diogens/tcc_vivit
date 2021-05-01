@@ -3,6 +3,8 @@ import React from 'react'
 import Details from './details'
 import Feeds from './feed'
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
+import { Easing } from 'react-native-reanimated'
+import { CardStyleInterpolators } from '@react-navigation/stack'
 
 type SharedStackParams = {
   List: undefined
@@ -22,7 +24,37 @@ function Feed() {
     <Navigator initialRouteName="Feeds" headerMode="none">
       <Screen
         name="Details"
+        /* sharedElementsConfig={({ name, key, params }) => {
+          return [
+            {
+              id: key,
+              animation: 'fade-in',
+              resize: 'clip'
+            }
+          ]
+        }} */
         component={Details}
+        options={{
+          gestureEnabled: false,
+          headerBackTitleVisible: false,
+          transitionSpec: {
+            open: {
+              animation: 'timing',
+              config: { duration: 400 }
+            },
+            close: {
+              animation: 'timing',
+              config: { duration: 400 }
+            }
+          },
+          cardStyleInterpolator: ({ current: { progress } }) => {
+            return {
+              cardStyle: {
+                opacity: progress
+              }
+            }
+          }
+        }}
         initialParams={{ id: 0, src: 'unknow' }}
         sharedElements={(route, otherRoute, showing) => {
           const { item } = route.params
@@ -38,20 +70,27 @@ function Feed() {
       />
       <Screen
         name="Feeds"
-        sharedElements={(route, otherRoute, showing) => {
-          const { item } = route.params
-          return [
-            {
-              id: `item.${item.id}.photo`,
-              animation: 'fade'
-              // resize: 'clip'
-              // align: ''left-top'
-            }
-          ]
-        }}
         component={Feeds}
         options={{
-          title: 'Awesome app'
+          gestureEnabled: false,
+          headerBackTitleVisible: false,
+          transitionSpec: {
+            open: {
+              animation: 'timing',
+              config: { duration: 400 }
+            },
+            close: {
+              animation: 'timing',
+              config: { duration: 400 }
+            }
+          },
+          cardStyleInterpolator: ({ current: { progress } }) => {
+            return {
+              cardStyle: {
+                opacity: progress
+              }
+            }
+          }
         }}
       />
     </Navigator>

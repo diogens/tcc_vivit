@@ -14,5 +14,7 @@ export const WrapperDetails = styled.ScrollView`
     background-color: ${theme.colors.white};
     height: 100%;
     padding: 20px;
+    position: absolute;
+    z-index: -2;
   `}
 `

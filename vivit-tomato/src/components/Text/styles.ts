@@ -20,6 +20,18 @@ const wrapperModifiers = {
     font-size: ${theme.font.sizes.large}px;
   `,
 
+  xlarge: (theme) => css`
+    font-size: ${theme.font.sizes.xlarge}px;
+  `,
+
+  xxlarge: (theme) => css`
+    font-size: ${theme.font.sizes.xxlarge}px;
+  `,
+
+  xxxlarge: (theme) => css`
+    font-size: ${theme.font.sizes.xxxlarge}px;
+  `,
+
   primary: (theme) => css`
     color: ${theme.theme_colors.primary};
   `,
@@ -46,9 +58,10 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled.Text<WrapperProps>`
-  ${({ size, color, theme }) => css`
+  ${({ size, color, theme, upercase }) => css`
     font-family: ${theme.font.family.ubuntu_light};
     color: ${theme.colors.black};
+    text-transform: ${({ uppercase }) => (uppercase ? 'uppercase' : 'none')}
 
     padding-top: 5px;
     padding-bottom: 5px;

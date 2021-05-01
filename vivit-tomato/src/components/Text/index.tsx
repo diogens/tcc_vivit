@@ -2,7 +2,8 @@ import React from 'react'
 import * as S from './styles'
 
 export type TextProps = {
-  size?: 'small' | 'medium' | 'large'
+  uppercase?: boolean
+  size?: 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge' | 'xxxlarge'
   fontFamily?: 'ubuntu' | 'nada'
   color?:
     | 'primary'

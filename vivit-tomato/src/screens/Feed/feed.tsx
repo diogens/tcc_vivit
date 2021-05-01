@@ -2,10 +2,10 @@ import React from 'react'
 import {
   View,
   ActivityIndicator,
-  Text,
   Animated,
   Image,
-  SafeAreaView
+  SafeAreaView,
+  Dimensions
 } from 'react-native'
 
 import { useQuery } from '@apollo/client'
@@ -22,13 +22,15 @@ import {
   TouchableOpacity
 } from 'react-native-gesture-handler'
 
+import Text from '../../components/Text'
+
 import { SharedElement } from 'react-navigation-shared-element'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 const Feeds = ({ navigation }) => {
-  const IMAGE_WIDTH = 400 * 0.86
+  const IMAGE_WIDTH = Dimensions.get('window').width * 0.86
   const IMAGE_HEIGHT = IMAGE_WIDTH * 1.5
-  const VISIBLE_ITEMS = 4
+  const VISIBLE_ITEMS = 1
 
   const { data, error, loading } = useQuery<QueryPosts>(QUERY_POSTS)
 
@@ -139,8 +141,8 @@ const Feeds = ({ navigation }) => {
                   <Animated.View
                     style={{
                       position: 'absolute',
-                      opacity
-                      /* transform: [{ translateY }, { scale }] */
+                      opacity,
+                      transform: [{ translateY }, { scale }]
                     }}
                   >
                     <TouchableOpacity
@@ -164,16 +166,10 @@ const Feeds = ({ navigation }) => {
 
                       <View style={{ position: 'absolute', bottom: 20 }}>
                         <Text
-                          style={{
-                            textTransform: 'uppercase',
-                            fontSize: 36,
-                            fontWeight: 'bold',
-                            color: '#fff',
-                            left: 30
-                          }}
-                        >
-                          {item.title}
-                        </Text>
+                          size="xxxlarge"
+                          text={item.title}
+                          uppercase={true}
+                        />
                       </View>
                     </TouchableOpacity>
                   </Animated.View>
