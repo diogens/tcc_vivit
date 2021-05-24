@@ -49,7 +49,7 @@ export default function App() {
         />
         <TabNavigator.Screen
           name="Vivit"
-          component={Feed}
+          component={Mapa}
           options={{
             title: '',
             // eslint-disable-next-line react/display-name
@@ -60,7 +60,7 @@ export default function App() {
         />
         <TabNavigator.Screen
           name="Map"
-          component={Mapa}
+          component={Feed}
           options={{
             title: 'Hemocentros',
             // eslint-disable-next-line react/display-name

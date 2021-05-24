@@ -2,10 +2,10 @@ import React from 'react'
 import * as S from './styles'
 import { Text } from 'react-native'
 
-const Blablabla = () => (
+const Marker = () => (
   <S.Wrapper>
-    <Text>Blablabla</Text>
+    <Text>Marker</Text>
   </S.Wrapper>
 )
 
-export default Blablabla
+export default Marker
