@@ -25,6 +25,8 @@ const Map = ({ navigation }) => {
   const contentWidth = useWindowDimensions().width
 
   const modalizeRef = React.useRef(null)
+  const fadeAnim = React.useRef(new Animated.Value(0)).current
+  const down = React.useRef(new Animated.Value(0)).current
 
   const [index, setIndex] = React.useState(0)
   const [search, setSearch] = React.useState('')
@@ -35,24 +37,51 @@ const Map = ({ navigation }) => {
     modalizeRef.current?.open()
   }
 
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 3000,
+      useNativeDriver: true
+    }).start()
+  }
+
+  const fadeOut = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 3000,
+      useNativeDriver: true
+    }).start()
+  }
+
+  React.useEffect(() => {
+    fadeIn()
+  })
+
   return (
     <>
-      <View
+      <Animated.View
         style={{
           backgroundColor: '#fff',
           width: '100%',
-          position: 'absolute',
-          elevation: 5
+          zIndex: 2,
+          opacity: fadeAnim
         }}
       >
+        <Text style={{ padding: 10, fontSize: 18 }}> Rua Onde eu estou</Text>
         <TextInput
-          style={{ height: 40, margin: 12, borderWidth: 1, borderRadius: 6 }}
+          style={{
+            height: 40,
+            margin: 12,
+            backgroundColor: '#ddd',
+            borderRadius: 6,
+            padding: 10
+          }}
           value={search}
-          placeholder="useless placeholder"
-          keyboardType="default"
-          onChangeText={(text) => setSearch(text)}
+          onChangeText={(text) => {
+            setSearch(text)
+          }}
         />
-      </View>
+      </Animated.View>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         {loading ? (
           <Text>carregando...</Text>
