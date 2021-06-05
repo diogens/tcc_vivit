@@ -30,7 +30,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 const Feeds = ({ navigation }) => {
   const IMAGE_WIDTH = Dimensions.get('window').width * 0.86
   const IMAGE_HEIGHT = IMAGE_WIDTH * 1.5
-  const VISIBLE_ITEMS = 1
+  const VISIBLE_ITEMS = 4
 
   const { data, error, loading } = useQuery<QueryPosts>(QUERY_POSTS)
 

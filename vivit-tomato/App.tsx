@@ -9,6 +9,7 @@ import * as Updates from 'expo-updates'
 import Routers from './src/router'
 
 import { apolloClient } from './apollo'
+import { UserContext } from './src/context/UserContext'
 import theme from './src/styles/theme'
 
 export default function App() {
@@ -45,14 +46,16 @@ export default function App() {
   }
   return (
     <ApolloProvider client={apolloClient}>
-      <StatusBar
-        backgroundColor="#000"
-        showHideTransition="slide"
-        barStyle="light-content"
-      />
-      <ThemeProvider theme={theme}>
-        <Routers />
-      </ThemeProvider>
+      <UserContext>
+        <StatusBar
+          backgroundColor="#000"
+          showHideTransition="slide"
+          barStyle="light-content"
+        />
+        <ThemeProvider theme={theme}>
+          <Routers />
+        </ThemeProvider>
+      </UserContext>
     </ApolloProvider>
   )
 }
