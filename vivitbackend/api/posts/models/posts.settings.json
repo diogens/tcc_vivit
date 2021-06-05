@@ -47,8 +47,8 @@
       "required": false
     },
     "centro": {
-      "model": "centro-hospitalar",
-      "via": "posts"
+      "via": "posts",
+      "model": "centro-hospitalar"
     }
   }
 }

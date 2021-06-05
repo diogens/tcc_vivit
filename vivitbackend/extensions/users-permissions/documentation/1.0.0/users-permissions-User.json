@@ -1250,6 +1250,74 @@
                 "type": "string"
               }
             }
+          },
+          "centro": {
+            "required": [
+              "id",
+              "name",
+              "avatar",
+              "state",
+              "latitude"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "gallery": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "telephone1": {
+                "type": "string"
+              },
+              "telephone2": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "posts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longitude": {
+                "type": "number"
+              },
+              "user": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -1290,6 +1358,9 @@
             "default": false
           },
           "role": {
+            "type": "string"
+          },
+          "centro": {
             "type": "string"
           },
           "created_by": {

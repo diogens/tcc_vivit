@@ -26,7 +26,7 @@
       "plugin": "upload",
       "required": true
     },
-    "galery": {
+    "gallery": {
       "collection": "file",
       "via": "related",
       "allowedTypes": [
@@ -46,38 +46,31 @@
     "number": {
       "type": "string"
     },
-    "telphone1": {
+    "telephone1": {
       "type": "string"
     },
-    "telphone2": {
+    "telephone2": {
       "type": "string"
-    },
-    "location": {
-      "type": "float"
-    },
-    "bolsas": {
-      "collection": "bolsa",
-      "via": "centro"
-    },
-    "eventos": {
-      "collection": "evento",
-      "via": "centro"
     },
     "state": {
       "type": "string",
       "required": true
     },
-    "city": {
-      "type": "string",
+    "posts": {
+      "collection": "posts",
+      "via": "centro"
+    },
+    "latitude": {
+      "type": "float",
       "required": true
     },
-    "cidade": {
-      "model": "cidade",
-      "via": "centros"
+    "longitude": {
+      "type": "float"
     },
-    "posts": {
+    "user": {
       "via": "centro",
-      "collection": "posts"
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

@@ -681,7 +681,7 @@
               "name",
               "avatar",
               "state",
-              "city"
+              "latitude"
             ],
             "properties": {
               "id": {
@@ -693,7 +693,7 @@
               "avatar": {
                 "type": "string"
               },
-              "galery": {
+              "gallery": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -708,34 +708,13 @@
               "number": {
                 "type": "string"
               },
-              "telphone1": {
+              "telephone1": {
                 "type": "string"
               },
-              "telphone2": {
+              "telephone2": {
                 "type": "string"
-              },
-              "location": {
-                "type": "number"
-              },
-              "bolsas": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "eventos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "state": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "cidade": {
                 "type": "string"
               },
               "posts": {
@@ -743,6 +722,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longitude": {
+                "type": "number"
+              },
+              "user": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"

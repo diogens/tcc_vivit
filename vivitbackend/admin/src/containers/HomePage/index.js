@@ -20,12 +20,12 @@ import SocialLink from "./SocialLink";
 const FIRST_BLOCK_LINKS = [
   {
     link:
-      "https://strapi.io/documentation/v3.x/getting-started/quick-start.html#_4-create-a-category-content-type",
+      "google.com",
     contentId: "app.components.BlockLink.documentation.content",
     titleId: "app.components.BlockLink.documentation",
   },
   {
-    link: "https://github.com/strapi/foodadvisor",
+    link: "google.com",
     contentId: "app.components.BlockLink.code.content",
     titleId: "app.components.BlockLink.code",
   },
@@ -37,13 +37,17 @@ const SOCIAL_LINKS = [
     link: "https://github.com/diogens/",
   },
   {
+    name: "CofferIsland",
+    link: "https://github.com/CofferIsland",
+  },
+  {
     name: "Twitter",
     link: "https://twitter.com/Hemoba",
   },
   {
-    name: "Test",
-    link: "https://google.com",
-  },
+    name: "Instagram",
+    link: "https://www.instagram.com/hemobaoficial/",
+  }
 ];
 
 const HomePage = () => {
@@ -67,32 +71,19 @@ const HomePage = () => {
         <div className="row">
           <div className="col-lg-8 col-md-12">
             <Block>
-              <h2 id="mainHeader">Bem vindo a <b>VIVIT</b></h2>
+              <h2 id="mainHeader">Bem vindo ao <b>VIVIT</b></h2>
               <P>
                ...... descrição para o projeto....
               </P>
 
               <Separator style={{ marginTop: 37, marginBottom: 36 }} />
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                {FIRST_BLOCK_LINKS.map((data, index) => {
-                  const type = index === 0 ? "doc" : "code";
-
-                  return (
-                    <LinkWrapper
-                      href={data.link}
-                      target="_blank"
-                      key={data.link}
-                      type={type}
-                    >
-                      <FormattedMessage id={data.titleId}>
-                        {(title) => <p className="bold">{title}</p>}
-                      </FormattedMessage>
-                      <FormattedMessage id={data.contentId}>
-                        {(content) => <p>{content}</p>}
-                      </FormattedMessage>
-                    </LinkWrapper>
-                  );
-                })}
+                <div style={{ background: 'tomato', width: 200, height: 100 }}>
+                  <p>Grafico 1</p>
+                </div>
+                <div style={{ background: 'green', width: 200, height: 100 }}>
+                  <p>Grafico 2</p>
+                </div>
               </div>
             </Block>
           </div>
@@ -100,18 +91,6 @@ const HomePage = () => {
           <div className="col-md-12 col-lg-4">
             <Block style={{ paddingRight: 30, paddingBottom: 0 }}>
               <h2>Veja nosso links</h2>
-              <P style={{ marginTop: 7, marginBottom: 0 }}>
-                Em caso de duvidas e sugestões, só ir em algum de nossos links
-                :)
-              </P>
-
-              <ALink
-                rel="noopener noreferrer"
-                href="https://google.com.br"
-                target="_blank"
-              >
-                Veja mais sobre ...
-              </ALink>
               <Separator style={{ marginTop: 18 }} />
               <div
                 className="row social-wrapper"

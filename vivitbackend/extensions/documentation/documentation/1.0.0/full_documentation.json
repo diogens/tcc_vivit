@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/04/2021 8:13:37 PM"
+    "x-generation-date": "06/04/2021 6:35:34 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -45,19 +45,19 @@
     }
   ],
   "paths": {
-    "/bolsas": {
+    "/agendamentos": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find all the agendamentos's records",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve agendamentos document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Bolsa"
+                    "$ref": "#/components/schemas/Agendamentos"
                   }
                 }
               }
@@ -96,7 +96,7 @@
         },
         "summary": "",
         "tags": [
-          "Bolsa"
+          "Agendamentos"
         ],
         "parameters": [
           {
@@ -239,14 +239,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Create a new agendamentos record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve agendamentos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Bolsa"
+                  "$ref": "#/components/schemas/Agendamentos"
                 }
               }
             }
@@ -284,7 +284,7 @@
         },
         "summary": "",
         "tags": [
-          "Bolsa"
+          "Agendamentos"
         ],
         "requestBody": {
           "description": "",
@@ -292,20 +292,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewBolsa"
+                "$ref": "#/components/schemas/NewAgendamentos"
               }
             }
           }
         }
       }
     },
-    "/bolsas/count": {
+    "/agendamentos/count": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Retrieve the numver of agendamentos documents",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve agendamentos document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -351,22 +351,22 @@
         },
         "summary": "",
         "tags": [
-          "Bolsa"
+          "Agendamentos"
         ],
         "parameters": []
       }
     },
-    "/bolsas/{id}": {
+    "/agendamentos/{id}": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find one agendamentos record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve agendamentos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Bolsa"
+                  "$ref": "#/components/schemas/Agendamentos"
                 }
               }
             }
@@ -404,7 +404,7 @@
         },
         "summary": "",
         "tags": [
-          "Bolsa"
+          "Agendamentos"
         ],
         "parameters": [
           {
@@ -421,14 +421,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a record",
+        "description": "Update a single agendamentos record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve agendamentos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Bolsa"
+                  "$ref": "#/components/schemas/Agendamentos"
                 }
               }
             }
@@ -466,7 +466,7 @@
         },
         "summary": "",
         "tags": [
-          "Bolsa"
+          "Agendamentos"
         ],
         "requestBody": {
           "description": "",
@@ -474,7 +474,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewBolsa"
+                "$ref": "#/components/schemas/NewAgendamentos"
               }
             }
           }
@@ -494,10 +494,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete a single agendamentos record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the ID supplied",
+            "description": "deletes a single agendamentos based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -540,7 +540,7 @@
         },
         "summary": "",
         "tags": [
-          "Bolsa"
+          "Agendamentos"
         ],
         "parameters": [
           {
@@ -1065,1028 +1065,6 @@
         "summary": "",
         "tags": [
           "Centro-hospitalar"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/cidades": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Cidade"
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Cidade"
-        ],
-        "parameters": [
-          {
-            "name": "_limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of results possible",
-            "schema": {
-              "type": "integer"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_sort",
-            "in": "query",
-            "required": false,
-            "description": "Sort according to a specific field.",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_start",
-            "in": "query",
-            "required": false,
-            "description": "Skip a specific number of entries (especially useful for pagination)",
-            "schema": {
-              "type": "integer"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "=",
-            "in": "query",
-            "required": false,
-            "description": "Get entries that matches exactly your input",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_ne",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are not equals to something",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_lt",
-            "in": "query",
-            "required": false,
-            "description": "Get record that are lower than a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_lte",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are lower than or equal to a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_gt",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are greater than a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_gte",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are greater than  or equal a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_contains",
-            "in": "query",
-            "required": false,
-            "description": "Get records that contains a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_containss",
-            "in": "query",
-            "required": false,
-            "description": "Get records that contains (case sensitive) a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_in",
-            "in": "query",
-            "required": false,
-            "description": "Get records that matches any value in the array of values",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_nin",
-            "in": "query",
-            "required": false,
-            "description": "Get records that doesn't match any value in the array of values",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "deprecated": false
-          }
-        ]
-      },
-      "post": {
-        "deprecated": false,
-        "description": "Create a new record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cidade"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Cidade"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewCidade"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/cidades/count": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Cidade"
-        ],
-        "parameters": []
-      }
-    },
-    "/cidades/{id}": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cidade"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Cidade"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      },
-      "put": {
-        "deprecated": false,
-        "description": "Update a record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Cidade"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Cidade"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewCidade"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      },
-      "delete": {
-        "deprecated": false,
-        "description": "Delete a record",
-        "responses": {
-          "200": {
-            "description": "deletes a single record based on the ID supplied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int64"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Cidade"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/eventos": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Evento"
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Evento"
-        ],
-        "parameters": [
-          {
-            "name": "_limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of results possible",
-            "schema": {
-              "type": "integer"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_sort",
-            "in": "query",
-            "required": false,
-            "description": "Sort according to a specific field.",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_start",
-            "in": "query",
-            "required": false,
-            "description": "Skip a specific number of entries (especially useful for pagination)",
-            "schema": {
-              "type": "integer"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "=",
-            "in": "query",
-            "required": false,
-            "description": "Get entries that matches exactly your input",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_ne",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are not equals to something",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_lt",
-            "in": "query",
-            "required": false,
-            "description": "Get record that are lower than a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_lte",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are lower than or equal to a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_gt",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are greater than a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_gte",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are greater than  or equal a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_contains",
-            "in": "query",
-            "required": false,
-            "description": "Get records that contains a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_containss",
-            "in": "query",
-            "required": false,
-            "description": "Get records that contains (case sensitive) a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_in",
-            "in": "query",
-            "required": false,
-            "description": "Get records that matches any value in the array of values",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_nin",
-            "in": "query",
-            "required": false,
-            "description": "Get records that doesn't match any value in the array of values",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "deprecated": false
-          }
-        ]
-      },
-      "post": {
-        "deprecated": false,
-        "description": "Create a new record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Evento"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Evento"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewEvento"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/eventos/count": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "count": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Evento"
-        ],
-        "parameters": []
-      }
-    },
-    "/eventos/{id}": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Evento"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Evento"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      },
-      "put": {
-        "deprecated": false,
-        "description": "Update a record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Evento"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Evento"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewEvento"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      },
-      "delete": {
-        "deprecated": false,
-        "description": "Delete a record",
-        "responses": {
-          "200": {
-            "description": "deletes a single record based on the ID supplied",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int64"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Evento"
         ],
         "parameters": [
           {
@@ -4714,52 +3692,21 @@
   },
   "components": {
     "schemas": {
-      "Bolsa": {
+      "Agendamentos": {
         "required": [
-          "id"
+          "id",
+          "date",
+          "status",
+          "nome",
+          "cpf"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "obs": {
-            "type": "string"
-          },
           "date": {
             "type": "string",
             "format": "date-time"
-          },
-          "typeABnegativo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeABpositivo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeOpositivo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeOnegativo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeApositivo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeBpositivo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeAnegativo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeBnegativo": {
-            "type": "integer",
-            "default": 0
           },
           "centro": {
             "required": [
@@ -4767,7 +3714,7 @@
               "name",
               "avatar",
               "state",
-              "city"
+              "latitude"
             ],
             "properties": {
               "id": {
@@ -4779,7 +3726,7 @@
               "avatar": {
                 "type": "string"
               },
-              "galery": {
+              "gallery": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -4794,34 +3741,13 @@
               "number": {
                 "type": "string"
               },
-              "telphone1": {
+              "telephone1": {
                 "type": "string"
               },
-              "telphone2": {
+              "telephone2": {
                 "type": "string"
-              },
-              "location": {
-                "type": "number"
-              },
-              "bolsas": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "eventos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "state": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "cidade": {
                 "type": "string"
               },
               "posts": {
@@ -4829,6 +3755,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longitude": {
+                "type": "number"
+              },
+              "user": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"
@@ -4841,54 +3776,51 @@
               }
             }
           },
+          "status": {
+            "type": "boolean",
+            "default": false
+          },
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "tipoSangue": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
           }
         }
       },
-      "NewBolsa": {
+      "NewAgendamentos": {
+        "required": [
+          "date",
+          "status",
+          "nome",
+          "cpf"
+        ],
         "properties": {
-          "obs": {
-            "type": "string"
-          },
           "date": {
             "type": "string",
             "format": "date-time"
           },
-          "typeABnegativo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeABpositivo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeOpositivo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeOnegativo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeApositivo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeBpositivo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeAnegativo": {
-            "type": "integer",
-            "default": 0
-          },
-          "typeBnegativo": {
-            "type": "integer",
-            "default": 0
-          },
           "centro": {
+            "type": "string"
+          },
+          "status": {
+            "type": "boolean",
+            "default": false
+          },
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "tipoSangue": {
             "type": "string"
           },
           "published_at": {
@@ -4909,7 +3841,7 @@
           "name",
           "avatar",
           "state",
-          "city"
+          "latitude"
         ],
         "properties": {
           "id": {
@@ -4985,500 +3917,6 @@
               }
             }
           },
-          "galery": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name",
-                "hash",
-                "mime",
-                "size",
-                "url",
-                "provider"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "alternativeText": {
-                  "type": "string"
-                },
-                "caption": {
-                  "type": "string"
-                },
-                "width": {
-                  "type": "integer"
-                },
-                "height": {
-                  "type": "integer"
-                },
-                "formats": {
-                  "type": "object"
-                },
-                "hash": {
-                  "type": "string"
-                },
-                "ext": {
-                  "type": "string"
-                },
-                "mime": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "number"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "previewUrl": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "provider_metadata": {
-                  "type": "object"
-                },
-                "related": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "description": {
-            "type": "string"
-          },
-          "street": {
-            "type": "string"
-          },
-          "number": {
-            "type": "string"
-          },
-          "telphone1": {
-            "type": "string"
-          },
-          "telphone2": {
-            "type": "string"
-          },
-          "location": {
-            "type": "number"
-          },
-          "bolsas": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "obs": {
-                  "type": "string"
-                },
-                "date": {
-                  "type": "string"
-                },
-                "typeABnegativo": {
-                  "type": "integer"
-                },
-                "typeABpositivo": {
-                  "type": "integer"
-                },
-                "typeOpositivo": {
-                  "type": "integer"
-                },
-                "typeOnegativo": {
-                  "type": "integer"
-                },
-                "typeApositivo": {
-                  "type": "integer"
-                },
-                "typeBpositivo": {
-                  "type": "integer"
-                },
-                "typeAnegativo": {
-                  "type": "integer"
-                },
-                "typeBnegativo": {
-                  "type": "integer"
-                },
-                "centro": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "eventos": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "title",
-                "date",
-                "description"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "date": {
-                  "type": "string"
-                },
-                "subtitle": {
-                  "type": "string"
-                },
-                "gallery": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "description": {
-                  "type": "string"
-                },
-                "centro": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "state": {
-            "type": "string"
-          },
-          "city": {
-            "type": "string"
-          },
-          "cidade": {
-            "required": [
-              "id",
-              "city"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "city": {
-                "type": "uid"
-              },
-              "centros": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "posts": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "title",
-                "date",
-                "description"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "subtitle": {
-                  "type": "string"
-                },
-                "date": {
-                  "type": "string"
-                },
-                "gallery": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "description": {
-                  "type": "string"
-                },
-                "cover": {
-                  "type": "string"
-                },
-                "centro": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "NewCentro-hospitalar": {
-        "required": [
-          "name",
-          "state",
-          "city"
-        ],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "street": {
-            "type": "string"
-          },
-          "number": {
-            "type": "string"
-          },
-          "telphone1": {
-            "type": "string"
-          },
-          "telphone2": {
-            "type": "string"
-          },
-          "location": {
-            "type": "number"
-          },
-          "bolsas": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "eventos": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "state": {
-            "type": "string"
-          },
-          "city": {
-            "type": "string"
-          },
-          "cidade": {
-            "type": "string"
-          },
-          "posts": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
-          }
-        }
-      },
-      "Cidade": {
-        "required": [
-          "id",
-          "city"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "city": {
-            "type": "uid"
-          },
-          "centros": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name",
-                "avatar",
-                "state",
-                "city"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "avatar": {
-                  "type": "string"
-                },
-                "galery": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "description": {
-                  "type": "string"
-                },
-                "street": {
-                  "type": "string"
-                },
-                "number": {
-                  "type": "string"
-                },
-                "telphone1": {
-                  "type": "string"
-                },
-                "telphone2": {
-                  "type": "string"
-                },
-                "location": {
-                  "type": "number"
-                },
-                "bolsas": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "eventos": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "state": {
-                  "type": "string"
-                },
-                "city": {
-                  "type": "string"
-                },
-                "cidade": {
-                  "type": "string"
-                },
-                "posts": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "NewCidade": {
-        "required": [
-          "city"
-        ],
-        "properties": {
-          "city": {
-            "type": "uid"
-          },
-          "centros": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
-          }
-        }
-      },
-      "Evento": {
-        "required": [
-          "id",
-          "title",
-          "date",
-          "description"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "subtitle": {
-            "type": "string"
-          },
           "gallery": {
             "type": "array",
             "items": {
@@ -5552,76 +3990,114 @@
           "description": {
             "type": "string"
           },
-          "centro": {
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "telephone1": {
+            "type": "string"
+          },
+          "telephone2": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "posts": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "title",
+                "date",
+                "description"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "subtitle": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "gallery": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "description": {
+                  "type": "string"
+                },
+                "cover": {
+                  "type": "string"
+                },
+                "centro": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "user": {
             "required": [
               "id",
-              "name",
-              "avatar",
-              "state",
-              "city"
+              "username",
+              "email"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "name": {
+              "username": {
                 "type": "string"
               },
-              "avatar": {
+              "email": {
                 "type": "string"
               },
-              "galery": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "description": {
+              "provider": {
                 "type": "string"
               },
-              "street": {
+              "password": {
                 "type": "string"
               },
-              "number": {
+              "resetPasswordToken": {
                 "type": "string"
               },
-              "telphone1": {
+              "confirmationToken": {
                 "type": "string"
               },
-              "telphone2": {
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
                 "type": "string"
               },
-              "location": {
-                "type": "number"
-              },
-              "bolsas": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "eventos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "state": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "cidade": {
-                "type": "string"
-              },
-              "posts": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "published_at": {
+              "centro": {
                 "type": "string"
               },
               "created_by": {
@@ -5638,27 +4114,47 @@
           }
         }
       },
-      "NewEvento": {
+      "NewCentro-hospitalar": {
         "required": [
-          "title",
-          "date",
-          "description"
+          "name",
+          "state",
+          "latitude"
         ],
         "properties": {
-          "title": {
-            "type": "string"
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "subtitle": {
+          "name": {
             "type": "string"
           },
           "description": {
             "type": "string"
           },
-          "centro": {
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "telephone1": {
+            "type": "string"
+          },
+          "telephone2": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "posts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
+          },
+          "user": {
             "type": "string"
           },
           "published_at": {
@@ -5840,7 +4336,7 @@
               "name",
               "avatar",
               "state",
-              "city"
+              "latitude"
             ],
             "properties": {
               "id": {
@@ -5852,7 +4348,7 @@
               "avatar": {
                 "type": "string"
               },
-              "galery": {
+              "gallery": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -5867,34 +4363,13 @@
               "number": {
                 "type": "string"
               },
-              "telphone1": {
+              "telephone1": {
                 "type": "string"
               },
-              "telphone2": {
+              "telephone2": {
                 "type": "string"
-              },
-              "location": {
-                "type": "number"
-              },
-              "bolsas": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "eventos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "state": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "cidade": {
                 "type": "string"
               },
               "posts": {
@@ -5902,6 +4377,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longitude": {
+                "type": "number"
+              },
+              "user": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"
@@ -6054,6 +4538,9 @@
                 "role": {
                   "type": "string"
                 },
+                "centro": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -6166,6 +4653,74 @@
                 "type": "string"
               }
             }
+          },
+          "centro": {
+            "required": [
+              "id",
+              "name",
+              "avatar",
+              "state",
+              "latitude"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "gallery": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "telephone1": {
+                "type": "string"
+              },
+              "telephone2": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "posts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longitude": {
+                "type": "number"
+              },
+              "user": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -6208,6 +4763,9 @@
           "role": {
             "type": "string"
           },
+          "centro": {
+            "type": "string"
+          },
           "created_by": {
             "type": "string"
           },
@@ -6242,13 +4800,7 @@
   },
   "tags": [
     {
-      "name": "Bolsa"
-    },
-    {
-      "name": "Cidade"
-    },
-    {
-      "name": "Evento"
+      "name": "Agendamentos"
     },
     {
       "name": "Posts"

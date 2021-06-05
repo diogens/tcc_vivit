@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/agendamentos",
+      "handler": "agendamentos.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/agendamentos/count",
+      "handler": "agendamentos.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/agendamentos/:id",
+      "handler": "agendamentos.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/agendamentos",
+      "handler": "agendamentos.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/agendamentos/:id",
+      "handler": "agendamentos.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/agendamentos/:id",
+      "handler": "agendamentos.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

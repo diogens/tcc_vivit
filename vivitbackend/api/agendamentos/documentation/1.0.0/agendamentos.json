@@ -1,19 +1,18 @@
 {
   "paths": {
-    "/centro-hospitalars": {
+    "/agendamentos": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find all the agendamentos's records",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve agendamentos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Agendamentos"
                   }
                 }
               }
@@ -52,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Centro-hospitalar"
+          "Agendamentos"
         ],
         "parameters": [
           {
@@ -195,18 +194,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Create a new agendamentos record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve agendamentos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Agendamentos"
                 }
               }
             }
@@ -244,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Centro-hospitalar"
+          "Agendamentos"
         ],
         "requestBody": {
           "description": "",
@@ -252,26 +247,26 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCentro-hospitalar"
+                "$ref": "#/components/schemas/NewAgendamentos"
               }
             }
           }
         }
       }
     },
-    "/centro-hospitalars/count": {
+    "/agendamentos/count": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Retrieve the numver of agendamentos documents",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve agendamentos document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
-                    "foo": {
-                      "type": "string"
+                    "count": {
+                      "type": "integer"
                     }
                   }
                 }
@@ -311,26 +306,22 @@
         },
         "summary": "",
         "tags": [
-          "Centro-hospitalar"
+          "Agendamentos"
         ],
         "parameters": []
       }
     },
-    "/centro-hospitalars/{id}": {
+    "/agendamentos/{id}": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find one agendamentos record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve agendamentos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Agendamentos"
                 }
               }
             }
@@ -368,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Centro-hospitalar"
+          "Agendamentos"
         ],
         "parameters": [
           {
@@ -385,18 +376,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a record",
+        "description": "Update a single agendamentos record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve agendamentos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Agendamentos"
                 }
               }
             }
@@ -434,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Centro-hospitalar"
+          "Agendamentos"
         ],
         "requestBody": {
           "description": "",
@@ -442,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCentro-hospitalar"
+                "$ref": "#/components/schemas/NewAgendamentos"
               }
             }
           }
@@ -462,10 +449,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete a single agendamentos record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the ID supplied",
+            "description": "deletes a single agendamentos based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -508,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Centro-hospitalar"
+          "Agendamentos"
         ],
         "parameters": [
           {
@@ -527,30 +514,29 @@
   },
   "components": {
     "schemas": {
-      "Centro-hospitalar": {
+      "Agendamentos": {
         "required": [
           "id",
-          "name",
-          "avatar",
-          "state",
-          "latitude"
+          "date",
+          "status",
+          "nome",
+          "cpf"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "name": {
-            "type": "string"
+          "date": {
+            "type": "string",
+            "format": "date-time"
           },
-          "avatar": {
+          "centro": {
             "required": [
               "id",
               "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
+              "avatar",
+              "state",
+              "latitude"
             ],
             "properties": {
               "id": {
@@ -559,46 +545,49 @@
               "name": {
                 "type": "string"
               },
-              "alternativeText": {
+              "avatar": {
                 "type": "string"
               },
-              "caption": {
+              "gallery": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
                 "type": "string"
               },
-              "width": {
-                "type": "integer"
-              },
-              "height": {
-                "type": "integer"
-              },
-              "formats": {
-                "type": "object"
-              },
-              "hash": {
+              "street": {
                 "type": "string"
               },
-              "ext": {
+              "number": {
                 "type": "string"
               },
-              "mime": {
+              "telephone1": {
                 "type": "string"
               },
-              "size": {
+              "telephone2": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "posts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "latitude": {
                 "type": "number"
               },
-              "url": {
+              "longitude": {
+                "type": "number"
+              },
+              "user": {
                 "type": "string"
               },
-              "previewUrl": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "provider_metadata": {
-                "type": "object"
-              },
-              "related": {
+              "published_at": {
                 "type": "string"
               },
               "created_by": {
@@ -609,196 +598,18 @@
               }
             }
           },
-          "gallery": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name",
-                "hash",
-                "mime",
-                "size",
-                "url",
-                "provider"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "alternativeText": {
-                  "type": "string"
-                },
-                "caption": {
-                  "type": "string"
-                },
-                "width": {
-                  "type": "integer"
-                },
-                "height": {
-                  "type": "integer"
-                },
-                "formats": {
-                  "type": "object"
-                },
-                "hash": {
-                  "type": "string"
-                },
-                "ext": {
-                  "type": "string"
-                },
-                "mime": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "number"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "previewUrl": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "provider_metadata": {
-                  "type": "object"
-                },
-                "related": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
+          "status": {
+            "type": "boolean",
+            "default": false
           },
-          "description": {
+          "nome": {
             "type": "string"
           },
-          "street": {
+          "cpf": {
             "type": "string"
           },
-          "number": {
+          "tipoSangue": {
             "type": "string"
-          },
-          "telephone1": {
-            "type": "string"
-          },
-          "telephone2": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "posts": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "title",
-                "date",
-                "description"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "title": {
-                  "type": "string"
-                },
-                "subtitle": {
-                  "type": "string"
-                },
-                "date": {
-                  "type": "string"
-                },
-                "gallery": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "description": {
-                  "type": "string"
-                },
-                "cover": {
-                  "type": "string"
-                },
-                "centro": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "latitude": {
-            "type": "number"
-          },
-          "longitude": {
-            "type": "number"
-          },
-          "user": {
-            "required": [
-              "id",
-              "username",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "centro": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
           },
           "published_at": {
             "type": "string",
@@ -806,47 +617,32 @@
           }
         }
       },
-      "NewCentro-hospitalar": {
+      "NewAgendamentos": {
         "required": [
-          "name",
-          "state",
-          "latitude"
+          "date",
+          "status",
+          "nome",
+          "cpf"
         ],
         "properties": {
-          "name": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "centro": {
             "type": "string"
           },
-          "description": {
+          "status": {
+            "type": "boolean",
+            "default": false
+          },
+          "nome": {
             "type": "string"
           },
-          "street": {
+          "cpf": {
             "type": "string"
           },
-          "number": {
-            "type": "string"
-          },
-          "telephone1": {
-            "type": "string"
-          },
-          "telephone2": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "posts": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "latitude": {
-            "type": "number"
-          },
-          "longitude": {
-            "type": "number"
-          },
-          "user": {
+          "tipoSangue": {
             "type": "string"
           },
           "published_at": {
@@ -863,5 +659,9 @@
       }
     }
   },
-  "tags": []
+  "tags": [
+    {
+      "name": "Agendamentos"
+    }
+  ]
 }
