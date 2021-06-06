@@ -1,6 +1,8 @@
+import React from 'react'
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { NormalizedCacheObject } from '@apollo/client/cache/inmemory/types'
-// import { setContext } from '@apollo/link-context';
+import { AsyncStorage } from 'react-native'
+import { setContext } from '@apollo/link-context'
 
 /*
 uncomment the code below in case you are using a GraphQL API that requires some form of
@@ -14,10 +16,27 @@ const asyncAuthLink = setContext(async () => {
     },
   };
 });
+await AsyncStorage.getItem('@CofferIsland:username')
 */
 
+const GRAPHQL_API_URL = 'http://5.183.8.1:1337/graphql'
+
+const asyncAuthLink = setContext(async () => {
+  const TOKEN = await AsyncStorage.getItem('@CofferIsland:username')
+  console.log('### =>=>', TOKEN)
+  return {
+    headers: {
+      Authorization: TOKEN
+    }
+  }
+})
+
+const httpLink = new HttpLink({
+  uri: GRAPHQL_API_URL
+})
+
 export const apolloClient = new ApolloClient<NormalizedCacheObject>({
-  link: new HttpLink({ uri: 'http://5.183.8.1:1337/graphql' }),
+  /* link: asyncAuthLink.concat(httpLink), */
+  link: httpLink,
   cache: new InMemoryCache()
-  // link: asyncAuthLink.concat(httpLink),
 })

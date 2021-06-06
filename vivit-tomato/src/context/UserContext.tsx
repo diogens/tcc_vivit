@@ -36,6 +36,7 @@ type ContextProps = {
   loading: string
   setData: (value) => void
   signIn: (value) => void
+  signOut: (value) => void
   message: (value) => void
 }
 /* <Partial<ContextProps>> */
@@ -52,19 +53,52 @@ export const UserContext = ({ children }) => {
     MUTATION_LOGIN
   )
 
-  /*  const [loginUser, { loading: updating, error: updateError }] = useMutation(
-    MUTATION_LOGIN
-  ) */
+  async function loadStorageData() {
+    const storage = await AsyncStorage.multiGet([
+      '@CofferIsland:username',
+      '@CofferIsland:email',
+      '@CofferIsland:jwt'
+    ])
+
+    if (storage[2][1]) {
+      setAuthenticated({ authenticated: true })
+    } else {
+      setAuthenticated({ authenticated: false })
+    }
+
+    /* console.log('name=>', storage[0][1])
+    console.log('email=>', storage[1][1])
+    console.log('token=>', storage[2][1]) */
+    console.log('token=>', storage[2][1])
+  }
+
+  React.useEffect(() => {
+    loadStorageData()
+  }, [])
+
+  async function saveDataStore() {
+    await AsyncStorage.multiSet([
+      ['@CofferIsland:username', user?.user?.username],
+      ['@CofferIsland:email', user?.user?.email],
+      ['@CofferIsland:jwt', JSON.stringify(user?.jwt)]
+    ])
+  }
+
+  React.useEffect(() => {
+    saveDataStore()
+  }, [user])
 
   async function signIn({ username, password }: SignInProps) {
-    updateError
-      ? setAuthenticated({ authenticated: false })
-      : message({
-          title: 'Error',
-          message: 'Usuário ou senha inválidos',
-          textBtn: 'OK',
-          action: () => console.log('fechando...')
-        })
+    if (!updateError) {
+      setAuthenticated({ authenticated: false })
+    } else {
+      message({
+        title: 'Error',
+        message: 'Usuário ou senha inválidos',
+        textBtn: 'OK',
+        action: () => console.log('fechando...')
+      })
+    }
 
     const response = await loginUser({
       variables: {
@@ -84,8 +118,29 @@ export const UserContext = ({ children }) => {
     }
   }
 
+  async function signOut() {
+    try {
+      await AsyncStorage.multiRemove([
+        '@CofferIsland:username',
+        '@CofferIsland:email',
+        '@CofferIsland:jwt'
+      ])
+      setAuthenticated({ authenticated: false })
+    } catch (error) {
+      console.log(`erro`)
+    } finally {
+      setTimeout(() => {
+        message({
+          title: 'Aviso',
+          message: 'Você deslogou',
+          textBtn: 'Ok',
+          action: () => console.log('ok')
+        })
+      }, 2000)
+    }
+  }
+
   function message({ title, message, textBtn, action }: MessageProps) {
-    console.log('message ###', title, message, textBtn, action)
     return Alert.alert(title, message, [
       {
         text: textBtn,
@@ -96,7 +151,7 @@ export const UserContext = ({ children }) => {
   }
 
   return (
-    <User.Provider value={{ signIn, message, user, authenticated }}>
+    <User.Provider value={{ signIn, signOut, message, user, authenticated }}>
       {children}
     </User.Provider>
   )
