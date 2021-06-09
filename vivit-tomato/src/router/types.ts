@@ -4,4 +4,5 @@ export type StackParams = {
   Agendamentos: undefined
   SignIn: undefined
   SignUp: undefined
+  Details: undefined
 }

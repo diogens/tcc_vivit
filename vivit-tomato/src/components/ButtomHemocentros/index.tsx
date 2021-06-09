@@ -10,7 +10,7 @@ export type ButtonProps = {
 }
 
 const ButtomHemocentros = ({ color = '#000', size = 24 }: ButtonProps) => (
-  <S.Wrapper>
+  <S.Wrapper color={color}>
     <Fontisto
       style={{ marginBottom: 20 }}
       name="map-marker-alt"

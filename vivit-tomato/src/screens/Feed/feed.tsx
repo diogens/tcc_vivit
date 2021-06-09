@@ -8,7 +8,9 @@ import {
   Text,
   View,
   StyleSheet,
-  SafeAreaView
+  SafeAreaView,
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native'
 const { width } = Dimensions.get('screen')
 import { EvilIcons } from '@expo/vector-icons'
@@ -18,10 +20,14 @@ import {
   State
 } from 'react-native-gesture-handler'
 
-import { useQuery } from '@apollo/client'
+import { SharedElement } from 'react-navigation-shared-element'
+
+import { useQuery, NetworkStatus } from '@apollo/client'
 import { QueryPosts } from 'graphql/generated/QueryPosts'
 import { QUERY_POSTS } from '../../graphql/queries/posts'
 import theme from '../../styles/theme'
+import { NavigationProp } from '@react-navigation/native'
+import { PropsNavigate } from 'router'
 
 const OVERFLOW_HEIGHT = 90
 const SPACING = 10
@@ -64,7 +70,7 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
   )
 }
 
-export default function App() {
+const Feeds = ({ navigation }: PropsNavigate) => {
   /* const [data, setData] = React.useState(DATA) */
   const scrollXIndex = React.useRef(new Animated.Value(0)).current
   const scrollXAnimated = React.useRef(new Animated.Value(0)).current
@@ -78,16 +84,21 @@ export default function App() {
     setIndex(activeIndex)
   })
 
-  const { data, error, loading, fetchMore, refetch } = useQuery<QueryPosts>(
-    QUERY_POSTS
-  )
+  const {
+    data,
+    error,
+    loading,
+    fetchMore,
+    refetch,
+    networkStatus
+  } = useQuery<QueryPosts>(QUERY_POSTS, {
+    notifyOnNetworkStatusChange: true
+  })
 
   async function loadPage(pageNumber = 2, shouldRefresh = false) {}
 
   async function refreshList() {
-    refetch({
-      query: QUERY_POSTS
-    })
+    refetch()
   }
 
   React.useEffect(() => {
@@ -100,6 +111,21 @@ export default function App() {
       useNativeDriver: true
     }).start()
   })
+
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignContent: 'center',
+          backgroundColor: theme.theme_colors.back
+        }}
+      >
+        <ActivityIndicator color={theme.theme_colors.primary} size={300} />
+      </View>
+    )
+  }
 
   return (
     <FlingGestureHandler
@@ -127,7 +153,7 @@ export default function App() {
         }}
       >
         <SafeAreaView style={styles.container}>
-          <FlatList
+          <Animated.FlatList
             data={data?.posts}
             keyExtractor={(_, index) => String(index)}
             horizontal
@@ -163,7 +189,7 @@ export default function App() {
               })
               const scale = scrollXAnimated.interpolate({
                 inputRange,
-                outputRange: [0.8, 1, 1.6]
+                outputRange: [0.85, 1, 1.3]
               })
               const opacity = scrollXAnimated.interpolate({
                 inputRange,
@@ -185,6 +211,9 @@ export default function App() {
                   }}
                 >
                   <Image
+                    onProgress={({ nativeEvent: { loaded, total } }) => (
+                      <Text>CAREGANDO...</Text>
+                    )}
                     source={{ uri: `http://5.183.8.1:1337${item?.cover?.url}` }}
                     style={{
                       width: ITEM_WIDTH,
@@ -202,6 +231,8 @@ export default function App() {
     </FlingGestureHandler>
   )
 }
+
+export default Feeds
 
 const styles = StyleSheet.create({
   container: {

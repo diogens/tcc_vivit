@@ -15,6 +15,8 @@ import SignIn from '../screens/SignIn'
 import SignUp from '../screens/SignUp'
 
 import { AntDesign } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons'
+import { Entypo } from '@expo/vector-icons'
 import { StackParams } from './types'
 import { User } from '../context/UserContext'
 
@@ -60,7 +62,7 @@ function ScreensApp() {
           title: 'Noticias',
           // eslint-disable-next-line react/display-name
           tabBarIcon: ({ color }) => (
-            <AntDesign name="notification" color={color} size={30} />
+            <Entypo name="news" color={color} size={30} />
           )
         }}
       />
@@ -82,7 +84,7 @@ function ScreensApp() {
           title: 'Agendamentos',
           // eslint-disable-next-line react/display-name
           tabBarIcon: ({ color }) => (
-            <AntDesign name="info" color={color} size={30} />
+            <FontAwesome name="calendar" size={30} color={color} />
           )
         }}
       />

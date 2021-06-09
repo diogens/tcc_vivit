@@ -2,7 +2,12 @@ import { useQuery } from '@apollo/client'
 import { QueryCentroHospitalars } from '../../graphql/generated/QueryCentroHospitalars'
 import { QUERY_CENTRO_HOSPITALARS } from '../../graphql/queries/centroHospitars'
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Animated,
+  TextInput
+} from 'react-native'
 import {
   Button,
   View,
@@ -14,10 +19,11 @@ import MapView, { Marker } from 'react-native-maps'
 import HTML from 'react-native-render-html'
 import { Modalize } from 'react-native-modalize'
 import * as S from './styles'
-import { Animated } from 'react-native'
-import { TextInput } from 'react-native'
 
-const Map = ({ navigation }) => {
+import theme from '../../styles/theme'
+import { PropsNavigate } from '../../router'
+
+const Map = ({ navigation }: PropsNavigate) => {
   const { data, loading } = useQuery<QueryCentroHospitalars>(
     QUERY_CENTRO_HOSPITALARS
   )
@@ -57,6 +63,21 @@ const Map = ({ navigation }) => {
     fadeIn()
   })
 
+  if (loading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignContent: 'center',
+          backgroundColor: theme.theme_colors.back
+        }}
+      >
+        <ActivityIndicator color={theme.theme_colors.primary} size={300} />
+      </View>
+    )
+  }
+
   return (
     <>
       <Animated.View
@@ -83,44 +104,39 @@ const Map = ({ navigation }) => {
         />
       </Animated.View>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {loading ? (
-          <Text>carregando...</Text>
-        ) : (
-          <MapView
-            style={{
-              width: Dimensions.get('window').width,
-              height: Dimensions.get('window').height
-            }}
-            initialRegion={{
-              latitude: -12.2590293,
-              longitude: -38.9556411,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421
-            }}
-          >
-            {loading ? (
-              <Text>Carregando......</Text>
-            ) : (
-              data.centroHospitalars.map(
-                ({ id, latitude, longitude }, index) => {
-                  return (
-                    <Marker
-                      onPress={() => {
-                        onOpen()
-                        setIndex(index)
-                      }}
-                      key={id}
-                      coordinate={{
-                        longitude: longitude,
-                        latitude: latitude
-                      }}
-                    />
-                  )
-                }
+        <MapView
+          style={{
+            width: Dimensions.get('window').width,
+            height: Dimensions.get('window').height
+          }}
+          initialRegion={{
+            latitude: -12.2590293,
+            longitude: -38.9556411,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }}
+        >
+          {loading ? (
+            <Text>Carregando......</Text>
+          ) : (
+            data.centroHospitalars.map(({ id, latitude, longitude }, index) => {
+              return (
+                <Marker
+                  onPress={() => {
+                    onOpen()
+                    setIndex(index)
+                  }}
+                  key={id}
+                  coordinate={{
+                    longitude: longitude,
+                    latitude: latitude
+                  }}
+                />
               )
-            )}
-          </MapView>
-        )}
+            })
+          )}
+        </MapView>
+
         <Modalize
           ref={modalizeRef}
           snapPoint={500}
