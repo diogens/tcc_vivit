@@ -7,6 +7,7 @@ import { MUTATION_LOGIN } from '../graphql/mutations/login'
 type SignInProps = {
   username: string
   password: string
+  email?: string
 }
 
 type AuthenticatedProps = {
@@ -22,10 +23,7 @@ type MessageProps = {
 
 type UserProps = {
   jwt: string
-  user: {
-    email: string
-    username: string
-  }
+  user: SignInProps
 }
 
 type ContextProps = {
@@ -156,3 +154,5 @@ export const UserContext = ({ children }) => {
     </User.Provider>
   )
 }
+
+/* export const Context = () => React.useContext(User) */

@@ -29,7 +29,8 @@ export default {
     yellow2: '#E9C46A',
     orange: '#F4A261',
     tomato: '#E76F51',
-    white: '#FAFAFA'
+    white: '#FAFAFA',
+    back: '#000'
   },
   colors: {
     mediumChampagne: '#FFF3B0',
