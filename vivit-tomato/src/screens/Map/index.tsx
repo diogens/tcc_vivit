@@ -24,9 +24,12 @@ import theme from '../../styles/theme'
 import { PropsNavigate } from '../../router'
 
 const Map = ({ navigation }: PropsNavigate) => {
-  const { data, loading } = useQuery<QueryCentroHospitalars>(
-    QUERY_CENTRO_HOSPITALARS
-  )
+  const {
+    data,
+    loading,
+    error,
+    networkStatus
+  } = useQuery<QueryCentroHospitalars>(QUERY_CENTRO_HOSPITALARS)
 
   const contentWidth = useWindowDimensions().width
 
@@ -76,6 +79,10 @@ const Map = ({ navigation }: PropsNavigate) => {
         <ActivityIndicator color={theme.theme_colors.primary} size={300} />
       </View>
     )
+  }
+
+  if (error) {
+    return <Text>Error {error.message}</Text>
   }
 
   return (

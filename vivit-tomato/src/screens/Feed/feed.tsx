@@ -98,7 +98,9 @@ const Feeds = ({ navigation }: PropsNavigate) => {
   async function loadPage(pageNumber = 2, shouldRefresh = false) {}
 
   async function refreshList() {
-    refetch()
+    setRefreshing(true)
+    await refetch()
+    setRefreshing(false)
   }
 
   React.useEffect(() => {
@@ -125,6 +127,10 @@ const Feeds = ({ navigation }: PropsNavigate) => {
         <ActivityIndicator color={theme.theme_colors.primary} size={300} />
       </View>
     )
+  }
+
+  if (error) {
+    return <Text>Error {error.message}</Text>
   }
 
   return (
@@ -237,8 +243,7 @@ export default Feeds
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: theme.theme_colors.back
+    justifyContent: 'center'
   },
   title: {
     fontSize: 28,

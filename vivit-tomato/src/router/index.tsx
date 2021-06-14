@@ -1,10 +1,15 @@
 import React from 'react'
+import { useColorScheme } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
   createStackNavigator,
   StackNavigationProp
 } from '@react-navigation/stack'
-import { NavigationContainer } from '@react-navigation/native'
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme
+} from '@react-navigation/native'
 
 import ButtomHemocentros from '../components/ButtomHemocentros'
 
@@ -92,10 +97,19 @@ function ScreensApp() {
   )
 }
 
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'rgb(255, 45, 85)'
+  }
+}
+
 export default function App() {
-  const { authenticated } = React.useContext(User)
+  const scheme = useColorScheme()
+  const { authenticated, theme } = React.useContext(User)
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme ? DarkTheme : DefaultTheme}>
       {!authenticated.authenticated ? <Auth /> : <ScreensApp />}
     </NavigationContainer>
   )
