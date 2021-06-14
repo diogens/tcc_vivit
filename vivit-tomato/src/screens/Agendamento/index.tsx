@@ -29,22 +29,30 @@ import useForm from '../../hooks/useForms'
 import * as S from './styles'
 
 import moment from 'moment'
+import { User } from '../../context/UserContext'
+import { QUERY_LIST_CENTROS } from '../../graphql/queries/listCentros'
+import { QueryCentroHospitalar } from '../../graphql/generated/QueryCentroHospitalar'
 
 const Agendamento = ({ navigation }: PropsNavigate) => {
+  const { message, signOut } = React.useContext(User)
+
   const { data, loading, refetch, error } = useQuery<QueryAgendamentos>(
     QUERY_AGENTAMENTOS
   )
+
+  const centroList = useQuery<QueryCentroHospitalar>(QUERY_LIST_CENTROS)
 
   const [agendamento, { loading: updating, error: updateError }] = useMutation(
     MUTATION_AGENDAMENTO
   )
 
-  moment.locale('pt-br')
+  /* moment.locale('pt-br') */
 
   const name = useForm('email')
   const cpf = useForm('cpf')
   const sangue = useForm('tipoAB1')
   const date = useForm('java')
+  const centro = useForm('')
 
   const [modalVisible, setModalVisible] = React.useState(false)
   const [refreshing, setRefreshing] = React.useState(false)
@@ -59,28 +67,42 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
     { sangue: 'tipoO2' }
   ])
 
+  React.useEffect(() => {
+    signOut()
+  }, [])
+
   async function saveAgendamento() {
-    const response = await agendamento({
-      variables: {
-        input: {
-          data: {
-            nome: name.value,
-            status: true,
-            date: '2021-06-14T15:00:00.000Z',
-            cpf: cpf.value,
-            tipoSangue: 'tipoAB1'
+    if (cpf.valid) {
+      const response = await agendamento({
+        variables: {
+          input: {
+            data: {
+              nome: name.value,
+              status: true,
+              date: '2021-06-14T15:00:00.000Z',
+              cpf: cpf.value,
+              tipoSangue: sangue.value,
+              centro: centro.value
+            }
           }
         }
-      }
-    })
+      })
 
-    try {
-      setModalVisible(!modalVisible)
-      alert('Salvooo')
-      refreshList()
-      return response
-    } catch (error) {
-      return
+      try {
+        setModalVisible(!modalVisible)
+        alert('Salvooo')
+        refreshList()
+        return response
+      } catch (error) {
+        return
+      }
+    } else {
+      message({
+        title: 'CPF',
+        message: 'cpf invalido,',
+        textBtn: 'Ok',
+        action: () => console.log('ok')
+      })
     }
   }
 
@@ -90,7 +112,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
     setRefreshing(false)
   }
 
-  if (loading) {
+  if (loading || updating) {
     return (
       <View
         style={{
@@ -169,12 +191,34 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                 selectedValue={sangue.value}
                 style={{ height: 50, width: 150 }}
                 onValueChange={(itemValue, itemIndex) =>
-                  date.setValue(itemValue)
+                  sangue.setValue(itemValue)
                 }
               >
                 {type.map((item, index) => {
                   return (
-                    <Picker.Item key={index} label={item.sangue} value="java" />
+                    <Picker.Item
+                      key={index}
+                      label={item.sangue}
+                      value={item.sangue}
+                    />
+                  )
+                })}
+              </Picker>
+
+              <Picker
+                selectedValue={centro.value}
+                style={{ height: 50, width: 150 }}
+                onValueChange={(itemValue, itemIndex) =>
+                  centro.setValue(itemValue)
+                }
+              >
+                {centroList.data.centroHospitalars.map((item, index) => {
+                  return (
+                    <Picker.Item
+                      key={index}
+                      label={item.name}
+                      value={item.id}
+                    />
                   )
                 })}
               </Picker>

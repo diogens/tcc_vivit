@@ -8,6 +8,7 @@ type SignInProps = {
   username: string
   password: string
   email?: string
+  id?: string
 }
 
 type AuthenticatedProps = {
@@ -57,7 +58,8 @@ export const UserContext = ({ children }) => {
     const storage = await AsyncStorage.multiGet([
       '@CofferIsland:username',
       '@CofferIsland:email',
-      '@CofferIsland:jwt'
+      '@CofferIsland:jwt',
+      '@CofferIsland:id'
     ])
 
     if (storage[2][1]) {
@@ -66,10 +68,12 @@ export const UserContext = ({ children }) => {
       setAuthenticated({ authenticated: false })
     }
 
-    /* console.log('name=>', storage[0][1])
-    console.log('email=>', storage[1][1])
+    console.log('name=>', storage[0][1])
+    /* console.log('email=>', storage[1][1])
     console.log('token=>', storage[2][1]) */
-    console.log('token=>', storage[2][1])
+    console.log('id=>', storage[3][1])
+
+    /* console.log(user?.user) */
   }
 
   React.useEffect(() => {
@@ -80,7 +84,8 @@ export const UserContext = ({ children }) => {
     await AsyncStorage.multiSet([
       ['@CofferIsland:username', user?.user?.username],
       ['@CofferIsland:email', user?.user?.email],
-      ['@CofferIsland:jwt', JSON.stringify(user?.jwt)]
+      ['@CofferIsland:jwt', JSON.stringify(user?.jwt)],
+      ['@CofferIsland:id', user?.user?.id]
     ])
   }
 
@@ -121,6 +126,7 @@ export const UserContext = ({ children }) => {
   async function signOut() {
     try {
       await AsyncStorage.multiRemove([
+        '@CofferIsland:id',
         '@CofferIsland:username',
         '@CofferIsland:email',
         '@CofferIsland:jwt'

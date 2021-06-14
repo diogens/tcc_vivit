@@ -13,6 +13,7 @@ export interface MutationLogin_login_user {
   __typename: "UsersPermissionsMe";
   username: string;
   email: string;
+  id: string;
 }
 
 export interface MutationLogin_login {
