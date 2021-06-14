@@ -32,7 +32,22 @@
       "required": true
     },
     "tipoSangue": {
-      "type": "string"
+      "type": "enumeration",
+      "enum": [
+        "tipoAB1",
+        "tipoAB2",
+        "tipoA1",
+        "tipoA2",
+        "tipoB1",
+        "tipoB2",
+        "tipoO1",
+        "tipoO2"
+      ],
+      "required": true
+    },
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

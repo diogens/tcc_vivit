@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "06/04/2021 6:35:34 PM"
+    "x-generation-date": "06/13/2021 10:01:44 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3698,7 +3698,8 @@
           "date",
           "status",
           "nome",
-          "cpf"
+          "cpf",
+          "tipoSangue"
         ],
         "properties": {
           "id": {
@@ -3787,7 +3788,65 @@
             "type": "string"
           },
           "tipoSangue": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "tipoAB1",
+              "tipoAB2",
+              "tipoA1",
+              "tipoA2",
+              "tipoB1",
+              "tipoB2",
+              "tipoO1",
+              "tipoO2"
+            ]
+          },
+          "users_permissions_user": {
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "centro": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           },
           "published_at": {
             "type": "string",
@@ -3800,7 +3859,8 @@
           "date",
           "status",
           "nome",
-          "cpf"
+          "cpf",
+          "tipoSangue"
         ],
         "properties": {
           "date": {
@@ -3821,6 +3881,19 @@
             "type": "string"
           },
           "tipoSangue": {
+            "type": "string",
+            "enum": [
+              "tipoAB1",
+              "tipoAB2",
+              "tipoA1",
+              "tipoA2",
+              "tipoB1",
+              "tipoB2",
+              "tipoO1",
+              "tipoO2"
+            ]
+          },
+          "users_permissions_user": {
             "type": "string"
           },
           "published_at": {
