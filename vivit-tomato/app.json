@@ -5,6 +5,12 @@
     "name": "Vivit",
     "slug": "vivit",
     "icon": "./assets/icon/ic_launcher.png",
+    "splash": {
+      "image":
+        "https://github.com/expo/expo/blob/master/templates/expo-template-blank/assets/splash.png?raw=true",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "platforms":[
