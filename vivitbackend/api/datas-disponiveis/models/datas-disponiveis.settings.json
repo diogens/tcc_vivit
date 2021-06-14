@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "datas_disponiveis",
+  "info": {
+    "name": "Datas Disponíveis"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "disponibilidade": {
+      "type": "datetime",
+      "required": true
+    }
+  }
+}
