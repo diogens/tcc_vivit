@@ -1,5 +1,5 @@
 import React from 'react'
-import { AsyncStorage, Text, Alert } from 'react-native'
+import { AsyncStorage, Text, Alert, Modal } from 'react-native'
 import { useMutation } from '@apollo/client'
 import { Snackbar } from 'react-native-paper'
 import { MUTATION_LOGIN } from '../graphql/mutations/login'
@@ -29,9 +29,10 @@ type UserProps = {
 type ContextProps = {
   user: UserProps
   authenticated: AuthenticatedProps
-  theme: string
+  theme: boolean
   error: string
   loading: string
+  setTheme: (value) => void
   setData: (value) => void
   signIn: (value) => void
   signOut: (value) => void
@@ -43,6 +44,7 @@ export const User = React.createContext<Partial<ContextProps>>({})
 
 export const UserContext = ({ children }) => {
   const [user, setUser] = React.useState<UserProps | undefined>(undefined)
+  const [theme, setTheme] = React.useState(true)
   const [authenticated, setAuthenticated] = React.useState<AuthenticatedProps>({
     authenticated: false
   })
@@ -148,8 +150,14 @@ export const UserContext = ({ children }) => {
     ])
   }
 
+  function modalAlert({ title, message, textBtn, action }: MessageProps) {
+    return Modal.contextType.displayName
+  }
+
   return (
-    <User.Provider value={{ signIn, signOut, message, user, authenticated }}>
+    <User.Provider
+      value={{ signIn, signOut, message, user, authenticated, setTheme, theme }}
+    >
       {children}
     </User.Provider>
   )

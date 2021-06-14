@@ -6,16 +6,16 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import theme from '../../styles/theme'
 
 export type InputProps = {
-  label: string
-  placeholder: string
-  icon: string
-  error: string
-  password: boolean
-  onChangeText: (value: string) => void
-  keyboardType: string
-  onBlurText: (value: string) => void
-  value: string
-  iconCustom: string
+  label?: string
+  placeholder?: string
+  icon?: string
+  error?: string
+  password?: boolean
+  onChangeText?: (value: string) => void
+  keyboardType?: string
+  onBlurText?: (value) => void
+  value?: string
+  iconCustom?: string
 }
 
 const Input = ({
