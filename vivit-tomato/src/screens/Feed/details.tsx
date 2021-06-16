@@ -12,9 +12,11 @@ import {
   QueryPostByIdVariables
 } from '../../graphql/generated/QueryPostById'
 
+import moment from 'moment'
 import Text from '../../components/Text'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import theme from '../../styles/theme'
+import { borderRadius } from 'polished'
 
 const IMAGE_WIDTH = Dimensions.get('window').width
 const IMAGE_HEIGHT = IMAGE_WIDTH * 1.2
@@ -43,27 +45,31 @@ const Details = ({ navigation, route }) => {
       >
         <View
           style={{
-            width: 60,
-            height: 60,
+            width: 50,
+            height: 50,
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            backgroundColor: '#000',
+            borderRadius: 50
           }}
         >
           <FontAwesome
             name="arrow-circle-o-left"
             size={50}
-            color={theme.theme_colors.tomato}
+            color={theme.theme_colors.white}
           />
         </View>
       </TouchableOpacity>
       <S.WrapperDetails>
         {loading ? (
-          <Text
-            color="white"
-            size="large"
-            fontFamily="ubuntu"
-            text="Carregando..."
-          />
+          <View style={{ justifyContent: 'center', alignContent: 'center' }}>
+            <Text
+              color="white"
+              size="large"
+              fontFamily="ubuntu"
+              text="Carregando..."
+            />
+          </View>
         ) : error ? (
           <Text
             color="white"
@@ -81,35 +87,40 @@ const Details = ({ navigation, route }) => {
                 style={{
                   width: IMAGE_WIDTH,
                   height: IMAGE_HEIGHT,
-                  borderRadius: 20,
+                  borderRadius: 10,
                   resizeMode: 'cover'
                 }}
               />
             </SharedElement>
 
-            <View>
+            <View style={{ paddingHorizontal: 10 }}>
               <Text
                 color="white"
                 size="large"
                 fontFamily="ubuntu"
-                text={data.posts[0].title}
+                text={data?.posts[0].title}
               />
 
               <View>
                 <Text
                   size="large"
                   fontFamily="ubuntu"
-                  text={data.posts[0].subtitle}
+                  text={data?.posts[0].subtitle}
                 />
                 <Text
                   size="medium"
                   fontFamily="ubuntu"
-                  text={data.posts[0].date}
+                  text={moment(data?.posts[0].date).format('LLLL')}
+                  color="white"
                 />
-
+                {/* ${data.posts[0].description} */}
                 <HTML
-                  classesStyles={{}}
-                  source={{ html: data.posts[0].description }}
+                  classesStyles={{ color: '#fff' }}
+                  source={{
+                    html: `<body style="color: #fff; padding: 0 0px; text-align:alignment">
+                    ${data.posts[0].description}
+                  </body>`
+                  }}
                   contentWidth={contentWidth}
                 />
                 <View style={{ height: 100 }} />

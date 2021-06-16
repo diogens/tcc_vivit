@@ -20,6 +20,8 @@ import {
   State
 } from 'react-native-gesture-handler'
 
+import moment from 'moment'
+
 import { SharedElement } from 'react-navigation-shared-element'
 
 import { useQuery, NetworkStatus } from '@apollo/client'
@@ -33,9 +35,9 @@ const OVERFLOW_HEIGHT = 90
 const SPACING = 10
 const ITEM_WIDTH = width * 0.86
 const ITEM_HEIGHT = ITEM_WIDTH * 1.5
-const VISIBLE_ITEMS = 3
+const VISIBLE_ITEMS = 5
 
-const OverflowItems = ({ data, scrollXAnimated }) => {
+const OverflowItems = ({ data, scrollXAnimated, navigation }) => {
   const inputRange = [-1, 0, 1]
   const translateY = scrollXAnimated.interpolate({
     inputRange,
@@ -46,29 +48,39 @@ const OverflowItems = ({ data, scrollXAnimated }) => {
       <Animated.View style={{ transform: [{ translateY }] }}>
         {data?.posts.map((item, index) => {
           return (
-            <View key={index} style={styles.itemContainer}>
-              <Text style={[styles.title]} numberOfLines={1}>
-                {item.title}
-              </Text>
-              <View style={styles.itemContainerRow}>
-                <Text style={[styles.location]}>
-                  <EvilIcons
-                    name="location"
-                    size={16}
-                    color="white"
-                    style={{ marginRight: 5 }}
-                  />
-                  {item?.centro.name}
+            <TouchableOpacity
+              style={{}}
+              key={index}
+              onPress={() => navigation?.navigate('Details', { item: item.id })}
+            >
+              <View style={styles.itemContainer}>
+                <Text style={[styles.title]} numberOfLines={1}>
+                  {item.title}
                 </Text>
-                <Text style={[styles.date]}>{item.date}</Text>
+                <View style={styles.itemContainerRow}>
+                  <Text style={[styles.location]} numberOfLines={1}>
+                    <EvilIcons
+                      name="location"
+                      size={16}
+                      color="white"
+                      style={{ marginRight: 5 }}
+                    />
+                    {item?.centro.name}
+                  </Text>
+                  <Text style={[styles.date]} numberOfLines={1}>
+                    {moment(item?.date).format('LLLL')}
+                  </Text>
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           )
         })}
       </Animated.View>
     </View>
   )
 }
+
+const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity)
 
 const Feeds = ({ navigation }: PropsNavigate) => {
   /* const [data, setData] = React.useState(DATA) */
@@ -167,9 +179,8 @@ const Feeds = ({ navigation }: PropsNavigate) => {
             refreshing={refreshing}
             contentContainerStyle={{
               flex: 1,
-              justifyContent: 'center',
-              padding: SPACING * 2,
-              marginTop: 50
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
             scrollEnabled={false}
             removeClippedSubviews={false}
@@ -180,7 +191,14 @@ const Feeds = ({ navigation }: PropsNavigate) => {
               style,
               ...props
             }) => {
-              const newStyle = [style, { zIndex: data.posts.length - index }]
+              const newStyle = [
+                style,
+                {
+                  zIndex: data.posts.length - index,
+                  letf: -ITEM_WIDTH / 2,
+                  top: -ITEM_HEIGHT / 2
+                }
+              ]
               return (
                 <View style={newStyle} index={index} {...props}>
                   {children}
@@ -191,7 +209,7 @@ const Feeds = ({ navigation }: PropsNavigate) => {
               const inputRange = [index - 1, index, index + 1]
               const translateX = scrollXAnimated.interpolate({
                 inputRange,
-                outputRange: [50, 0, -100]
+                outputRange: [50, 0, -20]
               })
               const scale = scrollXAnimated.interpolate({
                 inputRange,
@@ -205,33 +223,40 @@ const Feeds = ({ navigation }: PropsNavigate) => {
               return (
                 <Animated.View
                   style={{
-                    position: 'absolute',
                     left: -ITEM_WIDTH / 2,
+                    position: 'absolute',
                     opacity,
-                    transform: [
-                      {
-                        translateX
-                      },
-                      { scale }
-                    ]
+                    transform: [{ translateX }, { scale }]
                   }}
                 >
-                  <Image
-                    onProgress={({ nativeEvent: { loaded, total } }) => (
-                      <Text>CAREGANDO...</Text>
-                    )}
-                    source={{ uri: `http://5.183.8.1:1337${item?.cover?.url}` }}
-                    style={{
-                      width: ITEM_WIDTH,
-                      height: ITEM_HEIGHT,
-                      borderRadius: 14
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate('Details', { item: item.id })
                     }}
-                  />
+                  >
+                    <SharedElement id={`item.${item.id}.photo`}>
+                      <Image
+                        source={{
+                          uri: `http://5.183.8.1:1337${item?.cover?.url}`
+                        }}
+                        style={{
+                          width: ITEM_WIDTH,
+                          height: ITEM_HEIGHT,
+                          borderRadius: 20,
+                          resizeMode: 'cover'
+                        }}
+                      />
+                    </SharedElement>
+                  </TouchableOpacity>
                 </Animated.View>
               )
             }}
           />
-          <OverflowItems data={data} scrollXAnimated={scrollXAnimated} />
+          <OverflowItems
+            data={data}
+            scrollXAnimated={scrollXAnimated}
+            navigation={navigation}
+          />
         </SafeAreaView>
       </FlingGestureHandler>
     </FlingGestureHandler>

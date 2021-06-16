@@ -11,7 +11,7 @@ export const Wrapper = styled.View`
 export const WrapperDetails = styled.ScrollView`
   ${({ theme }) => css`
     height: 100%;
-    padding: 20px;
+
     position: absolute;
     z-index: -2;
   `}
