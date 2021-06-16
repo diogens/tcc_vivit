@@ -41,18 +41,22 @@ const SignIn = ({ navigation }: PropsNavigate) => {
   }, [])
   return (
     <S.Wrapper>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      <Text text="VIVIT" fontFamily="ubuntu" size="xxxlarge" />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={theme.theme_colors.back}
+      />
+      <Text text="VIVIT" fontFamily="ubuntu" size="xxxlarge" color="primary" />
       <Input
         placeholder="Email"
         keyboardType="email-address"
-        icon="email"
+        icon="user"
         {...username}
       />
       <Input
         placeholder="Password"
         keyboardType="default"
-        icon="email"
+        icon="mail"
+        password
         {...password}
       />
 

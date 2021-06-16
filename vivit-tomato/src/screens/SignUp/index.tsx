@@ -56,25 +56,29 @@ const SignUp = ({ navigation }) => {
   }, [])
   return (
     <S.Wrapper>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={theme.theme_colors.back}
+      />
       <Text text="VIVIT" fontFamily="ubuntu" size="xxxlarge" />
       <Text text="Crie sua conta" fontFamily="ubuntu" size="large" />
       <Input
         placeholder="Nome de Usuário"
         keyboardType="default"
-        icon="email"
+        icon="user"
         {...username}
       />
       <Input
         placeholder="Email"
         keyboardType="email-address"
-        icon="email"
+        icon="mail"
         {...email}
       />
       <Input
         placeholder="Password"
         keyboardType="default"
-        icon="email"
+        password
+        icon="lock"
         {...password}
       />
 

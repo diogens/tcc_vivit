@@ -1,7 +1,9 @@
-import styled from 'styled-components/native'
+import styled, { css } from 'styled-components/native'
 
 export const Wrapper = styled.View`
-  background-color: #888;
+  ${({ theme }) => css`
+    background-color: ${theme.theme_colors.back};
+  `}
   height: 100%;
   justify-content: center;
   align-items: center;
