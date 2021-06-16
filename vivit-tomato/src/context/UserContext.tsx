@@ -6,7 +6,7 @@ import { MUTATION_LOGIN } from '../graphql/mutations/login'
 
 type SignInProps = {
   username: string
-  password: string
+  password?: string
   email?: string
   id?: string
 }
@@ -36,7 +36,7 @@ type ContextProps = {
   setTheme: (value) => void
   setData: (value) => void
   signIn: (value) => void
-  signOut: (value) => void
+  signOut: () => void
   message: (value) => void
 }
 /* <Partial<ContextProps>> */
@@ -68,12 +68,19 @@ export const UserContext = ({ children }) => {
       setAuthenticated({ authenticated: false })
     }
 
-    console.log('name=>', storage[0][1])
+    /* console.log('name=>', storage[0][1]) */
     /* console.log('email=>', storage[1][1])
     console.log('token=>', storage[2][1]) */
-    console.log('id=>', storage[3][1])
+    /* console.log('id=>', storage[3][1])
+    console.log('Aqui', storage[3][1]) */
 
-    /* console.log(user?.user) */
+    setUser({
+      jwt: storage[2][1],
+      user: {
+        username: storage[0][1],
+        id: storage[3][1]
+      }
+    })
   }
 
   React.useEffect(() => {
