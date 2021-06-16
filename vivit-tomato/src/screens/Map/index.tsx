@@ -1,7 +1,9 @@
 import { useQuery } from '@apollo/client'
+import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import { QueryCentroHospitalars } from '../../graphql/generated/QueryCentroHospitalars'
 import { QUERY_CENTRO_HOSPITALARS } from '../../graphql/queries/centroHospitars'
 import React from 'react'
+import { customStyle } from '../../styles/stylemap'
 import {
   ActivityIndicator,
   StyleSheet,
@@ -39,8 +41,34 @@ const Map = ({ navigation }: PropsNavigate) => {
 
   const [index, setIndex] = React.useState(0)
   const [search, setSearch] = React.useState('')
+  const [currentRegion, setCurrentRegion] = React.useState({
+    latitude: -12.2590293,
+    longitude: -38.9556411,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+  })
 
-  console.log(data)
+  /* Captura posição do user */
+  React.useEffect(() => {
+    async function loadingInitPosition() {
+      const { granted } = await requestPermissionsAsync()
+
+      if (granted) {
+        const { coords } = await getCurrentPositionAsync()
+
+        const { latitude, longitude } = coords
+
+        setCurrentRegion({
+          latitude,
+          longitude,
+          latitudeDelta: 0.04,
+          longitudeDelta: 0.04
+        })
+      }
+    }
+
+    loadingInitPosition()
+  }, [])
 
   const onOpen = () => {
     modalizeRef.current?.open()
@@ -116,12 +144,11 @@ const Map = ({ navigation }: PropsNavigate) => {
             width: Dimensions.get('window').width,
             height: Dimensions.get('window').height
           }}
-          initialRegion={{
-            latitude: -12.2590293,
-            longitude: -38.9556411,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }}
+          initialRegion={currentRegion}
+          region={currentRegion}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
+          customMapStyle={customStyle}
         >
           {loading ? (
             <Text>Carregando......</Text>
