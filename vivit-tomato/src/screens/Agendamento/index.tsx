@@ -68,7 +68,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
   ])
 
   React.useEffect(() => {
-    signOut()
+    /* signOut() */
   }, [])
 
   async function saveAgendamento() {
@@ -126,7 +126,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
       </View>
     )
   }
-  if (error) {
+  if (error || updateError) {
     return <Text text={`Error {error?.message}`}></Text>
   }
 
