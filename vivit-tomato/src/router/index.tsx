@@ -19,6 +19,8 @@ import Agendamento from '../screens/Agendamento'
 import SignIn from '../screens/SignIn'
 import SignUp from '../screens/SignUp'
 
+import Drawer from '../components/Drawer'
+
 import { AntDesign } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons'
 import { Entypo } from '@expo/vector-icons'
@@ -110,7 +112,13 @@ export default function App() {
   const { authenticated, theme } = React.useContext(User)
   return (
     <NavigationContainer theme={theme ? DarkTheme : DefaultTheme}>
-      {!authenticated.authenticated ? <Auth /> : <ScreensApp />}
+      {!authenticated.authenticated ? (
+        <Auth />
+      ) : (
+        <Drawer>
+          <ScreensApp />
+        </Drawer>
+      )}
     </NavigationContainer>
   )
 }

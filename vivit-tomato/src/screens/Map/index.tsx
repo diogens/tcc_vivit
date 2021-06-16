@@ -1,8 +1,8 @@
+import React from 'react'
 import { useQuery } from '@apollo/client'
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import { QueryCentroHospitalars } from '../../graphql/generated/QueryCentroHospitalars'
 import { QUERY_CENTRO_HOSPITALARS } from '../../graphql/queries/centroHospitars'
-import React from 'react'
 import { customStyle } from '../../styles/stylemap'
 import {
   ActivityIndicator,
@@ -24,6 +24,7 @@ import * as S from './styles'
 
 import theme from '../../styles/theme'
 import { PropsNavigate } from '../../router'
+import Drawer from 'components/Drawer'
 
 const Map = ({ navigation }: PropsNavigate) => {
   const {

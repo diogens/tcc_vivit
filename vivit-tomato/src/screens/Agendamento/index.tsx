@@ -34,7 +34,7 @@ import { QUERY_LIST_CENTROS } from '../../graphql/queries/listCentros'
 import { QueryCentroHospitalar } from '../../graphql/generated/QueryCentroHospitalar'
 
 const Agendamento = ({ navigation }: PropsNavigate) => {
-  const { message, signOut } = React.useContext(User)
+  const { message, signOut, user } = React.useContext(User)
 
   const { data, loading, refetch, error } = useQuery<QueryAgendamentos>(
     QUERY_AGENTAMENTOS
@@ -43,9 +43,14 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
   const centroList = useQuery<QueryCentroHospitalar>(QUERY_LIST_CENTROS)
 
   const [agendamento, { loading: updating, error: updateError }] = useMutation(
-    MUTATION_AGENDAMENTO
+    MUTATION_AGENDAMENTO,
+    {
+      variables: {
+        user: user?.user?.id
+      }
+    }
   )
-
+  console.log('=>', user)
   /* moment.locale('pt-br') */
 
   const name = useForm('email')
@@ -82,7 +87,8 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
               date: '2021-06-14T15:00:00.000Z',
               cpf: cpf.value,
               tipoSangue: sangue.value,
-              centro: centro.value
+              centro: centro.value,
+              users_permissions_user: user?.user?.id
             }
           }
         }
