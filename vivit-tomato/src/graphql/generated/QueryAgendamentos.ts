@@ -49,3 +49,7 @@ export interface QueryAgendamentos_agendamentos {
 export interface QueryAgendamentos {
   agendamentos: QueryAgendamentos_agendamentos[];
 }
+
+export interface QueryAgendamentosVariables {
+  user?: string | null;
+}

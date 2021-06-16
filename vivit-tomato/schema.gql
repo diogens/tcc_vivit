@@ -451,6 +451,104 @@ type deleteCentroHospitalarPayload {
   centroHospitalar: CentroHospitalar
 }
 
+type DatasDisponiveis {
+  id: ID!
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  disponibilidade: DateTime!
+  published_at: DateTime
+}
+
+type DatasDisponiveisConnection {
+  values: [DatasDisponiveis]
+  groupBy: DatasDisponiveisGroupBy
+  aggregate: DatasDisponiveisAggregator
+}
+
+type DatasDisponiveisAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type DatasDisponiveisGroupBy {
+  id: [DatasDisponiveisConnectionId]
+  _id: [DatasDisponiveisConnection_id]
+  createdAt: [DatasDisponiveisConnectionCreatedAt]
+  updatedAt: [DatasDisponiveisConnectionUpdatedAt]
+  disponibilidade: [DatasDisponiveisConnectionDisponibilidade]
+  published_at: [DatasDisponiveisConnectionPublished_at]
+}
+
+type DatasDisponiveisConnectionId {
+  key: ID
+  connection: DatasDisponiveisConnection
+}
+
+type DatasDisponiveisConnection_id {
+  key: ID
+  connection: DatasDisponiveisConnection
+}
+
+type DatasDisponiveisConnectionCreatedAt {
+  key: DateTime
+  connection: DatasDisponiveisConnection
+}
+
+type DatasDisponiveisConnectionUpdatedAt {
+  key: DateTime
+  connection: DatasDisponiveisConnection
+}
+
+type DatasDisponiveisConnectionDisponibilidade {
+  key: DateTime
+  connection: DatasDisponiveisConnection
+}
+
+type DatasDisponiveisConnectionPublished_at {
+  key: DateTime
+  connection: DatasDisponiveisConnection
+}
+
+input DatasDisponiveiInput {
+  disponibilidade: DateTime!
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input editDatasDisponiveiInput {
+  disponibilidade: DateTime
+  published_at: DateTime
+  created_by: ID
+  updated_by: ID
+}
+
+input createDatasDisponiveiInput {
+  data: DatasDisponiveiInput
+}
+
+type createDatasDisponiveiPayload {
+  datasDisponivei: DatasDisponiveis
+}
+
+input updateDatasDisponiveiInput {
+  where: InputID
+  data: editDatasDisponiveiInput
+}
+
+type updateDatasDisponiveiPayload {
+  datasDisponivei: DatasDisponiveis
+}
+
+input deleteDatasDisponiveiInput {
+  where: InputID
+}
+
+type deleteDatasDisponiveiPayload {
+  datasDisponivei: DatasDisponiveis
+}
+
 type Posts {
   id: ID!
   _id: ID!
@@ -1076,7 +1174,7 @@ type deleteUserPayload {
   user: UsersPermissionsUser
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Agendamentos | AgendamentosConnection | AgendamentosAggregator | AgendamentosGroupBy | AgendamentosConnectionId | AgendamentosConnection_id | AgendamentosConnectionCreatedAt | AgendamentosConnectionUpdatedAt | AgendamentosConnectionDate | AgendamentosConnectionCentro | AgendamentosConnectionStatus | AgendamentosConnectionNome | AgendamentosConnectionCpf | AgendamentosConnectionTipoSangue | AgendamentosConnectionUsers_permissions_user | AgendamentosConnectionPublished_at | createAgendamentoPayload | updateAgendamentoPayload | deleteAgendamentoPayload | CentroHospitalar | CentroHospitalarConnection | CentroHospitalarAggregator | CentroHospitalarAggregatorSum | CentroHospitalarAggregatorAvg | CentroHospitalarAggregatorMin | CentroHospitalarAggregatorMax | CentroHospitalarGroupBy | CentroHospitalarConnectionId | CentroHospitalarConnection_id | CentroHospitalarConnectionCreatedAt | CentroHospitalarConnectionUpdatedAt | CentroHospitalarConnectionName | CentroHospitalarConnectionAvatar | CentroHospitalarConnectionDescription | CentroHospitalarConnectionStreet | CentroHospitalarConnectionNumber | CentroHospitalarConnectionTelephone1 | CentroHospitalarConnectionTelephone2 | CentroHospitalarConnectionState | CentroHospitalarConnectionLatitude | CentroHospitalarConnectionLongitude | CentroHospitalarConnectionUser | CentroHospitalarConnectionPublished_at | createCentroHospitalarPayload | updateCentroHospitalarPayload | deleteCentroHospitalarPayload | Posts | PostsConnection | PostsAggregator | PostsGroupBy | PostsConnectionId | PostsConnection_id | PostsConnectionCreatedAt | PostsConnectionUpdatedAt | PostsConnectionTitle | PostsConnectionSubtitle | PostsConnectionDate | PostsConnectionDescription | PostsConnectionCover | PostsConnectionCentro | PostsConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCentro | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Agendamentos | AgendamentosConnection | AgendamentosAggregator | AgendamentosGroupBy | AgendamentosConnectionId | AgendamentosConnection_id | AgendamentosConnectionCreatedAt | AgendamentosConnectionUpdatedAt | AgendamentosConnectionDate | AgendamentosConnectionCentro | AgendamentosConnectionStatus | AgendamentosConnectionNome | AgendamentosConnectionCpf | AgendamentosConnectionTipoSangue | AgendamentosConnectionUsers_permissions_user | AgendamentosConnectionPublished_at | createAgendamentoPayload | updateAgendamentoPayload | deleteAgendamentoPayload | CentroHospitalar | CentroHospitalarConnection | CentroHospitalarAggregator | CentroHospitalarAggregatorSum | CentroHospitalarAggregatorAvg | CentroHospitalarAggregatorMin | CentroHospitalarAggregatorMax | CentroHospitalarGroupBy | CentroHospitalarConnectionId | CentroHospitalarConnection_id | CentroHospitalarConnectionCreatedAt | CentroHospitalarConnectionUpdatedAt | CentroHospitalarConnectionName | CentroHospitalarConnectionAvatar | CentroHospitalarConnectionDescription | CentroHospitalarConnectionStreet | CentroHospitalarConnectionNumber | CentroHospitalarConnectionTelephone1 | CentroHospitalarConnectionTelephone2 | CentroHospitalarConnectionState | CentroHospitalarConnectionLatitude | CentroHospitalarConnectionLongitude | CentroHospitalarConnectionUser | CentroHospitalarConnectionPublished_at | createCentroHospitalarPayload | updateCentroHospitalarPayload | deleteCentroHospitalarPayload | DatasDisponiveis | DatasDisponiveisConnection | DatasDisponiveisAggregator | DatasDisponiveisGroupBy | DatasDisponiveisConnectionId | DatasDisponiveisConnection_id | DatasDisponiveisConnectionCreatedAt | DatasDisponiveisConnectionUpdatedAt | DatasDisponiveisConnectionDisponibilidade | DatasDisponiveisConnectionPublished_at | createDatasDisponiveiPayload | updateDatasDisponiveiPayload | deleteDatasDisponiveiPayload | Posts | PostsConnection | PostsAggregator | PostsGroupBy | PostsConnectionId | PostsConnection_id | PostsConnectionCreatedAt | PostsConnectionUpdatedAt | PostsConnectionTitle | PostsConnectionSubtitle | PostsConnectionDate | PostsConnectionDescription | PostsConnectionCover | PostsConnectionCentro | PostsConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCentro | createUserPayload | updateUserPayload | deleteUserPayload
 
 input InputID {
   id: ID!
@@ -1101,6 +1199,9 @@ type Query {
   centroHospitalar(id: ID!, publicationState: PublicationState): CentroHospitalar
   centroHospitalars(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [CentroHospitalar!]!
   centroHospitalarsConnection(sort: String, limit: Int, start: Int, where: JSON): CentroHospitalarConnection
+  datasDisponivei(id: ID!, publicationState: PublicationState): DatasDisponiveis
+  datasDisponiveis(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [DatasDisponiveis!]!
+  datasDisponiveisConnection(sort: String, limit: Int, start: Int, where: JSON): DatasDisponiveisConnection
   post(id: ID!, publicationState: PublicationState): Posts
   posts(sort: String, limit: Int, start: Int, where: JSON, publicationState: PublicationState): [Posts!]!
   postsConnection(sort: String, limit: Int, start: Int, where: JSON): PostsConnection
@@ -1123,6 +1224,9 @@ type Mutation {
   createCentroHospitalar(input: createCentroHospitalarInput): createCentroHospitalarPayload
   updateCentroHospitalar(input: updateCentroHospitalarInput): updateCentroHospitalarPayload
   deleteCentroHospitalar(input: deleteCentroHospitalarInput): deleteCentroHospitalarPayload
+  createDatasDisponivei(input: createDatasDisponiveiInput): createDatasDisponiveiPayload
+  updateDatasDisponivei(input: updateDatasDisponiveiInput): updateDatasDisponiveiPayload
+  deleteDatasDisponivei(input: deleteDatasDisponiveiInput): deleteDatasDisponiveiPayload
   createPost(input: createPostInput): createPostPayload
   updatePost(input: updatePostInput): updatePostPayload
   deletePost(input: deletePostInput): deletePostPayload
