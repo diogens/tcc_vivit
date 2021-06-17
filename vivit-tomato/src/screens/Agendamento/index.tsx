@@ -37,25 +37,25 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
   const { message, signOut, user } = React.useContext(User)
 
   const { data, loading, refetch, error } = useQuery<QueryAgendamentos>(
-    QUERY_AGENTAMENTOS
-  )
-
-  const centroList = useQuery<QueryCentroHospitalar>(QUERY_LIST_CENTROS)
-
-  const [agendamento, { loading: updating, error: updateError }] = useMutation(
-    MUTATION_AGENDAMENTO,
+    QUERY_AGENTAMENTOS,
     {
       variables: {
         user: user?.user?.id
       }
     }
   )
+
+  const centroList = useQuery<QueryCentroHospitalar>(QUERY_LIST_CENTROS)
+
+  const [agendamento, { loading: updating, error: updateError }] = useMutation(
+    MUTATION_AGENDAMENTO
+  )
   console.log('=>', user)
   /* moment.locale('pt-br') */
 
-  const name = useForm('email')
+  const name = useForm('')
   const cpf = useForm('cpf')
-  const sangue = useForm('tipoAB1')
+  const sangue = useForm('')
   const date = useForm('java')
   const centro = useForm('')
 
@@ -77,7 +77,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
   }, [])
 
   async function saveAgendamento() {
-    if (cpf.valid) {
+    if (cpf.valid() || name.valid() || sangue.valid() || centro.valid()) {
       const response = await agendamento({
         variables: {
           input: {
@@ -104,8 +104,9 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
       }
     } else {
       message({
-        title: 'CPF',
-        message: 'cpf invalido,',
+        title: 'Verifique os dados',
+        message:
+          'Dados informados podem está incomplentos, verifique por favor!,',
         textBtn: 'Ok',
         action: () => console.log('ok')
       })
@@ -149,8 +150,12 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
         >
           <Pressable
             style={{
+              zIndex: 10,
+              position: 'absolute',
+              top: -20,
+              right: 10,
               borderRadius: 20,
-              padding: 15,
+              padding: 20,
               marginBottom: -20,
               elevation: 10,
               backgroundColor: '#2196F3'
@@ -177,70 +182,116 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
               elevation: 5
             }}
           >
-            <Text text="Novo Agendamento" size="xxlarge" />
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: 10
+              }}
+            >
+              <Text text="Novo Agendamento" size="xxlarge" />
+            </View>
 
             <ScrollView>
               <Input
                 placeholder="Nome"
                 keyboardType="default"
-                icon="email"
+                icon="user"
                 {...name}
               />
               <Input
                 placeholder="CPF"
                 keyboardType="default"
-                icon="email"
+                icon="idcard"
                 {...cpf}
               />
 
-              <Picker
-                selectedValue={sangue.value}
-                style={{ height: 50, width: 150 }}
-                onValueChange={(itemValue, itemIndex) =>
-                  sangue.setValue(itemValue)
-                }
-              >
-                {type.map((item, index) => {
-                  return (
-                    <Picker.Item
-                      key={index}
-                      label={item.sangue}
-                      value={item.sangue}
-                    />
-                  )
-                })}
-              </Picker>
-
-              <Picker
-                selectedValue={centro.value}
-                style={{ height: 50, width: 150 }}
-                onValueChange={(itemValue, itemIndex) =>
-                  centro.setValue(itemValue)
-                }
-              >
-                {centroList.data.centroHospitalars.map((item, index) => {
-                  return (
-                    <Picker.Item
-                      key={index}
-                      label={item.name}
-                      value={item.id}
-                    />
-                  )
-                })}
-              </Picker>
-
-              <Pressable
+              <View
                 style={{
-                  borderRadius: 20,
-                  padding: 10,
-                  elevation: 2,
-                  backgroundColor: '#2196F3'
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  alignContent: 'center',
+                  paddingHorizontal: 15,
+                  paddingVertical: 10
                 }}
-                onPress={() => saveAgendamento()}
               >
-                <Text text="Agendar" />
-              </Pressable>
+                <AntDesign
+                  color={theme.theme_colors.orange}
+                  name="USB"
+                  size={30}
+                />
+                <Picker
+                  selectedValue={sangue.value}
+                  style={{ flex: 1, color: '#888' }}
+                  onValueChange={(itemValue, itemIndex) =>
+                    sangue.setValue(itemValue)
+                  }
+                >
+                  {type.map((item, index) => {
+                    return (
+                      <Picker.Item
+                        key={index}
+                        label={item.sangue}
+                        value={item.sangue}
+                      />
+                    )
+                  })}
+                </Picker>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  alignContent: 'center',
+                  paddingHorizontal: 15,
+                  paddingVertical: 10
+                }}
+              >
+                <AntDesign
+                  color={theme.theme_colors.orange}
+                  name="USB"
+                  size={30}
+                />
+                <Picker
+                  selectedValue={centro.value}
+                  style={{ flex: 1, color: '#888' }}
+                  itemStyle={{
+                    backgroundColor: 'grey',
+                    color: 'blue',
+                    fontFamily: 'Ebrima',
+                    fontSize: 17
+                  }}
+                  onValueChange={(itemValue, itemIndex) =>
+                    centro.setValue(itemValue)
+                  }
+                >
+                  {centroList.data.centroHospitalars.map((item, index) => {
+                    return (
+                      <Picker.Item
+                        key={index}
+                        label={item.name}
+                        value={item.id}
+                      />
+                    )
+                  })}
+                </Picker>
+              </View>
+              <View style={{ height: 30 }} />
             </ScrollView>
+            <TouchableOpacity
+              style={{
+                borderRadius: 50,
+                padding: 10,
+                elevation: 10,
+                backgroundColor: '#2196F3',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+              onPress={() => saveAgendamento()}
+            >
+              <Text text="Agendar" color="white" size="xxlarge" />
+            </TouchableOpacity>
           </View>
         </View>
       </>
@@ -288,19 +339,30 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                     marginBottom: 10
                   }}
                   source={{
-                    uri: 'https://reactnative.dev/img/tiny_logo.png'
+                    uri: `http://5.183.8.1:1337${item?.centro?.avatar?.url}`
                   }}
                 />
                 <Text text={item?.centro?.name} size="xlarge" color="white" />
               </View>
               <Card.Divider />
               <Text
-                text={moment(item?.date).format('LLLL')}
+                text={`DATA MARCADA: ${moment(item?.date).format('LLL')}`}
+                size="small"
+                color="white"
+              />
+              <Text text={`CPF: ${item.cpf}`} size="small" color="white" />
+              <Text
+                text={'RUA: ' + item?.centro?.street}
                 size="small"
                 color="white"
               />
               <Text
-                text={'RUA: ' + item?.centro?.street}
+                text={`N: ${item.centro.number}`}
+                size="small"
+                color="white"
+              />
+              <Text
+                text={`TELEFONE: ${item.centro.telephone1}`}
                 size="small"
                 color="white"
               />
