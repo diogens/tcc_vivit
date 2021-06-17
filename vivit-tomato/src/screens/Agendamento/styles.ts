@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components/native'
-import { lighten, desaturate } from 'polished'
 
-export const Wrapper = styled.View``
+export const Wrapper = styled.View`
+  padding: 0px 10px;
+  height: 100%;
+`
 
 export const Card = styled.TouchableOpacity`
   ${({ theme }) => css`
