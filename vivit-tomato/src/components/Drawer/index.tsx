@@ -1,32 +1,41 @@
 import React from 'react'
 import * as S from './styles'
-import {
-  Button,
-  DrawerLayoutAndroid,
-  Text,
-  StyleSheet,
-  View
-} from 'react-native'
+import { Button, DrawerLayoutAndroid, StyleSheet, View } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
+import Text from '../Text'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { User } from '../../context/UserContext'
+import theme from '../../styles/theme'
 
 type DrawerProps = {
   children: React.ReactChild
 }
 
 const Drawer = ({ children }: DrawerProps) => {
-  const { message, signOut } = React.useContext(User)
+  const { message, signOut, user } = React.useContext(User)
 
   const drawer = React.useRef(null)
 
   const navigationView = () => (
     <View style={styles.container}>
-      <View style={{ backgroundColor: 'red' }}>
-        <Text>Welcome Sr Diogenes</Text>
-        <Text style={styles.paragraph}>I'm in the Drawer!</Text>
-        <Button
-          title="Close drawer"
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'flex-end'
+        }}
+      >
+        <TouchableOpacity
+          style={{ width: 40, height: 40 }}
           onPress={() => drawer.current.closeDrawer()}
+        >
+          <AntDesign name="menufold" color="#FFF" size={20} />
+        </TouchableOpacity>
+      </View>
+      <View>
+        <Text
+          text={`Bem Vindo! ${user.user.username}`}
+          color="white"
+          size="xxlarge"
         />
       </View>
       <Button
@@ -46,13 +55,32 @@ const Drawer = ({ children }: DrawerProps) => {
       drawerPosition="left"
       renderNavigationView={navigationView}
       drawerBackgroundColor="rgba(0,0,0,0.5)"
+      style={{
+        zIndex: 20
+      }}
     >
-      <Button
-        title="Drawer - colocar em modo float"
-        onPress={() => {
-          drawer.current.openDrawer()
+      <View
+        style={{
+          backgroundColor: theme.theme_colors.back,
+          paddingTop: 20,
+          paddingBottom: 10
         }}
-      />
+      >
+        <TouchableOpacity
+          style={{
+            marginLeft: 30,
+            width: 30,
+            height: 30,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+          onPress={() => {
+            drawer.current.openDrawer()
+          }}
+        >
+          <AntDesign name="menufold" color="#FFF" size={20} />
+        </TouchableOpacity>
+      </View>
       {children}
     </DrawerLayoutAndroid>
   )
