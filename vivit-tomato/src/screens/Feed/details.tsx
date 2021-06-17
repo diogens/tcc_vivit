@@ -39,7 +39,12 @@ const Details = ({ navigation, route }) => {
           elevation: 3,
           top: 25,
           zIndex: 22,
-          left: 30
+          left: 30,
+          width: 60,
+          height: 60,
+          borderRadius: 50,
+          justifyContent: 'center',
+          alignItems: 'center'
         }}
         onPress={() => navigation.navigate('Feeds')}
       >
@@ -93,7 +98,7 @@ const Details = ({ navigation, route }) => {
               />
             </SharedElement>
 
-            <View style={{ paddingHorizontal: 10 }}>
+            <View style={{ paddingHorizontal: 15 }}>
               <Text
                 color="white"
                 size="large"
@@ -102,22 +107,32 @@ const Details = ({ navigation, route }) => {
               />
 
               <View>
-                <Text
+                {/* <Text
                   size="large"
                   fontFamily="ubuntu"
                   text={data?.posts[0].subtitle}
-                />
+                  color="white"
+                /> */}
+                <View style={{ margin: 10 }} />
                 <Text
                   size="medium"
                   fontFamily="ubuntu"
                   text={moment(data?.posts[0].date).format('LLLL')}
                   color="white"
                 />
+                <View
+                  style={{
+                    marginVertical: 6,
+                    width: 210,
+                    height: 1,
+                    backgroundColor: '#888'
+                  }}
+                />
                 {/* ${data.posts[0].description} */}
                 <HTML
                   classesStyles={{ color: '#fff' }}
                   source={{
-                    html: `<body style="color: #fff; padding: 0 0px; text-align:alignment">
+                    html: `<body style="color: #fff; padding: 0 0px; text-align:alignment; font-family: ${theme.font.family.ubuntu_light} ">
                     ${data.posts[0].description}
                   </body>`
                   }}
