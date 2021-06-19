@@ -158,7 +158,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
               padding: 20,
               marginBottom: -20,
               elevation: 10,
-              backgroundColor: '#2196F3'
+              backgroundColor: theme.theme_colors.primary
             }}
             onPress={() => setModalVisible(!modalVisible)}
           >
@@ -169,16 +169,18 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
               flex: 1,
               width: '90%',
               marginBottom: 20,
-              backgroundColor: 'white',
+              backgroundColor: '#000',
               borderRadius: 10,
               padding: 20,
-              shadowColor: '#000',
+              shadowColor: '#fff',
               shadowOffset: {
-                width: 0,
-                height: 2
+                width: 2,
+                height: 5
               },
-              shadowOpacity: 0.25,
+              shadowOpacity: 1,
               shadowRadius: 4,
+              borderWidth: 1,
+              borderColor: theme.theme_colors.white,
               elevation: 5
             }}
           >
@@ -201,7 +203,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
               />
               <Input
                 placeholder="CPF"
-                keyboardType="default"
+                keyboardType="numeric"
                 icon="idcard"
                 {...cpf}
               />
@@ -212,7 +214,11 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                   alignItems: 'center',
                   alignContent: 'center',
                   paddingHorizontal: 15,
-                  paddingVertical: 10
+                  paddingVertical: 5,
+                  borderColor: '#fff',
+                  marginBottom: 25,
+                  borderWidth: 1,
+                  borderRadius: 10
                 }}
               >
                 <AntDesign
@@ -245,7 +251,11 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                   alignItems: 'center',
                   alignContent: 'center',
                   paddingHorizontal: 15,
-                  paddingVertical: 10
+                  paddingVertical: 5,
+                  borderColor: '#fff',
+                  marginBottom: 25,
+                  borderWidth: 1,
+                  borderRadius: 10
                 }}
               >
                 <AntDesign
@@ -255,7 +265,10 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                 />
                 <Picker
                   selectedValue={centro.value}
-                  style={{ flex: 1, color: '#888' }}
+                  style={{
+                    flex: 1,
+                    color: '#888'
+                  }}
                   itemStyle={{
                     backgroundColor: 'grey',
                     color: 'blue',
@@ -284,7 +297,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                 borderRadius: 50,
                 padding: 10,
                 elevation: 10,
-                backgroundColor: '#2196F3',
+                backgroundColor: theme.theme_colors.primary,
                 justifyContent: 'center',
                 alignItems: 'center'
               }}
@@ -304,8 +317,8 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
       <TouchableOpacity
         onPress={() => setModalVisible(!modalVisible)}
         style={{
-          width: 70,
-          height: 70,
+          width: 50,
+          height: 50,
           borderRadius: 70,
           backgroundColor: theme.theme_colors.tomato,
           justifyContent: 'center',
@@ -313,7 +326,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
           marginVertical: 10
         }}
       >
-        <EvilIcons name="calendar" size={50} color="#fff" />
+        <EvilIcons name="calendar" size={40} color="#fff" />
       </TouchableOpacity>
       <FlatList
         data={data?.agendamentos}

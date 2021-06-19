@@ -8,7 +8,8 @@ import {
 import {
   NavigationContainer,
   DefaultTheme,
-  DarkTheme
+  DarkTheme,
+  NavigatorScreenParams
 } from '@react-navigation/native'
 
 import ButtomHemocentros from '../components/ButtomHemocentros'
@@ -110,12 +111,15 @@ const MyTheme = {
 export default function App() {
   const scheme = useColorScheme()
   const { authenticated, theme } = React.useContext(User)
+
+  console.log()
+
   return (
     <NavigationContainer theme={theme ? DarkTheme : DefaultTheme}>
       {!authenticated.authenticated ? (
         <Auth />
       ) : (
-        <Drawer>
+        <Drawer nameScreen="Página">
           <ScreensApp />
         </Drawer>
       )}
