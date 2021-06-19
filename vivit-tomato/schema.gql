@@ -457,6 +457,7 @@ type DatasDisponiveis {
   createdAt: DateTime!
   updatedAt: DateTime!
   disponibilidade: DateTime!
+  status: Boolean
   published_at: DateTime
 }
 
@@ -477,6 +478,7 @@ type DatasDisponiveisGroupBy {
   createdAt: [DatasDisponiveisConnectionCreatedAt]
   updatedAt: [DatasDisponiveisConnectionUpdatedAt]
   disponibilidade: [DatasDisponiveisConnectionDisponibilidade]
+  status: [DatasDisponiveisConnectionStatus]
   published_at: [DatasDisponiveisConnectionPublished_at]
 }
 
@@ -505,6 +507,11 @@ type DatasDisponiveisConnectionDisponibilidade {
   connection: DatasDisponiveisConnection
 }
 
+type DatasDisponiveisConnectionStatus {
+  key: Boolean
+  connection: DatasDisponiveisConnection
+}
+
 type DatasDisponiveisConnectionPublished_at {
   key: DateTime
   connection: DatasDisponiveisConnection
@@ -512,6 +519,7 @@ type DatasDisponiveisConnectionPublished_at {
 
 input DatasDisponiveiInput {
   disponibilidade: DateTime!
+  status: Boolean
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -519,6 +527,7 @@ input DatasDisponiveiInput {
 
 input editDatasDisponiveiInput {
   disponibilidade: DateTime
+  status: Boolean
   published_at: DateTime
   created_by: ID
   updated_by: ID
@@ -1037,6 +1046,7 @@ type UsersPermissionsUser {
   blocked: Boolean
   role: UsersPermissionsRole
   centro: CentroHospitalar
+  avatar: UploadFile
 }
 
 type UsersPermissionsUserConnection {
@@ -1062,6 +1072,7 @@ type UsersPermissionsUserGroupBy {
   blocked: [UsersPermissionsUserConnectionBlocked]
   role: [UsersPermissionsUserConnectionRole]
   centro: [UsersPermissionsUserConnectionCentro]
+  avatar: [UsersPermissionsUserConnectionAvatar]
 }
 
 type UsersPermissionsUserConnectionId {
@@ -1119,6 +1130,11 @@ type UsersPermissionsUserConnectionCentro {
   connection: UsersPermissionsUserConnection
 }
 
+type UsersPermissionsUserConnectionAvatar {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
 input UserInput {
   username: String!
   email: String!
@@ -1130,6 +1146,7 @@ input UserInput {
   blocked: Boolean
   role: ID
   centro: ID
+  avatar: ID
   created_by: ID
   updated_by: ID
 }
@@ -1145,6 +1162,7 @@ input editUserInput {
   blocked: Boolean
   role: ID
   centro: ID
+  avatar: ID
   created_by: ID
   updated_by: ID
 }
@@ -1174,7 +1192,7 @@ type deleteUserPayload {
   user: UsersPermissionsUser
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Agendamentos | AgendamentosConnection | AgendamentosAggregator | AgendamentosGroupBy | AgendamentosConnectionId | AgendamentosConnection_id | AgendamentosConnectionCreatedAt | AgendamentosConnectionUpdatedAt | AgendamentosConnectionDate | AgendamentosConnectionCentro | AgendamentosConnectionStatus | AgendamentosConnectionNome | AgendamentosConnectionCpf | AgendamentosConnectionTipoSangue | AgendamentosConnectionUsers_permissions_user | AgendamentosConnectionPublished_at | createAgendamentoPayload | updateAgendamentoPayload | deleteAgendamentoPayload | CentroHospitalar | CentroHospitalarConnection | CentroHospitalarAggregator | CentroHospitalarAggregatorSum | CentroHospitalarAggregatorAvg | CentroHospitalarAggregatorMin | CentroHospitalarAggregatorMax | CentroHospitalarGroupBy | CentroHospitalarConnectionId | CentroHospitalarConnection_id | CentroHospitalarConnectionCreatedAt | CentroHospitalarConnectionUpdatedAt | CentroHospitalarConnectionName | CentroHospitalarConnectionAvatar | CentroHospitalarConnectionDescription | CentroHospitalarConnectionStreet | CentroHospitalarConnectionNumber | CentroHospitalarConnectionTelephone1 | CentroHospitalarConnectionTelephone2 | CentroHospitalarConnectionState | CentroHospitalarConnectionLatitude | CentroHospitalarConnectionLongitude | CentroHospitalarConnectionUser | CentroHospitalarConnectionPublished_at | createCentroHospitalarPayload | updateCentroHospitalarPayload | deleteCentroHospitalarPayload | DatasDisponiveis | DatasDisponiveisConnection | DatasDisponiveisAggregator | DatasDisponiveisGroupBy | DatasDisponiveisConnectionId | DatasDisponiveisConnection_id | DatasDisponiveisConnectionCreatedAt | DatasDisponiveisConnectionUpdatedAt | DatasDisponiveisConnectionDisponibilidade | DatasDisponiveisConnectionPublished_at | createDatasDisponiveiPayload | updateDatasDisponiveiPayload | deleteDatasDisponiveiPayload | Posts | PostsConnection | PostsAggregator | PostsGroupBy | PostsConnectionId | PostsConnection_id | PostsConnectionCreatedAt | PostsConnectionUpdatedAt | PostsConnectionTitle | PostsConnectionSubtitle | PostsConnectionDate | PostsConnectionDescription | PostsConnectionCover | PostsConnectionCentro | PostsConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCentro | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | UserPermissionsPasswordPayload | Agendamentos | AgendamentosConnection | AgendamentosAggregator | AgendamentosGroupBy | AgendamentosConnectionId | AgendamentosConnection_id | AgendamentosConnectionCreatedAt | AgendamentosConnectionUpdatedAt | AgendamentosConnectionDate | AgendamentosConnectionCentro | AgendamentosConnectionStatus | AgendamentosConnectionNome | AgendamentosConnectionCpf | AgendamentosConnectionTipoSangue | AgendamentosConnectionUsers_permissions_user | AgendamentosConnectionPublished_at | createAgendamentoPayload | updateAgendamentoPayload | deleteAgendamentoPayload | CentroHospitalar | CentroHospitalarConnection | CentroHospitalarAggregator | CentroHospitalarAggregatorSum | CentroHospitalarAggregatorAvg | CentroHospitalarAggregatorMin | CentroHospitalarAggregatorMax | CentroHospitalarGroupBy | CentroHospitalarConnectionId | CentroHospitalarConnection_id | CentroHospitalarConnectionCreatedAt | CentroHospitalarConnectionUpdatedAt | CentroHospitalarConnectionName | CentroHospitalarConnectionAvatar | CentroHospitalarConnectionDescription | CentroHospitalarConnectionStreet | CentroHospitalarConnectionNumber | CentroHospitalarConnectionTelephone1 | CentroHospitalarConnectionTelephone2 | CentroHospitalarConnectionState | CentroHospitalarConnectionLatitude | CentroHospitalarConnectionLongitude | CentroHospitalarConnectionUser | CentroHospitalarConnectionPublished_at | createCentroHospitalarPayload | updateCentroHospitalarPayload | deleteCentroHospitalarPayload | DatasDisponiveis | DatasDisponiveisConnection | DatasDisponiveisAggregator | DatasDisponiveisGroupBy | DatasDisponiveisConnectionId | DatasDisponiveisConnection_id | DatasDisponiveisConnectionCreatedAt | DatasDisponiveisConnectionUpdatedAt | DatasDisponiveisConnectionDisponibilidade | DatasDisponiveisConnectionStatus | DatasDisponiveisConnectionPublished_at | createDatasDisponiveiPayload | updateDatasDisponiveiPayload | deleteDatasDisponiveiPayload | Posts | PostsConnection | PostsAggregator | PostsGroupBy | PostsConnectionId | PostsConnection_id | PostsConnectionCreatedAt | PostsConnectionUpdatedAt | PostsConnectionTitle | PostsConnectionSubtitle | PostsConnectionDate | PostsConnectionDescription | PostsConnectionCover | PostsConnectionCentro | PostsConnectionPublished_at | createPostPayload | updatePostPayload | deletePostPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | deleteFilePayload | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCentro | UsersPermissionsUserConnectionAvatar | createUserPayload | updateUserPayload | deleteUserPayload
 
 input InputID {
   id: ID!

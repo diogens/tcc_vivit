@@ -162,7 +162,7 @@ const Map = ({ navigation }: PropsNavigate) => {
           onChangeText={(text) => {
             getLocale(text)
           }}
-          onClear={(text) => getLocale('')}
+          onClear={() => getLocale('')}
           value={search.value}
         />
         <FlatList

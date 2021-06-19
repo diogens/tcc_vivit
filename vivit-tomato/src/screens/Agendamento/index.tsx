@@ -28,12 +28,14 @@ import { PropsNavigate } from '../../router'
 import theme from '../../styles/theme'
 import useForm from '../../hooks/useForms'
 import * as S from './styles'
+import { Avatar } from 'react-native-elements/dist/avatar/Avatar'
 
 import moment from 'moment'
 import { User } from '../../context/UserContext'
 import { QUERY_LIST_CENTROS } from '../../graphql/queries/listCentros'
 import { QueryCentroHospitalar } from '../../graphql/generated/QueryCentroHospitalar'
-import { Avatar } from 'react-native-elements/dist/avatar/Avatar'
+import { QueryDatasDisponiveis } from '../../graphql/generated/QueryDatasDisponiveis'
+import { QUERY_DATAS_DISPONIVEIS } from '../../graphql/queries/datasDisponiveis'
 
 moment.locale('pt-br')
 
@@ -51,6 +53,10 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
 
   const centroList = useQuery<QueryCentroHospitalar>(QUERY_LIST_CENTROS)
 
+  const dataDisponibilidade = useQuery<QueryDatasDisponiveis>(
+    QUERY_DATAS_DISPONIVEIS
+  )
+
   const [agendamento, { loading: updating, error: updateError }] = useMutation(
     MUTATION_AGENDAMENTO
   )
@@ -60,7 +66,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
   const name = useForm('')
   const cpf = useForm('cpf')
   const sangue = useForm('')
-  const date = useForm('java')
+  const date = useForm('')
   const centro = useForm('')
 
   const [modalVisible, setModalVisible] = React.useState(false)
@@ -77,12 +83,6 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
   ])
 
   const [visible, setVisible] = React.useState(false)
-  const [indexItem, setIndexItem] = React.useState(0)
-
-  const toggleOverlay = (index) => {
-    setIndexItem(index)
-    setVisible(!visible)
-  }
 
   React.useEffect(() => {
     /* signOut() */
@@ -300,6 +300,54 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                       />
                     )
                   })}
+                </Picker>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  alignContent: 'center',
+                  paddingHorizontal: 15,
+                  paddingVertical: 5,
+                  borderColor: '#fff',
+                  marginBottom: 25,
+                  borderWidth: 1,
+                  borderRadius: 10
+                }}
+              >
+                <AntDesign
+                  color={theme.theme_colors.orange}
+                  name="USB"
+                  size={30}
+                />
+                <Picker
+                  selectedValue={centro.value}
+                  style={{
+                    flex: 1,
+                    color: '#888'
+                  }}
+                  itemStyle={{
+                    backgroundColor: 'grey',
+                    color: 'blue',
+                    fontFamily: 'Ebrima',
+                    fontSize: 17
+                  }}
+                  onValueChange={(itemValue, itemIndex) =>
+                    date.setValue(itemValue)
+                  }
+                >
+                  {dataDisponibilidade.data.datasDisponiveis.map(
+                    (item, index) => {
+                      return (
+                        <Picker.Item
+                          key={index}
+                          label={moment(item.disponibilidade).format('LLLL')}
+                          value={item.id}
+                        />
+                      )
+                    }
+                  )}
                 </Picker>
               </View>
               <View style={{ height: 30 }} />
