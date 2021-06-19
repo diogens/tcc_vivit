@@ -564,6 +564,9 @@
                 "centro": {
                   "type": "string"
                 },
+                "avatar": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },

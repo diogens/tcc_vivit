@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "datas_disponiveis",
   "info": {
-    "name": "Datas Disponíveis"
+    "name": "Datas Disponíveis",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -13,6 +14,10 @@
     "disponibilidade": {
       "type": "datetime",
       "required": true
+    },
+    "status": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

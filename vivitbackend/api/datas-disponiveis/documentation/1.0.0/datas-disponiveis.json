@@ -540,6 +540,10 @@
             "type": "string",
             "format": "date-time"
           },
+          "status": {
+            "type": "boolean",
+            "default": true
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -554,6 +558,10 @@
           "disponibilidade": {
             "type": "string",
             "format": "date-time"
+          },
+          "status": {
+            "type": "boolean",
+            "default": true
           },
           "published_at": {
             "type": "string",
