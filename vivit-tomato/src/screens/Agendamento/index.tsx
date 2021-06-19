@@ -11,7 +11,7 @@ import {
 
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { Card, ListItem, Button, Icon } from 'react-native-elements'
+import { Card, Button, Icon, Overlay, ListItem } from 'react-native-elements'
 
 import { AntDesign, EvilIcons } from '@expo/vector-icons'
 
@@ -22,6 +22,7 @@ import { QueryAgendamentos } from '../../graphql/generated/QueryAgendamentos'
 
 import Text from '../../components/Text'
 import Input from '../../components/Input'
+import Accordion from '../../components/Accordion'
 
 import { PropsNavigate } from '../../router'
 import theme from '../../styles/theme'
@@ -32,6 +33,9 @@ import moment from 'moment'
 import { User } from '../../context/UserContext'
 import { QUERY_LIST_CENTROS } from '../../graphql/queries/listCentros'
 import { QueryCentroHospitalar } from '../../graphql/generated/QueryCentroHospitalar'
+import { Avatar } from 'react-native-elements/dist/avatar/Avatar'
+
+moment.locale('pt-br')
 
 const Agendamento = ({ navigation }: PropsNavigate) => {
   const { message, signOut, user } = React.useContext(User)
@@ -71,6 +75,14 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
     { sangue: 'tipoO1' },
     { sangue: 'tipoO2' }
   ])
+
+  const [visible, setVisible] = React.useState(false)
+  const [indexItem, setIndexItem] = React.useState(0)
+
+  const toggleOverlay = (index) => {
+    setIndexItem(index)
+    setVisible(!visible)
+  }
 
   React.useEffect(() => {
     /* signOut() */
@@ -157,7 +169,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
               borderRadius: 20,
               padding: 20,
               marginBottom: -20,
-              elevation: 10,
+              elevation: 30,
               backgroundColor: theme.theme_colors.primary
             }}
             onPress={() => setModalVisible(!modalVisible)}
@@ -174,14 +186,14 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
               padding: 20,
               shadowColor: '#fff',
               shadowOffset: {
-                width: 2,
+                width: 0,
                 height: 5
               },
-              shadowOpacity: 1,
-              shadowRadius: 4,
+              shadowOpacity: 0.44,
+              shadowRadius: 20.32,
               borderWidth: 1,
               borderColor: theme.theme_colors.white,
-              elevation: 5
+              elevation: 15
             }}
           >
             <View
@@ -333,55 +345,23 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
         onRefresh={refreshList}
         refreshing={refreshing}
         keyExtractor={({ id }) => id}
-        renderItem={({ item }) => {
+        renderItem={({ item, index }) => {
           return (
-            <S.Card key={`index-${item.id}`} status={item?.status}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'flex-start',
-                  alignItems: 'center'
-                }}
-              >
-                <Image
-                  style={{
-                    width: 50,
-                    height: 50,
-                    borderRadius: 40,
-                    marginRight: 30,
-                    marginBottom: 10
-                  }}
-                  source={{
-                    uri: `http://5.183.8.1:1337${item?.centro?.avatar?.url}`
-                  }}
-                />
-                <Text text={item?.centro?.name} size="xlarge" color="white" />
-              </View>
-              <Card.Divider />
-              <Text
-                text={`DATA MARCADA: ${moment(item?.date).format('LLL')}`}
-                size="small"
-                color="white"
-              />
-              <Text text={`CPF: ${item.cpf}`} size="small" color="white" />
-              <Text
-                text={'RUA: ' + item?.centro?.street}
-                size="small"
-                color="white"
-              />
-              <Text
-                text={`N: ${item.centro.number}`}
-                size="small"
-                color="white"
-              />
-              <Text
-                text={`TELEFONE: ${item.centro.telephone1}`}
-                size="small"
-                color="white"
-              />
-              <Text text={'DOADOR: ' + item?.nome} size="small" color="white" />
-              <Text text={'CPF: ' + item?.cpf} size="small" color="white" />
-            </S.Card>
+            <Accordion
+              title={item?.centro?.name}
+              content={{
+                uri: `http://5.183.8.1:1337${item?.centro?.avatar?.url}`,
+                dataAgendamento: moment(item?.date).format('LLL'),
+                cpf: item.cpf,
+                nome: item.nome,
+                tipoSangue: item.tipoSangue,
+                status: item.status,
+                solicitante: item.users_permissions_user.username,
+                telefone: item.centro.telephone1,
+                numero: item.centro.number,
+                endereco: item.centro.street
+              }}
+            />
           )
         }}
       />

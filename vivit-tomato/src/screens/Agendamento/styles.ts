@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/native'
 
 export const Wrapper = styled.View`
-  padding: 0px 15px;
+  padding: 0px;
   height: 100%;
 `
 
