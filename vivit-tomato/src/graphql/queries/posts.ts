@@ -3,7 +3,7 @@ import { PostFrament } from '../fragments/posts'
 
 export const QUERY_POSTS = gql`
   query QueryPosts {
-    posts {
+    posts(sort: "createdAt:desc") {
       ...PostFrament
     }
   }

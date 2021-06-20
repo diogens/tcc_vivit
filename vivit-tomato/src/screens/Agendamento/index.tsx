@@ -89,14 +89,20 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
   }, [])
 
   async function saveAgendamento() {
-    if (cpf.valid() || name.valid() || sangue.valid() || centro.valid()) {
+    if (
+      cpf.valid() ||
+      name.valid() ||
+      sangue.value !== '' ||
+      centro.value !== '' ||
+      date.value !== ''
+    ) {
       const response = await agendamento({
         variables: {
           input: {
             data: {
               nome: name.value,
               status: true,
-              date: '2021-06-14T15:00:00.000Z',
+              date: date.value,
               cpf: cpf.value,
               tipoSangue: sangue.value,
               centro: centro.value,
@@ -112,7 +118,12 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
         refreshList()
         return response
       } catch (error) {
-        return
+        message({
+          title: 'Erro 500',
+          message: 'problemas tecnicos, tente novamente mais tarde',
+          textBtn: 'Ok',
+          action: () => console.log('ok')
+        })
       }
     } else {
       message({
@@ -203,7 +214,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                 padding: 10
               }}
             >
-              <Text text="Novo Agendamento" size="xxlarge" />
+              <Text text="Novo Agendamento" size="xxlarge" color="white" />
             </View>
 
             <ScrollView>
@@ -322,7 +333,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                   size={30}
                 />
                 <Picker
-                  selectedValue={centro.value}
+                  selectedValue={date.value}
                   style={{
                     flex: 1,
                     color: '#888'
@@ -343,7 +354,7 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                         <Picker.Item
                           key={index}
                           label={moment(item.disponibilidade).format('LLLL')}
-                          value={item.id}
+                          value={item.disponibilidade}
                         />
                       )
                     }
@@ -373,17 +384,18 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
 
   return (
     <S.Wrapper>
-      <Text text="Agendamentos" size="xxxlarge" color="white" />
+      {/* <Text text="Agendamentos" size="xxxlarge" color="white" /> */}
       <TouchableOpacity
         onPress={() => setModalVisible(!modalVisible)}
         style={{
           width: 50,
           height: 50,
+          marginLeft: 20,
           borderRadius: 70,
           backgroundColor: theme.theme_colors.tomato,
           justifyContent: 'center',
           alignItems: 'center',
-          marginVertical: 10
+          marginVertical: 20
         }}
       >
         <EvilIcons name="calendar" size={40} color="#fff" />

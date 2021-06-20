@@ -4,6 +4,7 @@ import { ListItem, Button, Avatar } from 'react-native-elements'
 import { AntDesign } from '@expo/vector-icons'
 import theme from '../../styles/theme'
 import { View } from 'react-native'
+import { Divider } from 'react-native-paper'
 
 export type AccordionProps = {
   title: string
@@ -54,6 +55,25 @@ const Accordion = ({ title, content }: AccordionProps) => {
       }
     >
       <ListItem>
+        <ListItem.Content>
+          <ListItem.Title>DOADOR</ListItem.Title>
+          <ListItem.Subtitle>NOME: {content.nome}</ListItem.Subtitle>
+          <ListItem.Subtitle>CPF: {content.cpf}</ListItem.Subtitle>
+          <Divider
+            style={{
+              width: '80%',
+              margin: 5,
+              backgroundColor: theme.theme_colors.tomato
+            }}
+          />
+          <ListItem.Title>HEMOCENTRO</ListItem.Title>
+          <ListItem.Subtitle>TELEFONE: {content.telefone}</ListItem.Subtitle>
+          <ListItem.Subtitle>ENDEREÇO: {content.endereco}</ListItem.Subtitle>
+          <ListItem.Subtitle>Nº: {content.numero}</ListItem.Subtitle>
+          <ListItem.Subtitle>
+            STATUS DO ATENDIMENTO: {content.status ? 'CONCLUIDO' : 'ABERTO'}
+          </ListItem.Subtitle>
+        </ListItem.Content>
         <View
           style={{
             backgroundColor: content?.status
@@ -69,11 +89,6 @@ const Accordion = ({ title, content }: AccordionProps) => {
             name={content?.status ? 'check' : 'clockcircleo'}
           />
         </View>
-        <ListItem.Content>
-          <ListItem.Subtitle>TELEFONE: {content.telefone}</ListItem.Subtitle>
-          <ListItem.Subtitle>CPF: {content.cpf}</ListItem.Subtitle>
-          <ListItem.Subtitle>ENDEREÇO: {content.endereco}</ListItem.Subtitle>
-        </ListItem.Content>
       </ListItem>
     </ListItem.Accordion>
   )
