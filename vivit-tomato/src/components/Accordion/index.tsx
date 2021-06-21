@@ -28,7 +28,12 @@ const Accordion = ({ title, content }: AccordionProps) => {
 
   return (
     <ListItem.Accordion
-      style={{ backgroundColor: theme.theme_colors.back, borderRadius: 20 }}
+      containerStyle={{
+        backgroundColor: theme.theme_colors.yellow1,
+        borderRadius: 4,
+        borderBottomColor: theme.theme_colors.white,
+        borderBottomWidth: 1
+      }}
       isExpanded={explaned}
       onPress={() => setExplaned(!explaned)}
       content={
@@ -54,7 +59,9 @@ const Accordion = ({ title, content }: AccordionProps) => {
         </>
       }
     >
-      <ListItem>
+      <ListItem
+        containerStyle={{ backgroundColor: theme.theme_colors.yellow1 }}
+      >
         <ListItem.Content>
           <ListItem.Title>DOADOR</ListItem.Title>
           <ListItem.Subtitle>NOME: {content.nome}</ListItem.Subtitle>
