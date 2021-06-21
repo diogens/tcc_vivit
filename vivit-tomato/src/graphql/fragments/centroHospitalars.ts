@@ -15,5 +15,16 @@ export const CentroHospitalarsFrament = gql`
     state
     latitude
     longitude
+    gallery {
+      id
+      url
+    }
+    posts {
+      id
+      title
+      cover {
+        url
+      }
+    }
   }
 `
