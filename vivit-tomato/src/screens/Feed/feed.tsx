@@ -30,6 +30,7 @@ import { QUERY_POSTS } from '../../graphql/queries/posts'
 import theme from '../../styles/theme'
 import { NavigationProp } from '@react-navigation/native'
 import { PropsNavigate } from 'router'
+import Drawer from '../../components/Drawer'
 
 const OVERFLOW_HEIGHT = 90
 const SPACING = 10
@@ -146,120 +147,122 @@ const Feeds = ({ navigation }: PropsNavigate) => {
   }
 
   return (
-    <FlingGestureHandler
-      key="left"
-      direction={Directions.LEFT}
-      onHandlerStateChange={(ev) => {
-        if (ev.nativeEvent.state === State.END) {
-          if (index === data?.posts.length - 1) {
-            return
-          }
-          setActiveIndex(index + 1)
-        }
-      }}
-    >
+    <Drawer nameScreen="Saúde">
       <FlingGestureHandler
-        key="right"
-        direction={Directions.RIGHT}
+        key="left"
+        direction={Directions.LEFT}
         onHandlerStateChange={(ev) => {
           if (ev.nativeEvent.state === State.END) {
-            if (index === 0) {
+            if (index === data?.posts.length - 1) {
               return
             }
-            setActiveIndex(index - 1)
+            setActiveIndex(index + 1)
           }
         }}
       >
-        <SafeAreaView style={styles.container}>
-          <Animated.FlatList
-            data={data?.posts}
-            keyExtractor={(_, index) => String(index)}
-            horizontal
-            onRefresh={refreshList}
-            refreshing={refreshing}
-            contentContainerStyle={{
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            scrollEnabled={false}
-            removeClippedSubviews={false}
-            CellRendererComponent={({
-              item,
-              index,
-              children,
-              style,
-              ...props
-            }) => {
-              const newStyle = [
+        <FlingGestureHandler
+          key="right"
+          direction={Directions.RIGHT}
+          onHandlerStateChange={(ev) => {
+            if (ev.nativeEvent.state === State.END) {
+              if (index === 0) {
+                return
+              }
+              setActiveIndex(index - 1)
+            }
+          }}
+        >
+          <SafeAreaView style={styles.container}>
+            <Animated.FlatList
+              data={data?.posts}
+              keyExtractor={(_, index) => String(index)}
+              horizontal
+              onRefresh={refreshList}
+              refreshing={refreshing}
+              contentContainerStyle={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              scrollEnabled={false}
+              removeClippedSubviews={false}
+              CellRendererComponent={({
+                item,
+                index,
+                children,
                 style,
-                {
-                  zIndex: data.posts.length - index,
-                  letf: -ITEM_WIDTH / 2,
-                  top: -ITEM_HEIGHT / 2
-                }
-              ]
-              return (
-                <View style={newStyle} index={index} {...props}>
-                  {children}
-                </View>
-              )
-            }}
-            renderItem={({ item, index }) => {
-              const inputRange = [index - 1, index, index + 1]
-              const translateX = scrollXAnimated.interpolate({
-                inputRange,
-                outputRange: [50, 0, -20]
-              })
-              const scale = scrollXAnimated.interpolate({
-                inputRange,
-                outputRange: [0.85, 1, 1.3]
-              })
-              const opacity = scrollXAnimated.interpolate({
-                inputRange,
-                outputRange: [1 - 1 / VISIBLE_ITEMS, 1, 0]
-              })
+                ...props
+              }) => {
+                const newStyle = [
+                  style,
+                  {
+                    zIndex: data.posts.length - index,
+                    letf: -ITEM_WIDTH / 2,
+                    top: -ITEM_HEIGHT / 2
+                  }
+                ]
+                return (
+                  <View style={newStyle} index={index} {...props}>
+                    {children}
+                  </View>
+                )
+              }}
+              renderItem={({ item, index }) => {
+                const inputRange = [index - 1, index, index + 1]
+                const translateX = scrollXAnimated.interpolate({
+                  inputRange,
+                  outputRange: [50, 0, -20]
+                })
+                const scale = scrollXAnimated.interpolate({
+                  inputRange,
+                  outputRange: [0.85, 1, 1.3]
+                })
+                const opacity = scrollXAnimated.interpolate({
+                  inputRange,
+                  outputRange: [1 - 1 / VISIBLE_ITEMS, 1, 0]
+                })
 
-              return (
-                <Animated.View
-                  style={{
-                    left: -ITEM_WIDTH / 2,
-                    position: 'absolute',
-                    opacity,
-                    transform: [{ translateX }, { scale }]
-                  }}
-                >
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.navigate('Details', { item: item.id })
+                return (
+                  <Animated.View
+                    style={{
+                      left: -ITEM_WIDTH / 2,
+                      position: 'absolute',
+                      opacity,
+                      transform: [{ translateX }, { scale }]
                     }}
                   >
-                    <SharedElement id={`item.${item.id}.photo`}>
-                      <Image
-                        source={{
-                          uri: `http://5.183.8.1:1337${item?.cover?.url}`
-                        }}
-                        style={{
-                          width: ITEM_WIDTH,
-                          height: ITEM_HEIGHT,
-                          borderRadius: 20,
-                          resizeMode: 'cover'
-                        }}
-                      />
-                    </SharedElement>
-                  </TouchableOpacity>
-                </Animated.View>
-              )
-            }}
-          />
-          <OverflowItems
-            data={data}
-            scrollXAnimated={scrollXAnimated}
-            navigation={navigation}
-          />
-        </SafeAreaView>
+                    <TouchableOpacity
+                      onPress={() => {
+                        navigation.navigate('Details', { item: item.id })
+                      }}
+                    >
+                      <SharedElement id={`item.${item.id}.photo`}>
+                        <Image
+                          source={{
+                            uri: `http://5.183.8.1:1337${item?.cover?.url}`
+                          }}
+                          style={{
+                            width: ITEM_WIDTH,
+                            height: ITEM_HEIGHT,
+                            borderRadius: 20,
+                            resizeMode: 'cover'
+                          }}
+                        />
+                      </SharedElement>
+                    </TouchableOpacity>
+                  </Animated.View>
+                )
+              }}
+            />
+            <OverflowItems
+              data={data}
+              scrollXAnimated={scrollXAnimated}
+              navigation={navigation}
+            />
+          </SafeAreaView>
+        </FlingGestureHandler>
       </FlingGestureHandler>
-    </FlingGestureHandler>
+    </Drawer>
   )
 }
 

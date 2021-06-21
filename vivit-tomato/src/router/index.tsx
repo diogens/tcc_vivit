@@ -116,13 +116,7 @@ export default function App() {
 
   return (
     <NavigationContainer theme={theme ? DarkTheme : DefaultTheme}>
-      {!authenticated.authenticated ? (
-        <Auth />
-      ) : (
-        <Drawer nameScreen="Página">
-          <ScreensApp />
-        </Drawer>
-      )}
+      {!authenticated.authenticated ? <Auth /> : <ScreensApp />}
     </NavigationContainer>
   )
 }

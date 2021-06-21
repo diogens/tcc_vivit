@@ -32,6 +32,7 @@ import Text from '../../components/Text'
 import MarkerCustom from '../../components/Marker'
 import { Avatar } from 'react-native-elements/dist/avatar/Avatar'
 import { Divider } from 'react-native-elements/dist/divider/Divider'
+import Drawer from '../../components/Drawer'
 
 const customHTMLElementModels = {
   bluecircle: HTMLElementModel.fromCustomModel({
@@ -150,16 +151,18 @@ const Map = ({ navigation }: PropsNavigate) => {
 
   if (loading) {
     return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignContent: 'center',
-          backgroundColor: theme.theme_colors.back
-        }}
-      >
-        <ActivityIndicator color={theme.theme_colors.primary} size={300} />
-      </View>
+      <Drawer nameScreen="Hemocentros">
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignContent: 'center',
+            backgroundColor: theme.theme_colors.back
+          }}
+        >
+          <ActivityIndicator color={theme.theme_colors.primary} size={300} />
+        </View>
+      </Drawer>
     )
   }
 
@@ -168,152 +171,161 @@ const Map = ({ navigation }: PropsNavigate) => {
   }
 
   return (
-    <>
-      <Animated.View
-        style={{
-          backgroundColor: theme.theme_colors.back,
-          width: '100%',
-          zIndex: 2,
-          opacity: fadeAnim
-        }}
-      >
-        <SearchBar
-          platform="ios"
-          placeholder="Encontre o seu Hemocentro"
-          onChangeText={(text) => {
-            getLocale(text)
+    <Drawer nameScreen="Hemocentros">
+      <>
+        <Animated.View
+          style={{
+            backgroundColor: theme.theme_colors.back,
+            width: '100%',
+            zIndex: 2,
+            opacity: fadeAnim
           }}
-          onClear={() => getLocale('')}
-          value={search.value}
-        />
-        <FlatList
-          keyExtractor={(i, index) => parseInt(index)}
-          data={searchList}
-          ItemSeparatorComponent={({ item, index }) => {
-            return <Text key={`index-${index}`} text="OK" />
-          }}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={() => {
-                /* setCurrentRegion({
+        >
+          <SearchBar
+            platform="ios"
+            placeholder="Encontre o seu Hemocentro"
+            onChangeText={(text) => {
+              getLocale(text)
+            }}
+            onClear={() => getLocale('')}
+            value={search.value}
+            containerStyle={{
+              backgroundColor: theme.theme_colors.back
+            }}
+          />
+          <FlatList
+            keyExtractor={(i, index) => parseInt(index)}
+            data={searchList}
+            ItemSeparatorComponent={({ item, index }) => {
+              return <Text key={`index-${index}`} text="OK" />
+            }}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => {
+                  /* setCurrentRegion({
                   latitude: item?.latitude,
                   longitude: item?.longitude
                 }) */
-                changeRegion()
-              }}
-            >
-              <Text text={item.name} />
-            </TouchableOpacity>
-          )}
-        />
-      </Animated.View>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <MapView
-          style={{
-            width: Dimensions.get('window').width,
-            height: Dimensions.get('window').height
-          }}
-          onRegionChange={() => {
-            changeRegion()
-          }}
-          initialRegion={currentRegion}
-          region={currentRegion}
-          showsUserLocation={true}
-          showsMyLocationButton={true}
-          customMapStyle={customStyle}
+                  changeRegion()
+                }}
+              >
+                <Text text={item.name} />
+              </TouchableOpacity>
+            )}
+          />
+        </Animated.View>
+        <View
+          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
         >
-          {loading ? (
-            <Text text="Carregando..." />
-          ) : (
-            data.centroHospitalars.map(
-              ({ id, latitude, longitude, ...props }, index) => {
-                return (
-                  <Marker
-                    key={`$index-${id + index}`}
-                    onPress={() => {
-                      onOpen()
-                      setIndex(index)
-                    }}
-                    coordinate={{
-                      longitude: longitude,
-                      latitude: latitude
-                    }}
-                    calloutOffset={{ x: -8, y: 28 }}
-                    calloutAnchor={{ x: 0.5, y: 0.4 }}
-                  >
-                    <MarkerCustom {...props} />
-                    {/* <Callout>
+          <MapView
+            style={{
+              zIndex: -1,
+              width: Dimensions.get('window').width,
+              height: Dimensions.get('window').height
+            }}
+            onRegionChange={() => {
+              changeRegion()
+            }}
+            initialRegion={currentRegion}
+            region={currentRegion}
+            showsUserLocation={true}
+            showsMyLocationButton={true}
+            customMapStyle={customStyle}
+          >
+            {loading ? (
+              <Text text="Carregando..." />
+            ) : (
+              data.centroHospitalars.map(
+                ({ id, latitude, longitude, ...props }, index) => {
+                  return (
+                    <Marker
+                      key={`$index-${id + index}`}
+                      onPress={() => {
+                        onOpen()
+                        setIndex(index)
+                      }}
+                      coordinate={{
+                        longitude: longitude,
+                        latitude: latitude
+                      }}
+                      calloutOffset={{ x: -8, y: 28 }}
+                      calloutAnchor={{ x: 0.5, y: 0.4 }}
+                    >
+                      <MarkerCustom {...props} />
+                      {/* <Callout>
                       <MarkerCustom
 
                       />
                     </Callout> */}
-                  </Marker>
-                )
-              }
-            )
-          )}
-        </MapView>
-      </View>
-      <Modalize
-        ref={modalizeRef}
-        snapPoint={500}
-        HeaderComponent={
-          <View
-            style={{
-              justifyContent: 'flex-start',
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingVertical: 3
-            }}
-          >
-            <Avatar
-              /* containerStyle={{ marginRight: 20 }} */
-              rounded
-              source={{
-                uri: `http://5.183.8.1:1337${data?.centroHospitalars[index]?.avatar?.url}`
-              }}
-            />
+                    </Marker>
+                  )
+                }
+              )
+            )}
+          </MapView>
+        </View>
+        <Modalize
+          ref={modalizeRef}
+          snapPoint={500}
+          HeaderComponent={
             <View
               style={{
-                marginRight: 40,
-                marginLeft: 20
+                justifyContent: 'flex-start',
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingVertical: 3
               }}
             >
-              <Text
-                text={data.centroHospitalars[index].name}
-                size="xlarge"
-                color="white"
+              <Avatar
+                /* containerStyle={{ marginRight: 20 }} */
+                rounded
+                source={{
+                  uri: `http://5.183.8.1:1337${data?.centroHospitalars[index]?.avatar?.url}`
+                }}
+              />
+              <View
+                style={{
+                  marginRight: 40,
+                  marginLeft: 20
+                }}
+              >
+                <Text
+                  text={data.centroHospitalars[index].name}
+                  size="xlarge"
+                  color="white"
+                />
+              </View>
+              <View
+                style={{ backgroundColor: '#fff', height: 10, width: 60 }}
               />
             </View>
-            <View style={{ backgroundColor: '#fff', height: 10, width: 60 }} />
-          </View>
-        }
-        handleStyle={{
-          backgroundColor: theme.theme_colors.primary,
-          width: 200
-        }}
-        modalStyle={{
-          backgroundColor: theme.theme_colors.back,
-          borderColor: theme.theme_colors.orange,
-          borderWidth: 1,
-          borderTopRightRadius: 40,
-          borderTopLeftRadius: 40,
-          padding: 20
-        }}
-      >
-        {loading ? (
-          <Text text="Carregando..." />
-        ) : (
-          <>
-            <HTML
-              customHTMLElementModels={customHTMLElementModels}
-              source={{
-                html: `<body style="color: #fff">
+          }
+          handleStyle={{
+            backgroundColor: theme.theme_colors.primary,
+            width: 200
+          }}
+          modalStyle={{
+            backgroundColor: theme.theme_colors.back,
+            borderColor: theme.theme_colors.orange,
+            borderWidth: 1,
+            borderTopRightRadius: 40,
+            borderTopLeftRadius: 40,
+            padding: 20
+          }}
+        >
+          {loading ? (
+            <Text text="Carregando..." />
+          ) : (
+            <>
+              <HTML
+                customHTMLElementModels={customHTMLElementModels}
+                source={{
+                  html: `<body style="color: #fff">
                 ${data.centroHospitalars[index].description}</body>`
-              }}
-              contentWidth={contentWidth}
-            />
-            {/* <Text text={data.centroHospitalars[index].number} color="white" />
+                }}
+                contentWidth={contentWidth}
+              />
+              {/* <Text text={data.centroHospitalars[index].number} color="white" />
             <Text text={data.centroHospitalars[index].street} color="white" />
             <Text
               text={data.centroHospitalars[index].telephone1}
@@ -323,11 +335,12 @@ const Map = ({ navigation }: PropsNavigate) => {
               text={data.centroHospitalars[index].telephone2}
               color="white"
             /> */}
-            {/* <FlatList data={data.centroHospitalars[index]}/> */}
-          </>
-        )}
-      </Modalize>
-    </>
+              {/* <FlatList data={data.centroHospitalars[index]}/> */}
+            </>
+          )}
+        </Modalize>
+      </>
+    </Drawer>
   )
 }
 
