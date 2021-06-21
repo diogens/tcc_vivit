@@ -10,14 +10,16 @@ import { ActivityIndicator, Animated, FlatList, TextInput } from 'react-native'
 import {
   Button,
   View,
-  Text,
   Dimensions,
   StyleSheet,
   useWindowDimensions,
   Platform
 } from 'react-native'
-import MapView, { Marker, AnimatedRegion } from 'react-native-maps'
-import HTML from 'react-native-render-html'
+import MapView, { AnimatedRegion, Callout, Marker } from 'react-native-maps'
+import HTML, {
+  HTMLElementModel,
+  HTMLContentModel
+} from 'react-native-render-html'
 import { Modalize } from 'react-native-modalize'
 import * as S from './styles'
 
@@ -25,6 +27,25 @@ import theme from '../../styles/theme'
 import { PropsNavigate } from '../../router'
 import useForm from '../../hooks/useForms'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+
+import Text from '../../components/Text'
+import MarkerCustom from '../../components/Marker'
+import { Avatar } from 'react-native-elements/dist/avatar/Avatar'
+import { Divider } from 'react-native-elements/dist/divider/Divider'
+
+const customHTMLElementModels = {
+  bluecircle: HTMLElementModel.fromCustomModel({
+    tagName: 'bluecircle',
+    mixedUAStyles: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      alignSelf: 'center',
+      backgroundColor: 'blue'
+    },
+    contentModel: HTMLContentModel.block
+  })
+}
 
 const Map = ({ navigation }: PropsNavigate) => {
   const {
@@ -143,7 +164,7 @@ const Map = ({ navigation }: PropsNavigate) => {
   }
 
   if (error) {
-    return <Text>Error {error.message}</Text>
+    return <Text text={`Error ${error.message}`} />
   }
 
   return (
@@ -169,7 +190,7 @@ const Map = ({ navigation }: PropsNavigate) => {
           keyExtractor={(i, index) => parseInt(index)}
           data={searchList}
           ItemSeparatorComponent={({ item, index }) => {
-            return <Text key={`index-${index}`}>Ok</Text>
+            return <Text key={`index-${index}`} text="OK" />
           }}
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -181,7 +202,7 @@ const Map = ({ navigation }: PropsNavigate) => {
                 changeRegion()
               }}
             >
-              <Text style={styles.textStyle}>{item.name}</Text>
+              <Text text={item.name} />
             </TouchableOpacity>
           )}
         />
@@ -202,49 +223,110 @@ const Map = ({ navigation }: PropsNavigate) => {
           customMapStyle={customStyle}
         >
           {loading ? (
-            <Text>Carregando......</Text>
+            <Text text="Carregando..." />
           ) : (
-            data.centroHospitalars.map(({ id, latitude, longitude }, index) => {
-              return (
-                <Marker
-                  key={`$index-${id + index}`}
-                  onPress={() => {
-                    onOpen()
-                    setIndex(index)
-                  }}
-                  coordinate={{
-                    longitude: longitude,
-                    latitude: latitude
-                  }}
-                />
-              )
-            })
+            data.centroHospitalars.map(
+              ({ id, latitude, longitude, ...props }, index) => {
+                return (
+                  <Marker
+                    key={`$index-${id + index}`}
+                    onPress={() => {
+                      onOpen()
+                      setIndex(index)
+                    }}
+                    coordinate={{
+                      longitude: longitude,
+                      latitude: latitude
+                    }}
+                    calloutOffset={{ x: -8, y: 28 }}
+                    calloutAnchor={{ x: 0.5, y: 0.4 }}
+                  >
+                    <MarkerCustom {...props} />
+                    {/* <Callout>
+                      <MarkerCustom
+
+                      />
+                    </Callout> */}
+                  </Marker>
+                )
+              }
+            )
           )}
         </MapView>
-
-        <Modalize
-          ref={modalizeRef}
-          snapPoint={500}
-          HeaderComponent={<Text>Title</Text>}
-        >
-          {loading ? (
-            <Text>carregando...</Text>
-          ) : (
-            <>
-              <Text>{data.centroHospitalars[index].name}</Text>
-              <HTML
-                classesStyles={{}}
-                source={{ html: data.centroHospitalars[index].description }}
-                contentWidth={contentWidth}
-              />
-              <Text>{data.centroHospitalars[index].number}</Text>
-              <Text>{data.centroHospitalars[index].street}</Text>
-              <Text>{data.centroHospitalars[index].telephone1}</Text>
-              <Text>{data.centroHospitalars[index].telephone2}</Text>
-            </>
-          )}
-        </Modalize>
       </View>
+      <Modalize
+        ref={modalizeRef}
+        snapPoint={500}
+        HeaderComponent={
+          <View
+            style={{
+              justifyContent: 'flex-start',
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingVertical: 3
+            }}
+          >
+            <Avatar
+              /* containerStyle={{ marginRight: 20 }} */
+              rounded
+              source={{
+                uri: `http://5.183.8.1:1337${data?.centroHospitalars[index]?.avatar?.url}`
+              }}
+            />
+            <View
+              style={{
+                marginRight: 40,
+                marginLeft: 20
+              }}
+            >
+              <Text
+                text={data.centroHospitalars[index].name}
+                size="xlarge"
+                color="white"
+              />
+            </View>
+            <View style={{ backgroundColor: '#fff', height: 10, width: 60 }} />
+          </View>
+        }
+        handleStyle={{
+          backgroundColor: theme.theme_colors.primary,
+          width: 200
+        }}
+        modalStyle={{
+          backgroundColor: theme.theme_colors.back,
+          borderColor: theme.theme_colors.orange,
+          borderWidth: 1,
+          borderTopRightRadius: 40,
+          borderTopLeftRadius: 40,
+          padding: 20
+        }}
+      >
+        {loading ? (
+          <Text text="Carregando..." />
+        ) : (
+          <>
+            <HTML
+              customHTMLElementModels={customHTMLElementModels}
+              source={{
+                html: `<body style="color: #fff">
+                ${data.centroHospitalars[index].description}</body>`
+              }}
+              contentWidth={contentWidth}
+            />
+            {/* <Text text={data.centroHospitalars[index].number} color="white" />
+            <Text text={data.centroHospitalars[index].street} color="white" />
+            <Text
+              text={data.centroHospitalars[index].telephone1}
+              color="white"
+            />
+            <Text
+              text={data.centroHospitalars[index].telephone2}
+              color="white"
+            /> */}
+            {/* <FlatList data={data.centroHospitalars[index]}/> */}
+          </>
+        )}
+      </Modalize>
     </>
   )
 }
