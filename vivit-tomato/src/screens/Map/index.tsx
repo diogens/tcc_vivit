@@ -71,6 +71,13 @@ const Map = ({ navigation }: PropsNavigate) => {
     longitudeDelta: 0.0421
   })
 
+  const [region, setRegion] = React.useState({
+    latitude: -12.2590293,
+    longitude: -38.9556411,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+  })
+
   const search = useForm('')
 
   /* Captura posição do user */
@@ -84,6 +91,27 @@ const Map = ({ navigation }: PropsNavigate) => {
         const { latitude, longitude } = coords
 
         setCurrentRegion({
+          latitude,
+          longitude,
+          latitudeDelta: 0.04,
+          longitudeDelta: 0.04
+        })
+      }
+    }
+
+    loadingInitPosition()
+  }, [])
+
+  React.useEffect(() => {
+    async function loadingInitPosition() {
+      const { granted } = await requestPermissionsAsync()
+
+      if (granted) {
+        const { coords } = await getCurrentPositionAsync()
+
+        const { latitude, longitude } = coords
+
+        setRegion({
           latitude,
           longitude,
           latitudeDelta: 0.04,
@@ -130,12 +158,24 @@ const Map = ({ navigation }: PropsNavigate) => {
 
       /* console.log(itemData.indexOf(textData) > -1) */
       /* console.log('Value', centro.name === search.value)
-      console.log('Value', value) */
-      return itemData.indexOf(textData) > -1
+      /* console.log('Value', value) */
+      /* console.log('Value', value) */
+      if (value !== null) {
+        return itemData.indexOf(textData) > -1
+      } else {
+        return []
+      }
     })
+    if (value === '') {
+      /* searchList([{ name: '' }]) */
+      setSearchList(newData.filter((i) => i === '0'))
+      console.log('nada')
+    } else {
+      setSearchList(newData)
+      /* console.log(newData.filter((i) => i === '0')) */
+    }
 
-    console.log(newData)
-    setSearchList(newData)
+    /*   setSearchList(newData) */
   }
 
   const changeRegion = () => {
@@ -187,29 +227,55 @@ const Map = ({ navigation }: PropsNavigate) => {
             onChangeText={(text) => {
               getLocale(text)
             }}
-            onClear={() => getLocale('')}
+            onClear={() => getLocale(null)}
             value={search.value}
             containerStyle={{
               backgroundColor: theme.theme_colors.back
             }}
           />
           <FlatList
-            keyExtractor={(i, index) => parseInt(index)}
+            keyExtractor={(_, index) => index.toString()}
             data={searchList}
             ItemSeparatorComponent={({ item, index }) => {
-              return <Text key={`index-${index}`} text="OK" />
+              return (
+                <View
+                  style={{
+                    height: 0.5,
+                    width: '100%',
+                    backgroundColor: '#C8C8C8'
+                  }}
+                />
+              )
             }}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <TouchableOpacity
+                key={index}
                 onPress={() => {
-                  /* setCurrentRegion({
-                  latitude: item?.latitude,
-                  longitude: item?.longitude
-                }) */
-                  changeRegion()
+                  console.log({
+                    latitude: item?.latitude,
+                    longitude: item?.longitude,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421
+                  })
+                  setRegion({
+                    latitude: item?.latitude,
+                    longitude: item?.longitude,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421
+                  })
+                  /* changeRegion() */
                 }}
               >
-                <Text text={item.name} />
+                <View
+                  style={{
+                    paddingHorizontal: 10,
+                    paddingBottom: 10,
+                    borderWidth: 1,
+                    borderBottomColor: '#fff'
+                  }}
+                >
+                  <Text text={item?.name} color="white" />
+                </View>
               </TouchableOpacity>
             )}
           />
@@ -227,9 +293,10 @@ const Map = ({ navigation }: PropsNavigate) => {
               changeRegion()
             }}
             initialRegion={currentRegion}
-            region={currentRegion}
+            region={region}
             showsUserLocation={true}
             showsMyLocationButton={true}
+            followsUserLocation={true}
             customMapStyle={customStyle}
           >
             {loading ? (
@@ -239,7 +306,7 @@ const Map = ({ navigation }: PropsNavigate) => {
                 ({ id, latitude, longitude, ...props }, index) => {
                   return (
                     <Marker
-                      key={`$index-${id + index}`}
+                      key={`$index-${index}`}
                       onPress={() => {
                         onOpen()
                         setIndex(index)

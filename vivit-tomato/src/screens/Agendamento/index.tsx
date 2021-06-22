@@ -421,14 +421,14 @@ const Agendamento = ({ navigation }: PropsNavigate) => {
                 content={{
                   uri: `http://5.183.8.1:1337${item?.centro?.avatar?.url}`,
                   dataAgendamento: moment(item?.date).format('LLL'),
-                  cpf: item.cpf,
-                  nome: item.nome,
-                  tipoSangue: item.tipoSangue,
-                  status: item.status,
-                  solicitante: item.users_permissions_user.username,
-                  telefone: item.centro.telephone1,
-                  numero: item.centro.number,
-                  endereco: item.centro.street
+                  cpf: item?.cpf,
+                  nome: item?.nome,
+                  tipoSangue: item?.tipoSangue,
+                  status: item?.status,
+                  solicitante: item?.users_permissions_user?.username,
+                  telefone: item?.centro?.telephone1,
+                  numero: item?.centro?.number,
+                  endereco: item?.centro?.street
                 }}
               />
             )
